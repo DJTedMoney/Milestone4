@@ -25,7 +25,8 @@ public class Client : MonoBehaviour
 	
 	static TcpClient client;
 	NetworkStream stream;
-	const String serverIP = "128.195.11.143";
+	const String serverIP = "127.0.0.1";
+	//const String serverIP = "128.195.11.143";
 	
 	private Thread clientThread;
 	StreamReader playerReader;
@@ -47,6 +48,12 @@ public class Client : MonoBehaviour
 		pass = "";
 		
 	}
+	
+	//if anything needs the IP address
+	public String GetIP(){
+		return serverIP;
+	}
+	
 	
 	// Update is called once per frame
 	void Update () 

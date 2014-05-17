@@ -13,7 +13,8 @@ public class LoginBox : MonoBehaviour
 	public GameManager manager;
 	
 	public bool showLogin;
-	private const string ipAdress = "128.195.11.143";
+	//private const string ipAdress = "127.0.0.1";
+	//private const string ipAdress = "128.195.11.143";
 	
 	// Use this for initialization
 	void Start () 
@@ -27,7 +28,7 @@ public class LoginBox : MonoBehaviour
 	
 	// Update is called once per frame
 	
-	void OnGUI()
+	 void OnGUI()
 	{	
 		if(!showLogin)
 		{
@@ -46,7 +47,7 @@ public class LoginBox : MonoBehaviour
 				print ("<From LoginBox>UserName: " +Encryptor.encryptString(userName));
 			print ("<From LoginBox>Password: " +Encryptor.encryptString(passWord));;
 				//grafxText.text = "Connect";
-				manager.activeClient.Connect(ipAdress, Encryptor.encryptString(userName), 
+				manager.activeClient.Connect( manager.activeClient.GetIP(), Encryptor.encryptString(userName), 
 											 Encryptor.encryptString(passWord));
 				
 			}
