@@ -38,7 +38,7 @@ namespace SQLiteTest
 
         public ServerDatabase()
         {
-            TCPServer.dB = new LoginDatabase();
+            //TCPServer.dB = new LoginDatabase();
 
             server = new TCPServer();
         }
