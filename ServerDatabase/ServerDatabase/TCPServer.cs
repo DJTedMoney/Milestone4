@@ -120,9 +120,14 @@ namespace SQLiteTest
                         // if instruction[0] == "1" -> command to attempt login
                         // indexes of instruction   [0]     [1]                         [2]                         [3]
                         // expected sentence:       1   $   userName (pre-encrypted) $  elephant (pre-crypted) $    password (pre-encrypted) $ 
+
+                        ////// attempt to login now has return values 
+                        //          return 0 -> player successfully logged in 
+                        //          return 1 -> incorrect password, login failed
+                        //          return 2 -> new username/pw added to database as new player 
                         if (instruction[0] == "1")
                         {
-                            dB.login(instruction[1], instruction[3]);
+                            dB.attemptToLogin(instruction[1], instruction[3]);
                             sendMessage(activePlayers[client].psnws, "1$" + client.ToString());
                             
                         }

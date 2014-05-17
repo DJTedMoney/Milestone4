@@ -56,9 +56,9 @@ namespace SQLiteTest
             command.ExecuteNonQuery();
              */
 
-            login("Me", "3000");
-            login("Myself", "6000");
-            login("And I", "9001");
+            attemptToLogin("Me", "3000");
+            attemptToLogin("Myself", "6000");
+            attemptToLogin("And I", "9001");
              
         }
 
@@ -69,7 +69,9 @@ namespace SQLiteTest
             command.ExecuteNonQuery();
         }
 
-        void verifyPassword(string loginName, string loginPW)
+        // return 0 if the login attempt was a success
+        // return 1 if the login attempt was a fail
+        int verifyPassword(string loginName, string loginPW)
         {
             // check that newPW matches password of userName
             string sql = "select * from users where name= '" + loginName + "'";
@@ -90,6 +92,7 @@ namespace SQLiteTest
                 // return true;
 
                 // send TCP packet back to client setting player as logged in
+                return 0;
             }
 
             else
@@ -98,6 +101,7 @@ namespace SQLiteTest
                 // return false;
 
                 // send TCP packet back to client that login failed 
+                return 1;
             }
         }
 
@@ -118,7 +122,10 @@ namespace SQLiteTest
             return false;
         }
 
-        public void login(string checkName, string checkPW)
+        // return 0 if login attempt was a success
+        // return 1 if the login attempt was a fail 
+        // return 2 if the new user was created
+        public int attemptToLogin(string checkName, string checkPW)
         {
             bool returningUser = checkIfUserNameExists(checkName);
 
@@ -126,12 +133,15 @@ namespace SQLiteTest
 
             if (returningUser)
             {
-                verifyPassword(checkName, checkPW);
+                int verify = verifyPassword(checkName, checkPW);
+
+                return verify;
             }
 
             else
             {
                 addElement(checkName, checkPW);
+                return 2;
             }
         }
 

@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameMechanicsManager.cs" />
     <Compile Include="LoginDatabase.cs" />
+    <Compile Include="Pellet.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="PlayerSocket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerDatabase.cs" />

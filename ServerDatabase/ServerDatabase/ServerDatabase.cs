@@ -26,12 +26,12 @@ namespace SQLiteTest
 
             TCPServer.dB.fillTable();
 
-            TCPServer.dB.login("Farble", "deblarg");
-            TCPServer.dB.login("glory", "power");
-            TCPServer.dB.login("Farble", "deblarg");
+            TCPServer.dB.attemptToLogin("Farble", "deblarg");
+            TCPServer.dB.attemptToLogin("glory", "power");
+            TCPServer.dB.attemptToLogin("Farble", "deblarg");
 
-            TCPServer.dB.login("Myself", "6000");
-            TCPServer.dB.login("Myself", "asdf");
+            TCPServer.dB.attemptToLogin("Myself", "6000");
+            TCPServer.dB.attemptToLogin("Myself", "asdf");
 
             TCPServer.dB.printUsers();
         }
