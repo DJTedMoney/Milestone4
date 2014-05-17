@@ -31,6 +31,7 @@ public class Client : MonoBehaviour
 	private Thread clientThread;
 	StreamReader playerReader;
 	StreamWriter playerWriter;
+	private int numPlayers;
 	bool isConnect;
 	bool sendData;
 	bool getData;
@@ -46,7 +47,7 @@ public class Client : MonoBehaviour
 		getData = false;
 		use = "";
 		pass = "";
-		
+		numPlayers = 0;
 	}
 	
 	//if anything needs the IP address
@@ -108,6 +109,14 @@ public class Client : MonoBehaviour
 			clientThread.Start();
 			use = "";
 			pass = "";
+			
+			
+			
+			//here, add all the "connect" stuff, and "manager.start"
+			
+			
+			//after connecting to server:	
+			manager.start = true;
   		} 
   		catch (ArgumentNullException e) 
   		{
@@ -121,9 +130,15 @@ public class Client : MonoBehaviour
 	
 	public void Disconnect()
 	{
+		
+		//moved here from LoginBox
+		manager.start = false;
+		
 		//stream.Close();
 		client.Close ();
 		clientThread.Abort();
+		
+
 	}
 	
 	public void serverIO()

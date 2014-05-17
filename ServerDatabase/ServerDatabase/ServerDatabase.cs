@@ -22,7 +22,7 @@ namespace SQLiteTest
             // server.dB.createNewDatabase();
             //TCPServer.dB.connectToDatabase();
 
-            // TCPServer.dB.createTable();
+            //TCPServer.dB.createTable();
 
             TCPServer.dB.fillTable();
 

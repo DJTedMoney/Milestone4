@@ -10,16 +10,15 @@ public class LoginBox : MonoBehaviour
 	private string passWord;
 	
 	public GUIText grafxText;
-	public GameManager manager;
+	public Client client;
+	//public GameManager manager;
 	
 	public bool showLogin;
-	//private const string ipAdress = "127.0.0.1";
-	//private const string ipAdress = "128.195.11.143";
-	
 	// Use this for initialization
 	void Start () 
 	{
-		manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		//manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		client  = GameObject.Find("GameClient").GetComponent<Client>();
 		
 		userName = "";
 		passWord = "";
@@ -42,14 +41,15 @@ public class LoginBox : MonoBehaviour
 			
 			if(GUI.Button (new Rect (250, 170, 100, 20), "Connect") )
 			{
-				manager.start = true;
+
 				showLogin = !showLogin;
 				print ("<From LoginBox>UserName: " +Encryptor.encryptString(userName));
-				print ("<From LoginBox>Password: " +Encryptor.encryptString(passWord));;
+				print ("<From LoginBox>Password: " +Encryptor.encryptString(passWord));
+				//manager.start = true;
 				//grafxText.text = "Connect";
-				manager.activeClient.Connect( manager.activeClient.GetIP(), Encryptor.encryptString(userName), 
-											 Encryptor.encryptString(passWord));
-				
+				//manager.activeClient.Connect( manager.activeClient.GetIP(), Encryptor.encryptString(userName), 
+											// Encryptor.encryptString(passWord));
+				client.Connect(client.GetIP(),Encryptor.encryptString(userName), Encryptor.encryptString(passWord));
 			}
 		}
 		
@@ -60,9 +60,10 @@ public class LoginBox : MonoBehaviour
 			if(GUI.Button (new Rect(10, 10, 100, 20), "Disconnect") )
 			{
 				//grafxText.text = "Hello";
-				manager.activeClient.Disconnect();
+				//manager.activeClient.Disconnect();
+				client.Disconnect ();
 				showLogin = !showLogin;
-				manager.start = false;
+				//manager.start = false;
 			}
 		}
 	}
