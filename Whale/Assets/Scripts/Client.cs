@@ -51,7 +51,8 @@ public class Client : MonoBehaviour
 	}
 	
 	//if anything needs the IP address
-	public String GetIP(){
+	public String GetIP()
+	{
 		return serverIP;
 	}
 	
