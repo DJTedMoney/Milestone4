@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 			}
 			//Server sent Move commands to client
-			if(move == true && comType.Equals("2"))
+			if(comType.Equals("2") && move == true)
 			{
 				//sets player position to match server
 				int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));

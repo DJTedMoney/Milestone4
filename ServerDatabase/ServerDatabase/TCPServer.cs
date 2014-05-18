@@ -37,6 +37,8 @@ namespace SQLiteTest
 
             dB.connectToDatabase();
 
+            // dB.createTable();
+
             Console.Write("Press Enter to start the server:  ");
             Console.Read();
 

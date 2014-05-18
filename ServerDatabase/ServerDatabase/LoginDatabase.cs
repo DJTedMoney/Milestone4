@@ -69,8 +69,8 @@ namespace SQLiteTest
             command.ExecuteNonQuery();
         }
 
-        // return 0 if the login attempt was a success
-        // return 1 if the login attempt was a fail
+        // return 1 if the login attempt was a success
+        // return 0 if the login attempt was a fail
         int verifyPassword(string loginName, string loginPW)
         {
             // check that newPW matches password of userName
@@ -92,7 +92,7 @@ namespace SQLiteTest
                 // return true;
 
                 // send TCP packet back to client setting player as logged in
-                return 0;
+                return 1;
             }
 
             else
@@ -101,7 +101,7 @@ namespace SQLiteTest
                 // return false;
 
                 // send TCP packet back to client that login failed 
-                return 1;
+                return 0;
             }
         }
 
@@ -122,9 +122,9 @@ namespace SQLiteTest
             return false;
         }
 
-        // return 0 if login attempt was a success
-        // return 1 if the login attempt was a fail 
-        // return 2 if the new user was created
+        // return 1 if login attempt was a success
+        // return 0 if the login attempt was a fail 
+        // return 3 if the new user was created
         public int attemptToLogin(string checkName, string checkPW)
         {
             bool returningUser = checkIfUserNameExists(checkName);
@@ -141,7 +141,7 @@ namespace SQLiteTest
             else
             {
                 addElement(checkName, checkPW);
-                return 2;
+                return 3;
             }
         }
 
