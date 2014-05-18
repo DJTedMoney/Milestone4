@@ -22,6 +22,7 @@ public class LoginBox : MonoBehaviour
 		
 		userName = "";
 		passWord = "";
+		grafxText.text = "Enter Username and password";
 		
 	}
 	
