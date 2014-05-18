@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 			//Server connected client
 			else if(comType.Equals("1"))
 			{
-				guiBox.grafxText.text = "Connected";
+				guiBox.grafxText.text = "Connected\nWelcome back " + guiBox.userName;
 				clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 			}
@@ -148,7 +148,9 @@ public class GameManager : MonoBehaviour
 			//writes the server command to the gui
 			else if(comType.Equals("3"))
 			{
-				guiBox.grafxText.text = tempCommand.Substring(tempCommand.IndexOf(delim));
+				guiBox.grafxText.text = "Connected\nWelcome " + guiBox.userName;
+				clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 			}
 		}
 	}
