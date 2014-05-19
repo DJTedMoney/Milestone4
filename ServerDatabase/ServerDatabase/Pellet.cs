@@ -8,5 +8,13 @@ namespace ServerDatabase
 {
     class Pellet
     {
+        int x;
+        int y;
+
+        public void setPosition(int newX, int newY)
+        {
+            x = newX;
+            y = newY;
+        }
     }
 }
