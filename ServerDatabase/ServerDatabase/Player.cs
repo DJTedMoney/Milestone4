@@ -89,24 +89,24 @@ namespace ServerDatabase
             moveSpeed = newSpeed;
         }
 
-        public int getSpeed()
+        public string getLocX()
         {
-            return moveSpeed;
+            return locX.ToString();
         }
 
-        public int getLocX()
+        public string getLocY()
         {
-            return locX;
+            return locY.ToString();
         }
 
-        public int getLocY()
+        public string getSpeed()
         {
-            return locY;
+            return moveSpeed.ToString();
         }
 
-        public int getSize()
+        public string getSize()
         {
-            return size;
+            return size.ToString();
         }
 
         public void goLeft()

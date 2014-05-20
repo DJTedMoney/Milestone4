@@ -173,22 +173,58 @@ namespace ServerDatabase
 
                         // if instruction[0] == "2" -> command to change directions
                         // indexes of instruction   [0]     [1]                         [2]                                     [3]
-                        // expected sentence:       2 $     tostada (pre-crypted) $     { U D L R } $ "*****" (pre-crypt) $     { number of player who made the move }
-
+                        // expected sentence:       2 $     tostada (pre-crypted) $     { U D L R } $ "*****" (pre-crypt) $     { number of player who made the move } $ 
                         if (instruction[0] == "2")
                         {
                             // update direction that the indicated player is traveling 
+                            string directionToMove = instruction[2];
 
+                            // mP = moving player.  This is stored to make the variable name shorter 
+                            int mP = Convert.ToInt32( instruction[3] );
 
+                            if (directionToMove == "U")
+                            {
+                                gmm.gamePlayers[mP].goUp();
+                            }
 
+                            else if (directionToMove == "D")
+                            {
+                                gmm.gamePlayers[mP].goDown();
+                            }
+
+                            else if (directionToMove == "L")
+                            {
+                                gmm.gamePlayers[mP].goLeft();
+                            }
+
+                            else if (directionToMove == "R")
+                            {
+                                gmm.gamePlayers[mP].goRight();
+                            }
+
+                            // send a message to every player with the new direction of the player who turned 
                             // counting by w
                             for (int w = 0; w < numberPlayers; ++w)
                             {
-                                sendMessage(activePlayers[client].psnws, "2$");
+                                // abbreviating the current active player to p
+                                Player p = gmm.gamePlayers[client];
+
+                            // 2 $ locX $ locY $ dirX $ dirY $ speed $ size $  pellet1_x $ pellet1_y $ 
+                            //      pellet2_x $ pellet2_y $ pellet3_x $ pellet3_y $ pellet4_x $ pellet4_y $
+                                string moveMessage = "2$" + p.getLocX() + "$" + p.getLocY() + "$" + p.getSpeed() + "$" +
+                                    p.getSize() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() + "$" + 
+                                    gmm.gamePellets[1].getPosX() + "$" + gmm.gamePellets[1].getPosY() + "$" + gmm.gamePellets[2].getPosX() + 
+                                    "$" + gmm.gamePellets[2].getPosY() + "$" + gmm.gamePellets[3].getPosX() + "$" + 
+                                    gmm.gamePellets[3].getPosY() + "$";
+
+                                sendMessage(activePlayers[client].psnws, moveMessage);
                             }
                         }
 
-                        
+                        if (instruction[0] == "3")
+                        {
+
+                        }
 
                     } // end game loop for a player
 
