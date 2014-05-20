@@ -72,7 +72,7 @@ public class Client : MonoBehaviour
 		{
 			//sends the movement change command to server
 		 	// Translate the passed message into ASCII and store it as a Byte array.
-			print ("sending message to server");
+			//print ("sending message to server");
 			message = inputMove;
 			sendData = true;
 		}
@@ -81,7 +81,7 @@ public class Client : MonoBehaviour
 	//gets move data from server and sends it to gameManager
 	public void doMove(string newMove)
 	{
-		print ("doing move");
+		//print ("doing move");
 		//sends velocity change comand to gameManager
 		if(manager.start)
 		{
@@ -111,7 +111,7 @@ public class Client : MonoBehaviour
 			use = "";
 			pass = "";
 		
-			stream = client.GetStream();
+			//stream = client.GetStream();
 			
 			try
 			{ // start try to connect
@@ -149,7 +149,7 @@ public class Client : MonoBehaviour
 	
 	public void Disconnect()
 	{
-		
+		print("Running Disconnect");
 		//moved here from LoginBox
 		manager.start = false;
 		
@@ -184,6 +184,7 @@ public class Client : MonoBehaviour
 	
 	public void sendMessage(NetworkStream theStream)
 	{
+		print ("in SendMessage");
 		if(message.Length >0)
 		{
 			Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
@@ -196,6 +197,7 @@ public class Client : MonoBehaviour
 	
 	public void getMessage(NetworkStream theStream)
 	{
+		print("in GetMessage");
 		Byte[] data = new Byte[256];
     	// String to store the response ASCII representation.
    		String responseData = String.Empty;

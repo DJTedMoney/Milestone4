@@ -85,11 +85,12 @@ public class GameManager : MonoBehaviour
 	}
 	
 	void applyMove()
-	{		//print ("applyMove");
+	{	//print ("in applyMove");
 		//loads the next server command and reads the first command
 		//The first command is the command type (0 = disconect, 1 = connect, 2 = move)
 		while(serverCommand.Count != 0)
 		{
+			//print ("serverCommand is not = 0");
 			string tempCommand = serverCommand.Dequeue().ToString();
 			string comType = tempCommand.Substring(0,tempCommand.IndexOf(delim));
 			tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
 			//Server Disconectd Client
 			if(comType.Equals("0"))
 			{
+				print ("comtype is 0");
 				guiBox.grafxText.text = "error, wrong pasword\ndisconected from server";
 				activeClient.Disconnect();
 				start = false;
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
 			//Server connected client
 			else if(comType.Equals("1"))
 			{
+				print ("comtype is 1");
 				guiBox.grafxText.text = "Connected\nWelcome back " + guiBox.userName;
 				clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
@@ -112,6 +115,7 @@ public class GameManager : MonoBehaviour
 			//Server sent Move commands to client
 			if(comType.Equals("2") && move == true)
 			{
+				//print ("comtype is 2");
 				//sets player position to match server
 				int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 				tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
@@ -148,6 +152,7 @@ public class GameManager : MonoBehaviour
 			//writes the server command to the gui
 			else if(comType.Equals("3"))
 			{
+				print ("comtype is 3");
 				guiBox.grafxText.text = "Connected\nWelcome " + guiBox.userName;
 				clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
