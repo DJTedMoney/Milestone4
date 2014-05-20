@@ -28,9 +28,9 @@ public class Client : MonoBehaviour
 	const String serverIP = "127.0.0.1";
 	//const String serverIP = "128.195.11.143";
 	
+	
+	
 	private Thread clientThread;
-	StreamReader playerReader;
-	StreamWriter playerWriter;
 	private int numPlayers;
 	bool isConnect;
 	bool sendData;
@@ -97,7 +97,7 @@ public class Client : MonoBehaviour
   		{
     		// Create a TcpClient.
     		Int32 port = 4300;
-    		client = new TcpClient(server, port);
+    		client = new TcpClient();
 			
 			
 			//sends pre-encrypted username and password to server.
@@ -110,8 +110,26 @@ public class Client : MonoBehaviour
 			clientThread.Start();
 			use = "";
 			pass = "";
+		
+			stream = client.GetStream();
 			
-			
+			try
+			{ // start try to connect
+				client.Connect(server, port);
+				
+				if(! client.Connected)
+				{
+					print ("Connection failed!");	
+				}
+				
+				stream = client.GetStream();
+				
+			} // end try to connect
+		
+			catch(System.Exception e)
+			{
+				print("Exception e" + e.ToString() );
+			}
 			
 			//here, add all the "connect" stuff, and "manager.start"
 			
