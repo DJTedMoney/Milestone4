@@ -8,19 +8,19 @@ namespace ServerDatabase
 {
     class GameMechanicsManager
     {
-        Pellet[] gamePellets = new Pellet[4];
+        public Pellet[] gamePellets = new Pellet[4];
 
-        Player[] gamePlayers = new Player[4];
+        public Player[] gamePlayers = new Player[4];
 
         Random roller;
 
         // send is used to determine if the game manager is sending a message to the TCPServer or not
         bool send;
 
-        // command is the instruction that 
+        // command is the instruction that is being read and parsed 
         string command;
 
-        GameMechanicsManager()
+        public GameMechanicsManager()
         {
             roller = new Random();
 

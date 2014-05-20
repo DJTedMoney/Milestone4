@@ -14,7 +14,7 @@ using System.Threading;
 
 using System.Diagnostics;
 
-namespace SQLiteTest
+namespace ServerDatabase
 {
     class TCPServer
     {
@@ -25,10 +25,13 @@ namespace SQLiteTest
 
         public static LoginDatabase dB;
 
+        public static GameMechanicsManager gmm;
+
         public TCPServer()
         { // start constructor
 
             dB = new LoginDatabase();
+            gmm = new GameMechanicsManager();
 
             listener = new TcpListener(4300);
             listener.Start();
@@ -58,6 +61,11 @@ namespace SQLiteTest
                 activePlayers[t] = new PlayerSocket(nws, sock);
                 activePlayers[t].connected = true;
 
+                gmm.gamePlayers[t] = new Player();
+                gmm.gamePlayers[t].connect();
+
+
+
                 // Console.WriteLine(" connected true");
 
                 // string data = activePlayers[t].playerReader.ReadLine();
@@ -70,9 +78,6 @@ namespace SQLiteTest
                 activePlayers[t].psThread.Start();
                 Console.Write("bottom of for loop!\n");
             } // end for loop 
-
-
-
 
         } // end constructor
 

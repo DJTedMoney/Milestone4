@@ -13,7 +13,7 @@ using System.Threading;
 
 using System.Diagnostics;
 
-namespace SQLiteTest
+namespace ServerDatabase
 {
     class PlayerSocket
     {

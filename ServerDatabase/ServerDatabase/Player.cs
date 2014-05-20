@@ -19,16 +19,35 @@ namespace ServerDatabase
         // size is size
         public int size;
 
-        // constructor passes in location and direction, sets size to 40
-        public Player(int x, int y, int dirX, int dirY)
-        {
-            locX = x;
-            locY = y;
+        // determines if the player is currently connected to the server or not
+        bool connected;
 
-            speedX = dirX;
-            speedY = dirY;
+        Random decider;
+
+        // constructor produces location and direction, sets size to 40
+        public Player()
+        {
+            decider = new Random();
+
+            locX = decider.Next(-100, 100);
+            locY = decider.Next(-100, 100);
+
+            speedX = 0;
+            speedY = -10;
 
             size = 40;
+
+            connected = false;
+        }
+
+        public void connect()
+        {
+            connected = true;
+        }
+
+        public void disconnect()
+        {
+            connected = false;
         }
 
         // move increments the x and y locations by x and y speeds
