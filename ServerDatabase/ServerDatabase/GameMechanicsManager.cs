@@ -27,6 +27,8 @@ namespace ServerDatabase
             // counting by p
             for (int p = 0; p < 4; p++)
             {
+                gamePellets[p] = new Pellet();
+
                 int startX = roller.Next(-450, 450);
                 int startY = roller.Next(-450, 450);
 
@@ -39,6 +41,5 @@ namespace ServerDatabase
 
             }
         }
-
     }
 }

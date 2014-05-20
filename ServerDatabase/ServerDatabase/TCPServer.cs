@@ -58,13 +58,11 @@ namespace ServerDatabase
 
                 // Console.WriteLine("stream created");
 
-                activePlayers[t] = new PlayerSocket(nws, sock);
+                activePlayers[t] = new PlayerSocket(nws, sock, t);
                 activePlayers[t].connected = true;
 
                 gmm.gamePlayers[t] = new Player();
                 gmm.gamePlayers[t].connect();
-
-
 
                 // Console.WriteLine(" connected true");
 
@@ -94,6 +92,35 @@ namespace ServerDatabase
                 client = newNumber;
                 clientString = newNumber.ToString();
             } // end constructor
+
+            public void sendMessage(NetworkStream theStream, String message)
+            {
+                Byte[] sendData = System.Text.Encoding.ASCII.GetBytes(message);
+                // Send the message to the connected TcpServer. 
+                activePlayers[client].psnws.Write(sendData, 0, sendData.Length);
+                Console.WriteLine("Sent: " + message);
+            }
+
+            public void getMessage(NetworkStream theStream)
+            {
+                Byte[] data = new Byte[4096];
+
+                // String to store the response ASCII representation.
+                String responseData = String.Empty;
+
+                // Read the TcpClient response bytes.
+                Int32 buffer;
+                try
+                {
+                    buffer = theStream.Read(data, 0, 4096);
+                    responseData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
+                    Console.WriteLine("Received: " + responseData);
+                }
+                catch (Exception arg)
+                {
+                    Console.WriteLine("Exception: " + arg.Message);
+                }
+            }
 
             public void Service() // for an individual operating thread
             { // begin service
@@ -129,13 +156,18 @@ namespace ServerDatabase
                         // expected sentence:       1   $   userName (pre-encrypted) $  elephant (pre-crypted) $    password (pre-encrypted) $ 
 
                         ////// attempt to login now has return values 
-                        //          return 0 -> player successfully logged in 
-                        //          return 1 -> incorrect password, login failed
+                        //          return 1 -> player successfully logged in 
+                        //          return 0 -> incorrect password, login failed
                         //          return 2 -> new username/pw added to database as new player 
                         if (instruction[0] == "1")
                         {
                             dB.attemptToLogin(instruction[1], instruction[3]);
                             sendMessage(activePlayers[client].psnws, "1$" + client.ToString());
+
+                            string loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[client].getLocX().ToString() 
+                                + "$" + gmm.gamePlayers[client].getLocY().ToString() + "$";
+
+                            sendMessage(activePlayers[client].psnws, loginMessage);
                             
                         }
 
@@ -147,9 +179,9 @@ namespace ServerDatabase
                         {
                             // update direction that the indicated player is traveling 
 
+
+
                             // counting by w
-
-
                             for (int w = 0; w < numberPlayers; ++w)
                             {
                                 sendMessage(activePlayers[client].psnws, "2$");
@@ -168,35 +200,6 @@ namespace ServerDatabase
                 }
                 
             } // end service
-
-            public void sendMessage(NetworkStream theStream, String message)
-            {
-                Byte[] sendData = System.Text.Encoding.ASCII.GetBytes(message);
-                // Send the message to the connected TcpServer. 
-                activePlayers[client].psnws.Write(sendData, 0, sendData.Length);
-                Console.WriteLine("Sent: " + message);
-            }
-
-            public void getMessage(NetworkStream theStream)
-            {
-                Byte[] data = new Byte[4096];
-
-                // String to store the response ASCII representation.
-                String responseData = String.Empty;
-
-                // Read the TcpClient response bytes.
-                Int32 buffer;
-                try
-                {
-                    buffer = theStream.Read(data, 0, 4096);
-                    responseData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
-                    Console.WriteLine("Received: " + responseData);
-                }
-                catch (Exception arg)
-                {
-                    Console.WriteLine("Exception: " + arg.Message);
-                }
-            }
 
         } // end readThread class
     }

@@ -32,15 +32,11 @@ namespace ServerDatabase
         public Queue<string> updates;
         public Socket pSock;
 
-        public StreamReader playerReader;
-        public StreamWriter playerWriter;
-
-        public PlayerSocket(NetworkStream newStream, Socket newSocket /*,StreamReader newSR, StreamWriter newSW*/)
+        public PlayerSocket(NetworkStream newStream, Socket newSocket, int newID)
         {
             psnws = newStream;
             pSock = newSocket;
-            //playerReader = newSR;
-            //playerWriter = newSW;
+            clientID = newID;
 
             updates = new Queue<string>();
         }

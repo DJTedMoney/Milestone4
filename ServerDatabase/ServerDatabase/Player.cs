@@ -12,15 +12,22 @@ namespace ServerDatabase
         public int locX;
         public int locY;
 
+        // game mechanics to be implemented so that Player has a Speed value, how far they move
+        // left/right value is either 1, -1, or 0
+        // up/down value is either 1, -1, or 0
+        // each frame, a player moves its left/right * speed and its up/down * speed
+        // one of the two values will always be 0 (players cannot move diagonal)
+
         // speed x and y are the player speed left/right and up/down
-        public int speedX;
-        public int speedY;
+        public int leftRight;
+        public int upDown;
+        public int moveSpeed;
 
         // size is size
         public int size;
 
         // determines if the player is currently connected to the server or not
-        bool connected;
+        public bool connected;
 
         Random decider;
 
@@ -32,8 +39,9 @@ namespace ServerDatabase
             locX = decider.Next(-100, 100);
             locY = decider.Next(-100, 100);
 
-            speedX = 0;
-            speedY = -10;
+            leftRight = 0;
+            upDown = -1;
+            moveSpeed = 10;
 
             size = 40;
 
@@ -53,8 +61,8 @@ namespace ServerDatabase
         // move increments the x and y locations by x and y speeds
         public void move()
         {
-            locX += speedX;
-            locY += speedY;
+            locX += (leftRight * moveSpeed);
+            locY += (upDown * moveSpeed);
         }
 
         // grow increments player size
@@ -65,34 +73,25 @@ namespace ServerDatabase
 
         public void slowDown(int slowFactor)
         {
-            for(int s = 0; s < slowFactor; s++)
+            if (slowFactor > moveSpeed)
             {
-                if (speedX > 1)
-                {
-                    speedX *= (speedX - 1) / speedX;
-                }
+                moveSpeed = 1;
+            }
 
-                if (speedY > 1)
-                {
-                    speedY *= (speedY - 1) / speedY;
-                }
+            else
+            {
+                moveSpeed -= slowFactor;
             }
         }
 
-        public void setSpeed(int newX, int newY)
+        public void setSpeed(int newSpeed)
         {
-            speedX = newX;
-            speedY = newY;
+            moveSpeed = newSpeed;
         }
 
-        public int getSpeedX()
+        public int getSpeed()
         {
-            return speedX;
-        }
-
-        public int getSpeedY()
-        {
-            return speedY;
+            return moveSpeed;
         }
 
         public int getLocX()
@@ -110,5 +109,28 @@ namespace ServerDatabase
             return size;
         }
 
+        public void goLeft()
+        {
+            leftRight = -1;
+            upDown = 0;
+        }
+
+        public void goRight()
+        {
+            leftRight = 1;
+            upDown = 0;
+        }
+
+        public void goUp()
+        {
+            leftRight = 0;
+            upDown = 1;
+        }
+
+        public void goDown()
+        {
+            leftRight = 0;
+            upDown = -1;
+        }
     }
 }
