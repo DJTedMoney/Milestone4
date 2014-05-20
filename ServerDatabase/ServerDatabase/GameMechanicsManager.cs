@@ -8,6 +8,8 @@ namespace ServerDatabase
 {
     class GameMechanicsManager
     {
+        const int maxPlayers = 4;
+
         public Pellet[] gamePellets = new Pellet[4];
 
         public Player[] gamePlayers = new Player[4];
@@ -34,12 +36,21 @@ namespace ServerDatabase
 
                 gamePellets[p].setPosition(startX, startY);
             }
+        }
 
-            // counting players by l
-            for (int l = 0; l < 4; l++)
+        // pass in the player ID, and check for all collisions
+        public void detectCollision(int pID)
+        {
+            // count opponents by o
+            for (int o = 0; o < 4; o++)
             {
-
+                // if
             }
+        }
+
+        public int getNumberPlayers()
+        {
+            return maxPlayers;
         }
     }
 }

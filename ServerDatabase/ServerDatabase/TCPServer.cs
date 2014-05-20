@@ -19,19 +19,23 @@ namespace ServerDatabase
     class TCPServer
     {
         static TcpListener listener;
-        const int numberPlayers = 1;
-        protected static PlayerSocket[] activePlayers = new PlayerSocket[numberPlayers];
+        protected static PlayerSocket[] activePlayers;
         static Queue<string> movesMade;
 
         public static LoginDatabase dB;
-
         public static GameMechanicsManager gmm;
+
+        static int numberPlayers;
 
         public TCPServer()
         { // start constructor
 
             dB = new LoginDatabase();
             gmm = new GameMechanicsManager();
+
+            numberPlayers = gmm.getNumberPlayers();
+
+            activePlayers = new PlayerSocket[ numberPlayers ];
 
             listener = new TcpListener(4300);
             listener.Start();
@@ -46,7 +50,7 @@ namespace ServerDatabase
             Console.Read();
 
             // counting by t
-            for (int t = 0; t < numberPlayers; ++t)
+            for (int t = 0; t < gmm.getNumberPlayers(); ++t)
             { // start for loop 
                 Socket sock = listener.AcceptSocket();
                 Console.WriteLine("Player Socket has accepted the socket");
@@ -204,7 +208,7 @@ namespace ServerDatabase
 
                             // send a message to every player with the new direction of the player who turned 
                             // counting by w
-                            for (int w = 0; w < numberPlayers; ++w)
+                            for (int w = 0; w < numberPlayers; w++)
                             {
                                 // abbreviating the current active player to p
                                 Player p = gmm.gamePlayers[client];
