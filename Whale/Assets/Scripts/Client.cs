@@ -93,8 +93,12 @@ public class Client : MonoBehaviour
 	
 	public void Connect(String server, string userName, string password) 
 	{
+		print ("in Connect");
+		bool testing = false;
   		try 
   		{
+			testing = true;
+			
     		// Create a TcpClient.
     		Int32 port = 4300;
     		client = new TcpClient();
@@ -108,6 +112,8 @@ public class Client : MonoBehaviour
 			pass = password;
 		    clientThread = new Thread(new ThreadStart(serverIO));
 			clientThread.Start();
+			print ("clientThread should have started by now");
+			
 			use = "";
 			pass = "";
 		
@@ -145,6 +151,10 @@ public class Client : MonoBehaviour
   		{
     		Console.WriteLine("SocketException: {0}", e);
   		}
+		
+		if (testing == false){
+			print ("try never gets entered");
+		}
 	}
 	
 	public void Disconnect()
@@ -162,6 +172,7 @@ public class Client : MonoBehaviour
 	
 	public void serverIO()
 	{
+		print ("in ServerIO");
 		if(manager.start && isConnect)
 		{
 			stream = client.GetStream();

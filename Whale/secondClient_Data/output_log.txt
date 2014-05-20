@@ -11,24 +11,36 @@ Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4
 Loading E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.046 seconds
+- Completed reload, in  0.039 seconds
 desktop: 1920x1080 120Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\System.dll (this message is harmless)
-<From LoginBox>UserName: 006d2143154327a64d86a264aea225f3
+<From LoginBox>UserName: c4ca4238a0b923820dcc509a6f75849b
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-<From LoginBox>Password: ff1ccf57e98c817df1efcd9fe44a8aeb
+<From LoginBox>Password: 37693cfc748049e45d87b8c7d8b9aacd
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-UserName: 006d2143154327a64d86a264aea225f3
+in Connect
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-Password: ff1ccf57e98c817df1efcd9fe44a8aeb
+UserName: c4ca4238a0b923820dcc509a6f75849b
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Password: 37693cfc748049e45d87b8c7d8b9aacd
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+clientThread should have started by now
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+in ServerIO
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 

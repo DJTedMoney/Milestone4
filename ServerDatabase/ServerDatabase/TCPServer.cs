@@ -78,7 +78,7 @@ namespace ServerDatabase
 
                 activePlayers[t].psThread = new Thread(new ThreadStart(thread.Service) );
                 activePlayers[t].psThread.Start();
-                Console.Write("bottom of for loop!\n");
+                Console.Write("bottom of for loop in TCPServer constructor\n");
             } // end for loop 
 
         } // end constructor
@@ -133,7 +133,7 @@ namespace ServerDatabase
 
                     while (activePlayers[client].connected)
                     { // actual game loop for an individual player
-
+                        Console.WriteLine("in service while loop for player " + client);
                         getMessage(activePlayers[client].psnws);
 
                         //spliting the serverdata into instruction
