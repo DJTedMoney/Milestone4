@@ -8,7 +8,7 @@ namespace ServerDatabase
 {
     class GameMechanicsManager
     {
-        const int maxPlayers = 4;
+        const int maxPlayers = 2;
 
         public Pellet[] gamePellets = new Pellet[4];
 

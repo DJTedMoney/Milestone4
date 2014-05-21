@@ -110,15 +110,15 @@ namespace ServerDatabase
                 Byte[] data = new Byte[4096];
 
                 // String to store the response ASCII representation.
-                String responseData = String.Empty;
+                String receivedData = String.Empty;
 
                 // Read the TcpClient response bytes.
                 Int32 buffer;
                 try
                 {
                     buffer = theStream.Read(data, 0, 4096);
-                    responseData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
-                    Console.WriteLine("Received: " + responseData);
+                    receivedData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
+                    Console.WriteLine("Received: " + receivedData);
                 }
                 catch (Exception arg)
                 {
@@ -194,7 +194,9 @@ namespace ServerDatabase
 
                         }
 
+                        Console.WriteLine("in service, before getmessage");
                         getMessage(activePlayers[client].psnws);
+                        Console.WriteLine("in service, after getmessage");
 
                         if (collided)
                         {
