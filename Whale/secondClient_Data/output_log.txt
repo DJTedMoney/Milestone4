@@ -11,36 +11,7 @@ Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\second
 Loading C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.290 seconds
+- Completed reload, in  0.264 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\System.dll (this message is harmless)
-<From LoginBox>UserName: 912ec803b2ce49e4a541068d495ab570
- 
-(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
-
-<From LoginBox>Password: fc2baa1a20b4d5190b122b383d7449fd
- 
-(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
-
-in Connect
- 
-(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
-
-UserName: 912ec803b2ce49e4a541068d495ab570
- 
-(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
-
-Password: fc2baa1a20b4d5190b122b383d7449fd
- 
-(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
-
-clientThread should have started by now
- 
-(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
-
-in ServerIO
- 
-(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
-
