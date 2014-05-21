@@ -63,7 +63,6 @@ namespace ServerDatabase
                 // Console.WriteLine("stream created");
 
                 activePlayers[t] = new PlayerSocket(nws, sock, t);
-                activePlayers[t].connected = true;
 
                 gmm.gamePlayers[t] = new Player();
                 gmm.gamePlayers[t].connect();
@@ -133,7 +132,7 @@ namespace ServerDatabase
                 try
                 { // start try
 
-                    while (activePlayers[client].connected)
+                    while (activePlayers[client].pSock.Connected )
                     { // actual game loop for an individual player
                         Console.WriteLine("in service while loop for player " + client);
 

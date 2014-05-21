@@ -20,13 +20,9 @@ namespace ServerDatabase
         const string SERVER = "128.195.11.143";
         const int SERVER_PORT = 4300;
 
-        public TcpClient client;
 
         public NetworkStream psnws;
         public int clientID;
-        public bool startGame;
-        public bool connected;
-        public DateTime dateTime;
         public Thread psThread = null;
         protected static bool threadState = false;
         public Queue<string> updates;
