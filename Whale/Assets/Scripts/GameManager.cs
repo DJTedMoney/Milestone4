@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
 				guiBox.grafxText.text = "Connected\nWelcome back " + guiBox.userName;
 				clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				isActive[clientNumber] = true;
 			}
 			//Server sent Move commands to client
 			if(comType.Equals("2") && move == true)
