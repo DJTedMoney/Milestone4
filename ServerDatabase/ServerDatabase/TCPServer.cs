@@ -44,7 +44,7 @@ namespace ServerDatabase
 
             dB.connectToDatabase();
 
-            //dB.createTable();
+            // dB.createTable();
 
             Console.Write("Press Enter to start the server:  ");
             Console.Read();
@@ -257,7 +257,10 @@ namespace ServerDatabase
                         //          return 2 -> new username/pw added to database as new player 
                         if (instruction[0] == "1")
                         { // begin instruction 1
-                            int loginStatus;  
+                            int loginStatus;
+
+                            Console.WriteLine("Attempting to log in");
+
                             loginStatus = dB.attemptToLogin(instruction[1], instruction[3]);
 
                             string loginMessage;

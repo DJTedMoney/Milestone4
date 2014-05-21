@@ -179,7 +179,7 @@ public class Client : MonoBehaviour
 		if(isConnect)
 		{
 			print ("ServerIO: in first If");
-			stream = client.GetStream();
+			// stream = client.GetStream();
 			print ("1");
 			message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
 			print ("message " + message);

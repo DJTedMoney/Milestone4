@@ -33,6 +33,8 @@ namespace ServerDatabase
         // password = pw
         public void createTable()
         {
+            Console.WriteLine("CREATING TABLE");
+
             string sql = "create table users (name varchar(32), pw varchar(32) )";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
@@ -108,8 +110,13 @@ namespace ServerDatabase
         bool checkIfUserNameExists(string userName)
         {
             string sql = "select * from users where name= '" + userName + "'";
+            Console.WriteLine("sql " + sql);
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
+
+            Console.WriteLine("test");
+
+            // command.Connection.Open();
             bool userExists = reader.Read();
 
             if (userExists )
