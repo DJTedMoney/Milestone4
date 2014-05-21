@@ -134,6 +134,11 @@ namespace ServerDatabase
                     while (activePlayers[client].connected)
                     { // actual game loop for an individual player
                         Console.WriteLine("in service while loop for player " + client);
+
+                        gmm.detectCollisionsWithWalls(client);
+                        gmm.detectCollisionWithPellets(client);
+                        gmm.detectCollisionPlayers(client);
+
                         getMessage(activePlayers[client].psnws);
 
                         //spliting the serverdata into instruction
@@ -164,7 +169,7 @@ namespace ServerDatabase
                         //          return 0 -> incorrect password, login failed
                         //          return 2 -> new username/pw added to database as new player 
                         if (instruction[0] == "1")
-                        {
+                        { // begin instruction 1
                             int loginStatus;  
                             loginStatus = dB.attemptToLogin(instruction[1], instruction[3]);
 
@@ -208,13 +213,13 @@ namespace ServerDatabase
                             {
                                 sendMessage(activePlayers[client].psnws, "0$" + "Wrong password, try again" + "$");
                             }
-                        }
+                        } // end instruction 1
 
                         // if instruction[0] == "2" -> command to change directions
                         // indexes of instruction   [0]     [1]                         [2]                                     [3]
                         // expected sentence:       2 $     tostada (pre-crypted) $     { U D L R } $ "*****" (pre-crypt) $     { number of player who made the move } $ 
                         if (instruction[0] == "2")
-                        {
+                        { // begin instruction 2
                             // update direction that the indicated player is traveling 
                             string directionToMove = instruction[2];
 
@@ -258,6 +263,12 @@ namespace ServerDatabase
 
                                 sendMessage(activePlayers[client].psnws, moveMessage);
                             }
+                        } // end instruction 2
+
+                        // instruction [0] == "0" -> client wants to disconnect
+                        if (instruction[0] == "0")
+                        {
+
                         }
 
                     } // end game loop for a player

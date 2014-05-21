@@ -152,5 +152,17 @@ namespace ServerDatabase
             leftRight = 0;
             upDown = -1;
         }
+
+        public void kill()
+        {
+            locX = decider.Next(-100, 100);
+            locY = decider.Next(-100, 100);
+
+            leftRight = 0;
+            upDown = -1;
+            moveSpeed = 10;
+
+            size = 40;
+        }
     }
 }

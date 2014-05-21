@@ -47,7 +47,7 @@ namespace ServerDatabase
             for (int o = 0; o < 4; o++)
             {
                 // if o != clientID, check their distance as > or < (pID.size + o.size)
-                if (o != pID)
+                if ( (o != pID) && (gamePlayers[o].connected) )
                 {
                     int checkDist = distanceBetweenTwoPlayers(pID, o);
 
@@ -68,7 +68,7 @@ namespace ServerDatabase
         // if collision between a player and a pellet is detected, 
         // returns the index of the pellet that is colliding with the player
         // else returns -1
-        public int checkCollisionWithPellets(int pID)
+        public int detectCollisionWithPellets(int pID)
         {
             // counting the pellets by p
             for (int p = 0; p < 4; p++)
@@ -86,7 +86,7 @@ namespace ServerDatabase
             return -1;
         }
 
-        public bool checkCollisionsWithWalls(int p)
+        public bool detectCollisionsWithWalls(int p)
         {
             if( (gamePlayers[p].getLocX() > 500) || (gamePlayers[p].getLocX() < -500) || (gamePlayers[p].getLocY() > 500) || 
                     (gamePlayers[p].getLocY() < -500) )
