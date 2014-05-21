@@ -280,7 +280,7 @@ namespace ServerDatabase
                                 // counting by u
                                 for (int u = 0; u < numberPlayers; u++)
                                 {
-                                    if (gmm.gamePlayers[u].connected)
+                                    if ( (gmm.gamePlayers[u] != null) && (gmm.gamePlayers[u].connected) )
                                     {
                                         sendMessage(activePlayers[u].psnws, loginMessage);
                                     }
