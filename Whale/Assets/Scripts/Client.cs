@@ -176,13 +176,16 @@ public class Client : MonoBehaviour
 		print ("in ServerIO");
 		if(manager.start && isConnect)
 		{
+			print ("ServerIO: in first If");
 			stream = client.GetStream();
 			message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
 			sendMessage(stream);
+			print ("ServerIO: message sent");
 			isConnect = false;
 		}
 		while(manager.start)
-		{			
+		{
+			print ("ServerIO: in whileLoop");		
 			if(sendData)
 			{	
     			sendMessage(stream);
