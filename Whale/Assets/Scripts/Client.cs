@@ -143,6 +143,8 @@ public class Client : MonoBehaviour
 			
 			//after connecting to server:	
 			manager.start = true;
+			
+			print (" manager start " + manager.start);
   		} 
   		catch (ArgumentNullException e) 
   		{
@@ -195,6 +197,8 @@ public class Client : MonoBehaviour
 			//reads a message
 			getMessage(stream);
 		}
+		
+		print ("end of server IO");
 	}
 	
 	public void sendMessage(NetworkStream theStream)
