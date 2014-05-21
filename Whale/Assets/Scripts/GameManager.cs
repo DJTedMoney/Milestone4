@@ -24,10 +24,12 @@ public class GameManager : MonoBehaviour
 	void Start () 
 	{
 		activeClient = GameObject.Find("GameClient").GetComponent<Client>();
+		players = new Player[4];
+		isActive = new bool[4];
 		for(int i = 0; i<4; i++)
 		{
 			print ("test " + i);
-			players[i] = GameObject.Find ("Player"+i.ToString()).GetComponent<Player>();
+			players[i] = GameObject.Find ("Player1").GetComponent<Player>();
 			isActive[i]=false;
 		}
 		guiBox = GameObject.Find("GUI").GetComponent<LoginBox>();
