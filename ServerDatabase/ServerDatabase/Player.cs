@@ -19,8 +19,8 @@ namespace ServerDatabase
         // one of the two values will always be 0 (players cannot move diagonal)
 
         // speed x and y are the player speed left/right and up/down
-        public int leftRight;
-        public int upDown;
+        int leftRight;
+        int upDown;
         public int moveSpeed;
 
         // size is size
@@ -28,6 +28,9 @@ namespace ServerDatabase
 
         // determines if the player is currently connected to the server or not
         public bool connected;
+
+        // score for win condition
+        public int score;
 
         Random decider;
 
@@ -44,6 +47,7 @@ namespace ServerDatabase
             moveSpeed = 10;
 
             size = 40;
+            score = 0;
 
             connected = false;
         }
@@ -119,6 +123,16 @@ namespace ServerDatabase
             return moveSpeed.ToString();
         }
 
+        public string getLeftRightString()
+        {
+            return leftRight.ToString();
+        }
+
+        public string getUpDownString()
+        {
+            return upDown.ToString();
+        }
+
         public int getSize()
         {
             return size;
@@ -163,6 +177,27 @@ namespace ServerDatabase
             moveSpeed = 10;
 
             size = 40;
+            score = 0;
+        }
+
+        public int getScore()
+        {
+            return score;
+        }
+
+        public string getScoreString()
+        {
+            return score.ToString();
+        }
+
+        public void gainPoints(int points)
+        {
+            score += points;
+        }
+
+        public void setScore(int newScore)
+        {
+            score = newScore;
         }
     }
 }

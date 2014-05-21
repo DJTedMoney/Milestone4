@@ -137,9 +137,45 @@ namespace ServerDatabase
 
                         gmm.gamePlayers[client].move();
 
-                        gmm.detectCollisionsWithWalls(client);
-                        gmm.detectCollisionWithPellets(client);
-                        gmm.detectCollisionPlayers(client);
+                        if( gmm.detectCollisionsWithWalls(client) )
+                        {
+                            gmm.gamePlayers[client].kill();
+                        }
+
+                        int pelletCollide = gmm.detectCollisionWithPellets(client);
+
+                        if(pelletCollide != -1)
+                        {
+                            gmm.relocatePellet(pelletCollide);
+
+                            gmm.gamePlayers[client].grow(20);
+                            gmm.gamePlayers[client].slowDown(20);
+                            gmm.gamePlayers[client].gainPoints(1);
+                        }
+
+                        int collidingEnemy = gmm.detectCollisionPlayers(client);
+
+                        if(collidingEnemy != -1)
+                        {
+                            // if the colliding enemy is larger, kill the client and award the colliding enemy
+                            if(gmm.gamePlayers[collidingEnemy].getSize() > gmm.gamePlayers[client].getSize() )
+                            {
+
+                            }
+
+                            // if client is bigger than colliding enemy, kill colliding enemy and award client
+                            else if (gmm.gamePlayers[collidingEnemy].getSize() < gmm.gamePlayers[client].getSize())
+                            {
+
+                            }
+
+                            // if both players are the same size, kill them both 
+                            else
+                            {
+
+                            }
+
+                        }
 
                         getMessage(activePlayers[client].psnws);
 
@@ -248,7 +284,7 @@ namespace ServerDatabase
                                 gmm.gamePlayers[mP].goRight();
                             }
 
-                            // send a message to every player with the new direction of the player who turned 
+                            // send a message to every other player with the new direction of the player who turned 
                             // counting by w
                             for (int w = 0; w < numberPlayers; w++)
                             {
@@ -257,11 +293,11 @@ namespace ServerDatabase
 
                             // 2 $ locX $ locY $ dirX $ dirY $ speed $ size $  pellet1_x $ pellet1_y $ 
                             //      pellet2_x $ pellet2_y $ pellet3_x $ pellet3_y $ pellet4_x $ pellet4_y $
-                                string moveMessage = "2$" + p.getX_string() + "$" + p.getY_string() + "$" + p.getSpeed_string() + "$" +
-                                    p.getSize_string() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() + "$" + 
-                                    gmm.gamePellets[1].getPosX() + "$" + gmm.gamePellets[1].getPosY() + "$" + gmm.gamePellets[2].getPosX() + 
-                                    "$" + gmm.gamePellets[2].getPosY() + "$" + gmm.gamePellets[3].getPosX() + "$" + 
-                                    gmm.gamePellets[3].getPosY() + "$";
+                                string moveMessage = "2$" + p.getX_string() + "$" + p.getY_string() + "$" + p.getLeftRightString() +
+                                    "$" + p.getUpDownString() + "$" + p.getSpeed_string() + "$" +p.getSize_string() + 
+                                    "$" + p.getScoreString() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() + 
+                                    "$" + gmm.gamePellets[1].getPosX() + "$" + gmm.gamePellets[1].getPosY() + "$" + gmm.gamePellets[2].getPosX() + 
+                                    "$" + gmm.gamePellets[2].getPosY() + "$" + gmm.gamePellets[3].getPosX() + "$" + gmm.gamePellets[3].getPosY() + "$";
 
                                 sendMessage(activePlayers[client].psnws, moveMessage);
                             }

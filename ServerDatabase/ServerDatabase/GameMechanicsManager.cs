@@ -137,5 +137,14 @@ namespace ServerDatabase
 
             return dist;
         }
+
+        public void relocatePellet(int c)
+        {
+            int moveX = roller.Next(-450, 450);
+            int moveY = roller.Next(-450, 450);
+
+            gamePellets[c].setPosition(moveX, moveY);
+
+        }
     }
 }
