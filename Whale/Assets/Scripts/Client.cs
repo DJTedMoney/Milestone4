@@ -115,8 +115,8 @@ public class Client : MonoBehaviour
 			clientThread.Start();
 			print ("clientThread should have started by now");
 			
-			use = "";
-			pass = "";
+			// use = "";
+			// pass = "";
 		
 			//stream = client.GetStream();
 			
@@ -176,16 +176,18 @@ public class Client : MonoBehaviour
 	public void serverIO()
 	{
 		print ("in ServerIO");
-		if(manager.start && isConnect)
+		if(isConnect)
 		{
 			print ("ServerIO: in first If");
 			stream = client.GetStream();
+			print ("1");
 			message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
+			print ("message " + message);
 			sendMessage(stream);
 			print ("ServerIO: message sent");
 			isConnect = false;
 		}
-		while(manager.start)
+		while(true)
 		{
 			print ("ServerIO: in whileLoop");		
 			if(sendData)
@@ -203,7 +205,7 @@ public class Client : MonoBehaviour
 	
 	public void sendMessage(NetworkStream theStream)
 	{
-		print ("in SendMessage");
+		print ("in SendMessage " + message);
 		if(message.Length >0)
 		{
 			Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
