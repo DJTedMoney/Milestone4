@@ -86,6 +86,17 @@ namespace ServerDatabase
             return -1;
         }
 
+        public bool checkCollisionsWithWalls(int p)
+        {
+            if( (gamePlayers[p].getLocX() > 500) || (gamePlayers[p].getLocX() < -500) || (gamePlayers[p].getLocY() > 500) || 
+                    (gamePlayers[p].getLocY() < -500) )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public int getNumberPlayers()
         {
             return maxPlayers;
