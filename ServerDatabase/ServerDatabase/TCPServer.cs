@@ -135,6 +135,8 @@ namespace ServerDatabase
                     { // actual game loop for an individual player
                         Console.WriteLine("in service while loop for player " + client);
 
+                        gmm.gamePlayers[client].move();
+
                         gmm.detectCollisionsWithWalls(client);
                         gmm.detectCollisionWithPellets(client);
                         gmm.detectCollisionPlayers(client);
