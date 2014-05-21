@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 		for(int i = 0; i<4; i++)
 		{
 			print ("test " + i);
-			players[i] = GameObject.Find ("Player1").GetComponent<Player>();
+			players[i] = GameObject.Find ("Player" + i.ToString()).GetComponent<Player>();
 			isActive[i]=false;
 		}
 		guiBox = GameObject.Find("GUI").GetComponent<LoginBox>();
