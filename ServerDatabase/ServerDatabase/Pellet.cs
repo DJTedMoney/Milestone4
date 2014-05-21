@@ -24,9 +24,19 @@ namespace ServerDatabase
             y = newY;
         }
 
+        public int getLocX()
+        {
+            return x;
+        }
+
         public string getPosX()
         {
             return x.ToString();
+        }
+
+        public int getLocY()
+        {
+            return y;
         }
 
         public string getPosY()

@@ -168,8 +168,8 @@ namespace ServerDatabase
                             dB.attemptToLogin(instruction[1], instruction[3]);
                             sendMessage(activePlayers[client].psnws, "1$" + client.ToString());
 
-                            string loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[client].getLocX().ToString() 
-                                + "$" + gmm.gamePlayers[client].getLocY().ToString() + "$";
+                            string loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[client].getX_string() 
+                                + "$" + gmm.gamePlayers[client].getY_string() + "$";
 
                             sendMessage(activePlayers[client].psnws, loginMessage);
                             
@@ -215,8 +215,8 @@ namespace ServerDatabase
 
                             // 2 $ locX $ locY $ dirX $ dirY $ speed $ size $  pellet1_x $ pellet1_y $ 
                             //      pellet2_x $ pellet2_y $ pellet3_x $ pellet3_y $ pellet4_x $ pellet4_y $
-                                string moveMessage = "2$" + p.getLocX() + "$" + p.getLocY() + "$" + p.getSpeed() + "$" +
-                                    p.getSize() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() + "$" + 
+                                string moveMessage = "2$" + p.getX_string() + "$" + p.getY_string() + "$" + p.getSpeed_string() + "$" +
+                                    p.getSize_string() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() + "$" + 
                                     gmm.gamePellets[1].getPosX() + "$" + gmm.gamePellets[1].getPosY() + "$" + gmm.gamePellets[2].getPosX() + 
                                     "$" + gmm.gamePellets[2].getPosY() + "$" + gmm.gamePellets[3].getPosX() + "$" + 
                                     gmm.gamePellets[3].getPosY() + "$";

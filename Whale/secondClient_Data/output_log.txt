@@ -1,26 +1,26 @@
 Initialize engine version: 4.1.2f1 (911c7369eeac)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.3750]
-    Renderer: NVIDIA GeForce GTX 680M  
-    Vendor:   NVIDIA
-    VRAM:     1985 MB (via DXGI)
-    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 DF24=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+    Version:  Direct3D 9.0c [aticfx32.dll 8.17.10.1124]
+    Renderer: AMD Radeon HD 6320 Graphics
+    Vendor:   ATI
+    VRAM:     1163 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 DF24=1 INTZ=1 RAWZ=0 NULL=1 RESZ=1 SlowINTZ=1
 Begin MonoManager ReloadAssembly
-Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.039 seconds
-desktop: 1920x1080 120Hz; virtual: 1920x1080 at 0,0
+Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+- Completed reload, in  0.290 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\System.dll (this message is harmless)
-<From LoginBox>UserName: c4ca4238a0b923820dcc509a6f75849b
+Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\System.dll (this message is harmless)
+<From LoginBox>UserName: 912ec803b2ce49e4a541068d495ab570
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-<From LoginBox>Password: 37693cfc748049e45d87b8c7d8b9aacd
+<From LoginBox>Password: fc2baa1a20b4d5190b122b383d7449fd
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
@@ -28,11 +28,11 @@ in Connect
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-UserName: c4ca4238a0b923820dcc509a6f75849b
+UserName: 912ec803b2ce49e4a541068d495ab570
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-Password: 37693cfc748049e45d87b8c7d8b9aacd
+Password: fc2baa1a20b4d5190b122b383d7449fd
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
