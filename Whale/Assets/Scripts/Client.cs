@@ -18,7 +18,7 @@ using System.Collections;
 public class Client : MonoBehaviour 
 {
 	public GameManager manager;
-	public FakeServerInputs server;
+	//public FakeServerInputs server;
 	public string message;
 	string use;
 	string pass;
@@ -40,7 +40,7 @@ public class Client : MonoBehaviour
 	void Start () 
 	{
 		manager = GameObject.Find("GameManager").GetComponent<GameManager>();
-		server = GameObject.Find ("FakeServer").GetComponent<FakeServerInputs>();
+		//server = GameObject.Find ("FakeServer").GetComponent<FakeServerInputs>();
 		message = "";
 		isConnect = false;
 		sendData = false;
@@ -66,7 +66,7 @@ public class Client : MonoBehaviour
 	//sends move request to "server" from gameManager
 	public void requestMove(string inputMove)
 	{
-		server.getMessage(inputMove);
+		//server.getMessage(inputMove);
 		
 		if(manager.start)
 		{
