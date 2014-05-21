@@ -13,7 +13,7 @@ using System.Collections;
 
 public class FakeServerInputs : MonoBehaviour 
 {
-	public Client activeClient;
+	/*public Client activeClient;
 	public string message;
 	public Vector2[] pelletPos;
 	public Vector2 p1Pos;
@@ -155,4 +155,5 @@ public class FakeServerInputs : MonoBehaviour
 		//This will eventualy be TCP code to send message to the client
 		activeClient.doMove(message);
 	}
+*/
 }
