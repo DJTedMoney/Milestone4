@@ -77,7 +77,7 @@ namespace ServerDatabase
 
                 int combSize = gamePlayers[pID].getSize() + 20;
 
-                if (foodDist > combSize)
+                if (foodDist < combSize)
                 {
                     return p;
                 }

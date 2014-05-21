@@ -1,26 +1,42 @@
 Initialize engine version: 4.1.2f1 (911c7369eeac)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.3750]
-    Renderer: NVIDIA GeForce GTX 680M  
-    Vendor:   NVIDIA
-    VRAM:     1985 MB (via DXGI)
-    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 DF24=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+    Version:  Direct3D 9.0c [aticfx32.dll 8.17.10.1124]
+    Renderer: AMD Radeon HD 6320 Graphics
+    Vendor:   ATI
+    VRAM:     1163 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 DF24=1 INTZ=1 RAWZ=0 NULL=1 RESZ=1 SlowINTZ=1
 Begin MonoManager ReloadAssembly
-Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.042 seconds
-desktop: 1920x1080 120Hz; virtual: 1920x1080 at 0,0
+Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+- Completed reload, in  0.852 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: E:\School\UCI\Spring 14\ICS 168 Networking Project\Milestone4\Whale\secondClient_Data\Managed\System.dll (this message is harmless)
-<From LoginBox>UserName: f970e2767d0cfe75876ea857f92e319b
+Platform assembly: C:\Users\Barbarois\Documents\gitRepos\Milestone4\Whale\secondClient_Data\Managed\System.dll (this message is harmless)
+test 0
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-<From LoginBox>Password: eff7d5dba32b4da32d9a67a519434d3f
+test 1
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+test 2
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+test 3
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+<From LoginBox>UserName: 827ccb0eea8a706c4c34a16891f84e7b
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+<From LoginBox>Password: eb89f40da6a539dd1b1776e522459763
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
@@ -28,11 +44,11 @@ in Connect
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-UserName: f970e2767d0cfe75876ea857f92e319b
+UserName: 827ccb0eea8a706c4c34a16891f84e7b
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-Password: eff7d5dba32b4da32d9a67a519434d3f
+Password: eb89f40da6a539dd1b1776e522459763
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
@@ -41,6 +57,35 @@ clientThread should have started by now
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
 in ServerIO
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+in SendMessage
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Sent: 1$$e4b48fd541b3dcb99cababc87c2ee88f$$
+in SendMessage
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Sent: 1$$e4b48fd541b3dcb99cababc87c2ee88f$$
+in GetMessage
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Received: 
+in SendMessage
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Sent: 1$$e4b48fd541b3dcb99cababc87c2ee88f$$
+in GetMessage
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Received: 
+in GetMessage
  
 (Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
