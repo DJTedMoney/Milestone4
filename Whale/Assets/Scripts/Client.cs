@@ -183,7 +183,7 @@ public class Client : MonoBehaviour
 			print ("1");
 			message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
 			print ("message " + message);
-			sendMessage(stream);
+			sendMessage();
 			print ("ServerIO: message sent");
 			isConnect = false;
 		}
@@ -192,38 +192,38 @@ public class Client : MonoBehaviour
 			print ("ServerIO: in whileLoop");		
 			if(sendData)
 			{	
-    			sendMessage(stream);
+    			sendMessage();
 				sendData = false;
 			}
 			
 			//reads a message
-			getMessage(stream);
+			getMessage();
 		}
 		
 		print ("end of server IO");
 	}
 	
-	public void sendMessage(NetworkStream theStream)
+	public void sendMessage()
 	{
 		print ("in SendMessage " + message);
 		if(message.Length >0)
 		{
 			Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
    			// Send the message to the connected TcpServer. 
-		   	theStream.Write(data, 0, data.Length);
-			theStream.Flush();
+		   	stream.Write(data, 0, data.Length);
+			stream.Flush();
    			Console.WriteLine("Sent: " + message);
 		}
 	}
 	
-	public void getMessage(NetworkStream theStream)
+	public void getMessage()
 	{
 		print("in GetMessage");
 		Byte[] data = new Byte[256];
     	// String to store the response ASCII representation.
    		String responseData = String.Empty;
 		// Read the first batch of the TcpServer response bytes.
-    	Int32 bytes = theStream.Read(data, 0, data.Length);
+    	Int32 bytes = stream.Read(data, 0, data.Length);
     	responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
     	Console.WriteLine("Received: ", responseData);
 		manager.serverCommand.Enqueue(responseData);
