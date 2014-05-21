@@ -165,14 +165,29 @@ namespace ServerDatabase
                         //          return 2 -> new username/pw added to database as new player 
                         if (instruction[0] == "1")
                         {
-                            dB.attemptToLogin(instruction[1], instruction[3]);
-                            sendMessage(activePlayers[client].psnws, "1$" + client.ToString());
+                            int loginStatus;  
+                            loginStatus = dB.attemptToLogin(instruction[1], instruction[3]);
 
-                            string loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[client].getX_string() 
+                            string loginMessage;
+
+                            // if loginStatus == 1
+                            // returning user has successfully logged in
+                            // if loginStatus == 3
+                            // new user successfully created
+                            if ( (loginStatus == 1) || (loginStatus == 3) )
+                            {
+                                sendMessage(activePlayers[client].psnws, loginStatus.ToString() + "$" + client.ToString());
+
+                                loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[client].getX_string()
                                 + "$" + gmm.gamePlayers[client].getY_string() + "$";
 
-                            sendMessage(activePlayers[client].psnws, loginMessage);
-                            
+                                sendMessage(activePlayers[client].psnws, loginMessage);
+                            }
+
+                            else if (loginStatus == 0)
+                            {
+                                sendMessage(activePlayers[client].psnws, "0$" + "Wrong password, try again" + "$");
+                            }
                         }
 
                         // if instruction[0] == "2" -> command to change directions
@@ -223,11 +238,6 @@ namespace ServerDatabase
 
                                 sendMessage(activePlayers[client].psnws, moveMessage);
                             }
-                        }
-
-                        if (instruction[0] == "3")
-                        {
-
                         }
 
                     } // end game loop for a player
