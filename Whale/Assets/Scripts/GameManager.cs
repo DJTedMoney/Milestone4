@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
 				guiBox.grafxText.text = "Connected\nWelcome " + guiBox.userName;
 				clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				isActive[clientNumber] = true;
 			}
 			else if(comType.Equals("4"))
 			{
