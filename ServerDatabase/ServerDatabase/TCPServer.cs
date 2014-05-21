@@ -44,7 +44,7 @@ namespace ServerDatabase
 
             dB.connectToDatabase();
 
-            // dB.createTable();
+            //dB.createTable();
 
             Console.Write("Press Enter to start the server:  ");
             Console.Read();
@@ -95,6 +95,7 @@ namespace ServerDatabase
             { // begin constructor
                 client = newNumber;
                 clientString = newNumber.ToString();
+                responseData = "";
             } // end constructor
 
             public void sendMessage(NetworkStream theStream, String message)
@@ -110,15 +111,16 @@ namespace ServerDatabase
                 Byte[] data = new Byte[4096];
 
                 // String to store the response ASCII representation.
-                String receivedData = String.Empty;
+                //String receivedData = String.Empty;
+                responseData = String.Empty;
 
                 // Read the TcpClient response bytes.
                 Int32 buffer;
                 try
                 {
                     buffer = theStream.Read(data, 0, 4096);
-                    receivedData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
-                    Console.WriteLine("Received: " + receivedData);
+                    responseData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
+                    Console.WriteLine("Received: " + responseData);
                 }
                 catch (Exception arg)
                 {
@@ -194,9 +196,8 @@ namespace ServerDatabase
 
                         }
 
-                        Console.WriteLine("in service, before getmessage");
                         getMessage(activePlayers[client].psnws);
-                        Console.WriteLine("in service, after getmessage");
+
 
                         if (collided)
                         {

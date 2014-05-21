@@ -47,7 +47,7 @@ namespace ServerDatabase
             for (int o = 0; o < 4; o++)
             {
                 // if o != clientID, check their distance as > or < (pID.size + o.size)
-                if ( (o != pID) && (gamePlayers[o].connected) )
+                if ( (o != pID) && (gamePlayers[o] != null) && (gamePlayers[o].connected) )
                 {
                     int checkDist = distanceBetweenTwoPlayers(pID, o);
 
