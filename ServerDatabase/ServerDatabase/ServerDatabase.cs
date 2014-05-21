@@ -6,7 +6,7 @@ using System;
 
 using System.Data.SQLite;
 
-namespace SQLiteTest
+namespace ServerDatabase
 {
 
     class ServerDatabase

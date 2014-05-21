@@ -28,9 +28,9 @@ public class Client : MonoBehaviour
 	const String serverIP = "127.0.0.1";
 	//const String serverIP = "128.195.11.143";
 	
+	
+	
 	private Thread clientThread;
-	StreamReader playerReader;
-	StreamWriter playerWriter;
 	private int numPlayers;
 	bool isConnect;
 	bool sendData;
@@ -72,7 +72,7 @@ public class Client : MonoBehaviour
 		{
 			//sends the movement change command to server
 		 	// Translate the passed message into ASCII and store it as a Byte array.
-			print ("sending message to server");
+			//print ("sending message to server");
 			message = inputMove;
 			sendData = true;
 		}
@@ -81,7 +81,7 @@ public class Client : MonoBehaviour
 	//gets move data from server and sends it to gameManager
 	public void doMove(string newMove)
 	{
-		print ("doing move");
+		//print ("doing move");
 		//sends velocity change comand to gameManager
 		if(manager.start)
 		{
@@ -93,11 +93,15 @@ public class Client : MonoBehaviour
 	
 	public void Connect(String server, string userName, string password) 
 	{
+		print ("in Connect");
+		bool testing = false;
   		try 
   		{
+			testing = true;
+			
     		// Create a TcpClient.
     		Int32 port = 4300;
-    		client = new TcpClient(server, port);
+    		client = new TcpClient();
 			
 			
 			//sends pre-encrypted username and password to server.
@@ -109,10 +113,30 @@ public class Client : MonoBehaviour
 			isConnect = true;
 		    clientThread = new Thread(new ThreadStart(serverIO));
 			clientThread.Start();
+			print ("clientThread should have started by now");
+			
 			use = "";
 			pass = "";
+		
+			//stream = client.GetStream();
 			
-			
+			try
+			{ // start try to connect
+				client.Connect(server, port);
+				
+				if(! client.Connected)
+				{
+					print ("Connection failed!");	
+				}
+				
+				stream = client.GetStream();
+				
+			} // end try to connect
+		
+			catch(System.Exception e)
+			{
+				print("Exception e" + e.ToString() );
+			}
 			
 			//here, add all the "connect" stuff, and "manager.start"
 			
@@ -128,11 +152,15 @@ public class Client : MonoBehaviour
   		{
     		Console.WriteLine("SocketException: {0}", e);
   		}
+		
+		if (testing == false){
+			print ("try never gets entered");
+		}
 	}
 	
 	public void Disconnect()
 	{
-		
+		print("Running Disconnect");
 		//moved here from LoginBox
 		manager.start = false;
 		
@@ -145,6 +173,7 @@ public class Client : MonoBehaviour
 	
 	public void serverIO()
 	{
+		print ("in ServerIO");
 		if(manager.start && isConnect)
 		{
 			stream = client.GetStream();
@@ -167,6 +196,7 @@ public class Client : MonoBehaviour
 	
 	public void sendMessage(NetworkStream theStream)
 	{
+		print ("in SendMessage");
 		if(message.Length >0)
 		{
 			Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
@@ -179,6 +209,7 @@ public class Client : MonoBehaviour
 	
 	public void getMessage(NetworkStream theStream)
 	{
+		print("in GetMessage");
 		Byte[] data = new Byte[256];
     	// String to store the response ASCII representation.
    		String responseData = String.Empty;

@@ -9,7 +9,7 @@ using System.Text;
 
 using System.Data.SQLite;
 
-namespace SQLiteTest
+namespace ServerDatabase
 {
     class LoginDatabase
     {
