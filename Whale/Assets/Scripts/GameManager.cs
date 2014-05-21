@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 		activeClient = GameObject.Find("GameClient").GetComponent<Client>();
 		for(int i = 0; i<4; i++)
 		{
+			print ("test " + i);
 			players[i] = GameObject.Find ("Player"+i.ToString()).GetComponent<Player>();
 			isActive[i]=false;
 		}
@@ -82,7 +83,8 @@ public class GameManager : MonoBehaviour
 		//finishes the command with player data (Position x and y, speed, and size)
 		if(send == true)
 		{
-			command = command + players[clientNumber].transform.position.x.ToString() + "$" + 
+			command = command + clientNumber.ToString()+"$"+ 
+				      players[clientNumber].transform.position.x.ToString() + "$" + 
 				      players[clientNumber].transform.position.y.ToString() + "$" + 
 				      players[clientNumber].speed.ToString() + "$" + players[clientNumber].size.ToString();
 			activeClient.requestMove(command);
