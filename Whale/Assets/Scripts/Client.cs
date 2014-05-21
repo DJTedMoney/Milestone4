@@ -106,6 +106,7 @@ public class Client : MonoBehaviour
 			print ("Password: " + password);
 			use = userName;
 			pass = password;
+			isConnect = true;
 		    clientThread = new Thread(new ThreadStart(serverIO));
 			clientThread.Start();
 			use = "";
