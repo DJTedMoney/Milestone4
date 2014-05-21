@@ -181,7 +181,27 @@ namespace ServerDatabase
                                 loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[client].getX_string()
                                 + "$" + gmm.gamePlayers[client].getY_string() + "$";
 
-                                sendMessage(activePlayers[client].psnws, loginMessage);
+                                // update all players of the status of the new player's position
+                                // counting by u
+                                for (int u = 0; u < numberPlayers; u++)
+                                {
+                                    if (gmm.gamePlayers[u].connected)
+                                    {
+                                        sendMessage(activePlayers[u].psnws, loginMessage);
+                                    }
+                                }
+
+                                // update the new player of the position of all other players 
+                                // counting by i
+                                for(int i = 0; i < numberPlayers; i++)
+                                {
+                                    loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[i].getX_string()
+                                        + "$" + gmm.gamePlayers[i].getY_string() + "$";
+
+                                    sendMessage(activePlayers[client].psnws, loginMessage);
+                                }
+
+                                // sendMessage(activePlayers[client].psnws, loginMessage);
                             }
 
                             else if (loginStatus == 0)
