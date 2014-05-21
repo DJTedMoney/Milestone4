@@ -109,6 +109,8 @@ namespace ServerDatabase
             {
                 Byte[] data = new Byte[4096];
 
+                Console.WriteLine("attempting to get message");
+
                 // String to store the response ASCII representation.
                 //String receivedData = String.Empty;
                 responseData = String.Empty;
@@ -117,8 +119,15 @@ namespace ServerDatabase
                 Int32 buffer;
                 try
                 {
+                    Console.WriteLine("  In the Try");
+
                     buffer = theStream.Read(data, 0, 4096);
+                    Console.WriteLine("buffer" + buffer);
+
                     responseData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
+
+                    Console.WriteLine("responseData " + responseData);
+
                     Console.WriteLine("Received: " + responseData);
                 }
                 catch (Exception arg)
@@ -195,6 +204,7 @@ namespace ServerDatabase
 
                         }
 
+                        Console.WriteLine("Preparing to get message");
                         getMessage(activePlayers[client].psnws);
 
 
