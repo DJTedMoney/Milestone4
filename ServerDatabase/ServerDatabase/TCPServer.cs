@@ -288,6 +288,9 @@ namespace ServerDatabase
 
                                 // update the new player of the position of all other players 
                                 // counting by i
+
+                                //problem here.  when only one player is connected, it still tries to run the loop for numberPlayers (who might not all be connected).
+                                //so for anything after the first tile the loop runs is a null object exception
                                 for(int i = 0; i < numberPlayers; i++)
                                 {
                                     loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[i].getX_string()
