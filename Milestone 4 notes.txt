@@ -7,7 +7,7 @@ they'll always throw a null object exception because it's looping through it.
 
 Client.cs, line 213 (stream.Write(data, 0, data.Length);)
 Threw a null reference exception
-It was after connecting the debug client as the second player.
+It was after connecting the debug client (you have to make sure the Mono debugger is attached to the Unity process to see it)
 (In "this" in the locals window, it also says "System.argumentException- ToString can only be called from the main thread)
 
 
