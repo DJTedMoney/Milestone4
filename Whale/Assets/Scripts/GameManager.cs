@@ -54,27 +54,33 @@ public class GameManager : MonoBehaviour
 	
 	public void sendMove()
 	{
+		//print ("in SendMove");
+		
 		//starts command with new direction (U = up, D = down
 		//L = left, and R = right)
 		send = true;
 		if(Input.GetKeyDown(KeyCode.UpArrow) )
 		{
 			command = "U$"; 
+			print ("Sending UP");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.DownArrow) )
 		{
 			command = "D$";
+			print ("Sending DOWN");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.LeftArrow) )
 		{
 			command = "L$";
+			print ("Sending LEFT");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.RightArrow) )
 		{
 			command = "R$";
+	     	print ("Sending RIGHT");
 		}
 		//default command, means no change
 		else

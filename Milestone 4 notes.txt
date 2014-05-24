@@ -1,0 +1,34 @@
+m4 notes:
+
+TCPServer.cs, line 294 (for(int i = 0; i < numberPlayers; i++))
+It's going by numberPlayers, which is the TOTAL player slots. 
+So when there's only one client connected, and there are more who haven't, 
+they'll always throw a null object exception because it's looping through it.
+
+Client.cs, line 213 (stream.Write(data, 0, data.Length);)
+Threw a null reference exception
+It was after connecting the debug client as the second player.
+(In "this" in the locals window, it also says "System.argumentException- ToString can only be called from the main thread)
+
+
+
+
+
+
+
+
+client.cs, line 67. requestMove(string)
+Takes a string, but just sets message to inputMove and sendData to true
+Console window never prints "in SendMessage", which means it's never getting called
+
+
+
+
+
+
+
+
+
+
+
+
