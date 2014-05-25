@@ -17,7 +17,9 @@ namespace ServerDatabase
 {
     class PlayerSocket
     {
-        const string SERVER = "128.195.11.143";
+        // local 127 0 0 1
+        // wireless desktop 128 195 11 143
+        const string SERVER = "127.0.0.1";
         const int SERVER_PORT = 4300;
 
 
