@@ -145,7 +145,7 @@ namespace ServerDatabase
 
                     Console.WriteLine(responseData);
 
-                    sendMessage(activePlayers[client].psnws, "hello");
+                    sendMessage(activePlayers[client].psnws, "hello$");
 
 
                     /*
