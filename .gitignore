@@ -19,7 +19,7 @@
 
 
 # Build results
-/ServerDatabase/[Dd]ebug/
+#/ServerDatabase/[Dd]ebug/
 /ServerDatabase/[Dd]ebugPublic/
 /ServerDatabase/[Rr]elease/
 /ServerDatabase/x64/
