@@ -140,6 +140,12 @@ namespace ServerDatabase
             { // begin service
                 try
                 { // start try
+
+                    getMessage(activePlayers[client].psnws);
+
+                    Console.WriteLine(responseData);
+
+
                     /*
                     while (activePlayers[client].pSock.Connected )
                     { // actual game loop for an individual player
