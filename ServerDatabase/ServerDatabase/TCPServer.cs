@@ -145,6 +145,8 @@ namespace ServerDatabase
 
                     Console.WriteLine(responseData);
 
+                    sendMessage(activePlayers[client].psnws, "hello");
+
 
                     /*
                     while (activePlayers[client].pSock.Connected )

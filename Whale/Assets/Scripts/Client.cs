@@ -188,6 +188,8 @@ public class Client : MonoBehaviour
 			isConnect = false;
 		}
 		
+		getMessage();
+		
 		/*
 		while(true)
 		{
