@@ -135,7 +135,7 @@ public class Client : MonoBehaviour
 		
 			catch(System.Exception e)
 			{
-				print("Exception e" + e.ToString() );
+				print("Exception e" + e.Message );
 			}
 			
 			//here, add all the "connect" stuff, and "manager.start"
