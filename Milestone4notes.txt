@@ -1,0 +1,28 @@
+m4 notes:
+
+
+Client.cs, line 213 
+(stream.Write(data, 0, data.Length);)
+Threw a null reference exception.
+It was after connecting the debug client (you have to make sure the Mono debugger is attached to the Unity process to see it)
+(In "this" in the locals window, it also says "System.argumentException- ToString can only be called from the main thread)
+
+
+client.cs, line 67 
+requestMove(string)
+Takes a string, but just sets message to inputMove and sendData to true.
+Console window never prints "in SendMessage", which means it's never getting called.
+
+GameManager.cs, line 130
+isActive[clientNumber] = true;
+Got an array index out of bounds exception
+
+
+
+
+
+
+
+
+
+
