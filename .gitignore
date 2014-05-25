@@ -19,7 +19,7 @@
 
 
 # Build results
-#/ServerDatabase/[Dd]ebug/
+/ServerDatabase/[Dd]ebug/
 /ServerDatabase/[Dd]ebugPublic/
 /ServerDatabase/[Rr]elease/
 /ServerDatabase/x64/
@@ -27,6 +27,8 @@
 /ServerDatabase/bld/
 /ServerDatabase/ServerDatabase/[Bb]in/
 /ServerDatabase/ServerDatabase/[Oo]bj/
+
+!/ServerDatabase/ServerDatabase/bin/Debug/
 
 # Roslyn cache directories
 *.ide/
