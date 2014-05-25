@@ -8,7 +8,7 @@
 
 # Build results
 
-[Dd]ebug/
+#[Dd]ebug/
 [Rr]elease/
 x64/
 build/
@@ -17,7 +17,7 @@ build/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
-!/ServerDatabase/bin/Debug/
+!/ServerDatabase/bin/Debug/**
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
