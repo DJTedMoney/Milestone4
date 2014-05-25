@@ -169,26 +169,19 @@ public class Client : MonoBehaviour
 		//stream.Close();
 		client.Close ();
 		clientThread.Abort();
-		
-
+		isConnect = false;
 	}
 	
 	public void serverIO()
 	{
 		print ("in ServerIO");
-		if(isConnect)
-		{
-			print ("ServerIO: in first If");
-			// stream = client.GetStream();
-			print ("1");
-			message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
-			print ("message " + message);
-			sendMessage(message);
-			print ("ServerIO: message sent");
-			
-			
-			isConnect = false;
-		}
+		print ("ServerIO: in first If");
+		// stream = client.GetStream();
+		print ("1");
+		message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
+		print ("message " + message);
+		sendMessage(message);
+		print ("ServerIO: message sent");
 		
 		getMessage();
 		
@@ -204,8 +197,7 @@ public class Client : MonoBehaviour
 		
 		getMessage();
 		
-		/*
-		while(true)
+		while(isConnect)
 		{
 			print ("ServerIO: in whileLoop");		
 			if(sendData)
@@ -217,7 +209,6 @@ public class Client : MonoBehaviour
 			//reads a message
 			getMessage();
 		}
-		*/
 		print ("end of server IO");
 	}
 	
