@@ -183,7 +183,7 @@ public class Client : MonoBehaviour
 			print ("1");
 			message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
 			print ("message " + message);
-			sendMessage();
+			sendMessage(message);
 			print ("ServerIO: message sent");
 			isConnect = false;
 		}
@@ -207,16 +207,16 @@ public class Client : MonoBehaviour
 		print ("end of server IO");
 	}
 	
-	public void sendMessage()
+	public void sendMessage(string theMessage)
 	{
-		print ("in SendMessage " + message);
-		if(message.Length >0)
+		print ("in SendMessage " + theMessage);
+		if(theMessage.Length >0)
 		{
-			Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+			Byte[] data = System.Text.Encoding.ASCII.GetBytes(theMessage);
    			// Send the message to the connected TcpServer. 
 		   	stream.Write(data, 0, data.Length);
 			stream.Flush();
-   			Console.WriteLine("Sent: " + message);
+   			Console.WriteLine("Sent: " + theMessage);
 		}
 	}
 	
