@@ -62,25 +62,25 @@ public class GameManager : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.UpArrow) )
 		{
 			command = "U$"; 
-			print ("Sending UP");
+			print ("Pressed UP");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.DownArrow) )
 		{
 			command = "D$";
-			print ("Sending DOWN");
+			print ("Pressed DOWN");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.LeftArrow) )
 		{
 			command = "L$";
-			print ("Sending LEFT");
+			print ("Pressed LEFT");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.RightArrow) )
 		{
 			command = "R$";
-	     	print ("Sending RIGHT");
+	     	print ("Pressed RIGHT");
 		}
 		//default command, means no change
 		else
