@@ -151,6 +151,8 @@ namespace ServerDatabase
 
                     Console.WriteLine(responseData);
 
+                    sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
+
 
                     /*
                     while (activePlayers[client].pSock.Connected )

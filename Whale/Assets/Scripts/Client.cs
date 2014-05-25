@@ -202,7 +202,7 @@ public class Client : MonoBehaviour
 			print ("ServerIO: message sent");
 		//END THE TEST BLOCK
 		
-		//getMessage();
+		getMessage();
 		
 		/*
 		while(true)
