@@ -148,11 +148,11 @@ public class Client : MonoBehaviour
   		} 
   		catch (ArgumentNullException e) 
   		{
-    		Console.WriteLine("ArgumentNullException: {0}", e);
+    		print("ArgumentNullException: {0}"+ e.Message);
   		} 
   		catch (SocketException e) 
   		{
-    		Console.WriteLine("SocketException: {0}", e);
+    		print("SocketException: {0}" + e.Message);
   		}
 		
 		if (testing == false){
@@ -216,7 +216,7 @@ public class Client : MonoBehaviour
    			// Send the message to the connected TcpServer. 
 		   	stream.Write(data, 0, data.Length);
 			stream.Flush();
-   			Console.WriteLine("Sent: " + message);
+   			print("Sent: " + message);
 		}
 	}
 	
@@ -229,7 +229,7 @@ public class Client : MonoBehaviour
 		// Read the first batch of the TcpServer response bytes.
     	Int32 bytes = stream.Read(data, 0, data.Length);
     	responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-    	Console.WriteLine("Received: ", responseData);
+    	print("Received: " + responseData);
 		manager.serverCommand.Enqueue(responseData);
 	}
 }
