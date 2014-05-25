@@ -135,7 +135,7 @@ public class Client : MonoBehaviour
 		
 			catch(System.Exception e)
 			{
-				print("Exception e" + e.ToString() );
+				print("Exception e" + e.Message );
 			}
 			
 			//here, add all the "connect" stuff, and "manager.start"
@@ -148,11 +148,11 @@ public class Client : MonoBehaviour
   		} 
   		catch (ArgumentNullException e) 
   		{
-    		Console.WriteLine("ArgumentNullException: {0}", e);
+    		print("ArgumentNullException: {0}"+ e.Message);
   		} 
   		catch (SocketException e) 
   		{
-    		Console.WriteLine("SocketException: {0}", e);
+    		print("SocketException: {0}" + e.Message);
   		}
 		
 		if (testing == false){
@@ -183,7 +183,7 @@ public class Client : MonoBehaviour
 			print ("1");
 			message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
 			print ("message " + message);
-			sendMessage(message);
+			sendMessage();
 			print ("ServerIO: message sent");
 			isConnect = false;
 		}
@@ -207,16 +207,16 @@ public class Client : MonoBehaviour
 		print ("end of server IO");
 	}
 	
-	public void sendMessage(string theMessage)
+	public void sendMessage()
 	{
-		print ("in SendMessage " + theMessage);
-		if(theMessage.Length >0)
+		print ("in SendMessage " + message);
+		if(message.Length >0)
 		{
-			Byte[] data = System.Text.Encoding.ASCII.GetBytes(theMessage);
+			Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
    			// Send the message to the connected TcpServer. 
 		   	stream.Write(data, 0, data.Length);
 			stream.Flush();
-   			Console.WriteLine("Sent: " + theMessage);
+   			print("Sent: " + message);
 		}
 	}
 	
@@ -229,7 +229,7 @@ public class Client : MonoBehaviour
 		// Read the first batch of the TcpServer response bytes.
     	Int32 bytes = stream.Read(data, 0, data.Length);
     	responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-    	Console.WriteLine("Received: ", responseData);
+    	print("Received: " + responseData);
 		manager.serverCommand.Enqueue(responseData);
 	}
 }
