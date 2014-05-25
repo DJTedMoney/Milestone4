@@ -293,10 +293,13 @@ namespace ServerDatabase
                                 //so for anything after the first tile the loop runs is a null object exception
                                 for(int i = 0; i < numberPlayers; i++)
                                 {
-                                    loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[i].getX_string()
-                                        + "$" + gmm.gamePlayers[i].getY_string() + "$";
+                                    if(gmm.gamePlayers[i] != null && gmm.gamePlayers[i].connected)
+                                    {
+                                       loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[i].getX_string()
+                                         + "$" + gmm.gamePlayers[i].getY_string() + "$";
 
-                                    sendMessage(activePlayers[client].psnws, loginMessage);
+                                     sendMessage(activePlayers[client].psnws, loginMessage);
+                                    }
                                 }
 
                                 // sendMessage(activePlayers[client].psnws, loginMessage);

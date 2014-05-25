@@ -1,9 +1,5 @@
 m4 notes:
 
-TCPServer.cs, line 294 (for(int i = 0; i < numberPlayers; i++))
-It's going by numberPlayers, which is the TOTAL player slots. 
-So when there's only one client connected, and there are more who haven't, 
-they'll always throw a null object exception because it's looping through it.
 
 Client.cs, line 213 (stream.Write(data, 0, data.Length);)
 Threw a null reference exception
