@@ -140,7 +140,7 @@ namespace ServerDatabase
             { // begin service
                 try
                 { // start try
-
+                    /*
                     while (activePlayers[client].pSock.Connected )
                     { // actual game loop for an individual player
                         Console.WriteLine("in service while loop for player " + client);
@@ -367,7 +367,7 @@ namespace ServerDatabase
 
                         }
 
-                    } // end game loop for a player
+                    } // end game loop for a player */
 
                 } // end try
 
