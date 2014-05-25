@@ -186,7 +186,13 @@ public class Client : MonoBehaviour
 			sendMessage(message);
 			print ("ServerIO: message sent");
 			
-			//THIS IS A TEST BLOCK
+			
+			isConnect = false;
+		}
+		
+		getMessage();
+		
+		//THIS IS A TEST BLOCK
 			print ("ServerIO: in first If");
 			// stream = client.GetStream();
 			print ("1");
@@ -194,11 +200,9 @@ public class Client : MonoBehaviour
 			print ("message " + message);
 			sendMessage(message);
 			print ("ServerIO: message sent");
-			//END THE TEST BLOCK
-			isConnect = false;
-		}
+		//END THE TEST BLOCK
 		
-		getMessage();
+		//getMessage();
 		
 		/*
 		while(true)
