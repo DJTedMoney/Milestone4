@@ -110,10 +110,6 @@ public class Client : MonoBehaviour
 			print ("Password: " + password);
 			use = userName;
 			pass = password;
-			isConnect = true;
-		    clientThread = new Thread(new ThreadStart(serverIO));
-			clientThread.Start();
-			print ("clientThread should have started by now");
 			
 			// use = "";
 			// pass = "";
@@ -131,12 +127,18 @@ public class Client : MonoBehaviour
 				
 				stream = client.GetStream();
 				
+				isConnect = true;
+		    	clientThread = new Thread(new ThreadStart(serverIO));
+				clientThread.Start();
+				print ("clientThread should have started by now");
 			} // end try to connect
 		
 			catch(System.Exception e)
 			{
 				print("Exception e" + e.Message );
 			}
+			
+			
 			
 			//here, add all the "connect" stuff, and "manager.start"
 			
@@ -197,6 +199,7 @@ public class Client : MonoBehaviour
 		
 		getMessage();
 		
+		/*
 		while(isConnect)
 		{
 			print ("ServerIO: in whileLoop");		
@@ -209,6 +212,7 @@ public class Client : MonoBehaviour
 			//reads a message
 			getMessage();
 		}
+		*/
 		print ("end of server IO");
 	}
 	

@@ -56,21 +56,11 @@ namespace ServerDatabase
                 Console.WriteLine("Player Socket has accepted the socket");
 
                 NetworkStream nws = new NetworkStream(sock);
-                //StreamReader reader = new StreamReader(nws);
-                // StreamWriter writer = new StreamWriter(nws);
-                //writer.AutoFlush = true;
-
-                // Console.WriteLine("stream created");
 
                 activePlayers[t] = new PlayerSocket(nws, sock, t);
 
-                gmm.gamePlayers[t] = new Player();
+                gmm.gamePlayers[t] = new Player(t);
                 gmm.gamePlayers[t].connect();
-
-                // Console.WriteLine(" connected true");
-
-                // string data = activePlayers[t].playerReader.ReadLine();
-                // Console.Write(data);
 
                 // creates a ReadThread, passes in the player value t
                 ReadThread thread = new ReadThread(t);
@@ -96,7 +86,36 @@ namespace ServerDatabase
                 clientString = newNumber.ToString();
                 responseData = "";
             } // end constructor
+            
 
+            public void Service() // for an individual operating thread
+            { // begin service
+                try
+                { // start try
+
+                    getMessage(activePlayers[client].psnws);
+
+                    Console.WriteLine(responseData);
+
+                    sendMessage(activePlayers[client].psnws, "hello$");
+
+                    getMessage(activePlayers[client].psnws);
+
+                    Console.WriteLine(responseData);
+
+                    sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
+
+
+                    //Game Loop goes here!
+
+                } // end try
+
+                catch (Exception beiber)
+                {
+                    Console.WriteLine("Exception " + beiber.Message);
+                }
+                
+            } // end service
             public void sendMessage(NetworkStream theStream, String message)
             {
                 Byte[] sendData = System.Text.Encoding.ASCII.GetBytes(message);
@@ -136,26 +155,11 @@ namespace ServerDatabase
                 }
             }
 
-            public void Service() // for an individual operating thread
-            { // begin service
-                try
-                { // start try
+        } // end readThread class
+    }
+}
 
-                    getMessage(activePlayers[client].psnws);
-
-                    Console.WriteLine(responseData);
-
-                    sendMessage(activePlayers[client].psnws, "hello$");
-
-                    getMessage(activePlayers[client].psnws);
-
-                    Console.WriteLine(responseData);
-
-                    sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
-
-
-                    /*
-                    while (activePlayers[client].pSock.Connected )
+/*while (activePlayers[client].pSock.Connected )
                     { // actual game loop for an individual player
                         Console.WriteLine("in service while loop for player " + client);
 
@@ -382,16 +386,3 @@ namespace ServerDatabase
                         }
 
                     } // end game loop for a player */
-
-                } // end try
-
-                catch (Exception beiber)
-                {
-                    Console.WriteLine("Exception " + beiber.Message);
-                }
-                
-            } // end service
-
-        } // end readThread class
-    }
-}

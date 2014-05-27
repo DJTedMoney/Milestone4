@@ -26,7 +26,7 @@ namespace ServerDatabase
         public NetworkStream psnws;
         public int clientID;
         public Thread psThread = null;
-        protected static bool threadState = false;
+        // protected static bool threadState = false;
         public Queue<string> updates;
         public Socket pSock;
 

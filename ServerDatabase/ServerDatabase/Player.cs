@@ -32,10 +32,12 @@ namespace ServerDatabase
         // score for win condition
         public int score;
 
+        public int clientNumber;
+
         Random decider;
 
         // constructor produces location and direction, sets size to 40
-        public Player()
+        public Player(int newNumber)
         {
             decider = new Random();
 
@@ -50,6 +52,8 @@ namespace ServerDatabase
             score = 0;
 
             connected = false;
+
+            clientNumber = newNumber;
         }
 
         public void connect()
