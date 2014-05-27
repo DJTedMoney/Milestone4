@@ -33,11 +33,26 @@ namespace ServerDatabase
         // password = pw
         public void createTable()
         {
-            Console.WriteLine("CREATING TABLE");
+            //SELECT name FROM sqlite_master WHERE type='table' AND name='table_name';
 
-            string sql = "create table users (name varchar(32), pw varchar(32) )";
+            string sql = "SELECT * FROM sqlite_master WHERE type='table' AND name='users'";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
-            command.ExecuteNonQuery();
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            if (!reader.HasRows)
+            {
+                Console.WriteLine("CREATING TABLE");
+
+                sql = "create table users (name varchar(32), pw varchar(32) )";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                command.ExecuteNonQuery();
+
+                Console.WriteLine("HI!");
+            }
+            else
+            {
+                Console.WriteLine("TABLE EXISTS!");
+            }
         }
 
         // Inserts some values in the highscores table.

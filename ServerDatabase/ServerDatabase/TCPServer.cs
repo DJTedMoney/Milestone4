@@ -94,16 +94,35 @@ namespace ServerDatabase
                 { // start try
 
                     getMessage(activePlayers[client].psnws);
-
                     Console.WriteLine(responseData);
-
                     sendMessage(activePlayers[client].psnws, "hello$");
-
-                    getMessage(activePlayers[client].psnws);
-
-                    Console.WriteLine(responseData);
-
+                    //getMessage(activePlayers[client].psnws);
+                    //Console.WriteLine(responseData);
                     sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
+
+                    //spliting the serverdata into instruction
+                    string[] instruction = new string[11];
+                    instruction[0] = responseData.Substring(0, responseData.IndexOf(delimiter));
+                    responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
+
+                    instruction[1] = responseData.Substring(0, responseData.IndexOf(delimiter));
+                    responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
+
+                    instruction[2] = responseData.Substring(0, responseData.IndexOf(delimiter));
+                    responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
+
+                    instruction[3] = responseData.Substring(0, responseData.IndexOf(delimiter));
+                    responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
+
+                    Console.Write("Instruction [0] " + instruction[0] + " ; ");
+                    Console.Write("Instruction [1] " + instruction[1] + " ; ");
+                    Console.Write("Instruction [2] " + instruction[2] + " ; ");
+                    Console.Write("Instruction [3] " + instruction[3] + " ; ");
+
+                    int loginVal = dB.attemptToLogin(instruction[1],instruction[3]);
+
+                    Console.WriteLine(loginVal);
+
 
 
                     //Game Loop goes here!
@@ -246,24 +265,7 @@ namespace ServerDatabase
                             }
                         }
 
-                        //spliting the serverdata into instruction
-                        string[] instruction = new string[11];
-                        instruction[0] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1); 
-
-                        instruction[1] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1); 
-
-                        instruction[2] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1); 
-
-                        instruction[3] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
-                        Console.Write("Instruction [0] " + instruction[0] + " ; ");
-                        Console.Write("Instruction [1] " + instruction[1] + " ; ");
-                        Console.Write("Instruction [2] " + instruction[2] + " ; ");
-                        Console.Write("Instruction [3] " + instruction[3] + " ; ");
+                        
 
                         // if instruction[0] == "1" -> command to attempt login
                         // indexes of instruction   [0]     [1]                         [2]                         [3]
@@ -272,7 +274,7 @@ namespace ServerDatabase
                         ////// attempt to login now has return values 
                         //          return 1 -> player successfully logged in 
                         //          return 0 -> incorrect password, login failed
-                        //          return 2 -> new username/pw added to database as new player 
+                        //          return 3 -> new username/pw added to database as new player 
                         if (instruction[0] == "1")
                         { // begin instruction 1
                             int loginStatus;

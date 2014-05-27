@@ -19,12 +19,15 @@ namespace ServerDatabase
         
         static void Main(string[] args)
         {
-            // server.dB.createNewDatabase();
-            // TCPServer.dB.connectToDatabase();
+            Console.WriteLine("1");
+            //TCPServer.dB.createNewDatabase();
+            Console.WriteLine("2");
+            TCPServer.dB.connectToDatabase();
+            Console.WriteLine("3");
+            TCPServer.dB.createTable();
+            Console.WriteLine("4");
 
-            // TCPServer.dB.createTable();
-
-            TCPServer.dB.fillTable();
+            //TCPServer.dB.fillTable();
 
             TCPServer.dB.attemptToLogin("Farble", "deblarg");
             TCPServer.dB.attemptToLogin("glory", "power");
