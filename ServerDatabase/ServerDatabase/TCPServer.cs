@@ -93,39 +93,40 @@ namespace ServerDatabase
                 try
                 { // start try
 
-                    getMessage(activePlayers[client].psnws);
-                    Console.WriteLine(responseData);
-                    sendMessage(activePlayers[client].psnws, "hello$");
-                    //getMessage(activePlayers[client].psnws);
-                    //Console.WriteLine(responseData);
-                    sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
-
-                    //spliting the serverdata into instruction
-                    string[] instruction = new string[11];
-                    instruction[0] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                    responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
-                    instruction[1] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                    responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
-                    instruction[2] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                    responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
-                    instruction[3] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                    responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
-                    Console.Write("Instruction [0] " + instruction[0] + " ; ");
-                    Console.Write("Instruction [1] " + instruction[1] + " ; ");
-                    Console.Write("Instruction [2] " + instruction[2] + " ; ");
-                    Console.Write("Instruction [3] " + instruction[3] + " ; ");
-
-                    int loginVal = dB.attemptToLogin(instruction[1],instruction[3]);
-
-                    Console.WriteLine(loginVal);
-
-
-
                     //Game Loop goes here!
+
+                    while(activePlayers[client].pSock.Connected)
+                    {
+                        getMessage(activePlayers[client].psnws);
+                        Console.WriteLine(responseData);
+                        sendMessage(activePlayers[client].psnws, "hello$");
+                        //getMessage(activePlayers[client].psnws);
+                        //Console.WriteLine(responseData);
+                        sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
+
+                        //spliting the serverdata into instruction
+                        string[] instruction = new string[11];
+                        instruction[0] = responseData.Substring(0, responseData.IndexOf(delimiter));
+                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
+
+                        instruction[1] = responseData.Substring(0, responseData.IndexOf(delimiter));
+                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
+
+                        instruction[2] = responseData.Substring(0, responseData.IndexOf(delimiter));
+                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
+
+                        instruction[3] = responseData.Substring(0, responseData.IndexOf(delimiter));
+                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
+
+                        Console.Write("Instruction [0] " + instruction[0] + " ; ");
+                        Console.Write("Instruction [1] " + instruction[1] + " ; ");
+                        Console.Write("Instruction [2] " + instruction[2] + " ; ");
+                        Console.Write("Instruction [3] " + instruction[3] + " ; ");
+
+                        int loginVal = dB.attemptToLogin(instruction[1], instruction[3]);
+
+                        Console.WriteLine(loginVal);
+                    }
 
                 } // end try
 
