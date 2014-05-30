@@ -93,31 +93,24 @@ namespace ServerDatabase
                 try
                 { // start try
 
+                    getMessage(activePlayers[client].psnws);
+                    Console.WriteLine(responseData);
+                    sendMessage(activePlayers[client].psnws, "hello$");
+                    //getMessage(activePlayers[client].psnws);
+                    //Console.WriteLine(responseData);
+                    sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
+
                     //Game Loop goes here!
 
                     while(activePlayers[client].pSock.Connected)
                     {
+                        // waits on a message from this player
                         getMessage(activePlayers[client].psnws);
-                        Console.WriteLine(responseData);
-                        sendMessage(activePlayers[client].psnws, "hello$");
-                        //getMessage(activePlayers[client].psnws);
-                        //Console.WriteLine(responseData);
-                        sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
 
                         //spliting the serverdata into instruction
                         string[] instruction = new string[11];
-                        instruction[0] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
-                        instruction[1] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
-                        instruction[2] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
-                        instruction[3] = responseData.Substring(0, responseData.IndexOf(delimiter));
-                        responseData = responseData = responseData.Substring(responseData.IndexOf(delimiter) + 1);
-
+                        instruction = parseMessageSizeThree(responseData);
+                         
                         Console.Write("Instruction [0] " + instruction[0] + " ; ");
                         Console.Write("Instruction [1] " + instruction[1] + " ; ");
                         Console.Write("Instruction [2] " + instruction[2] + " ; ");
@@ -145,7 +138,7 @@ namespace ServerDatabase
             }
 
             public void getMessage(NetworkStream theStream)
-            {
+            { // begin getMessage 
                 Byte[] data = new Byte[4096];
 
                 Console.WriteLine("attempting to get message");
@@ -173,7 +166,22 @@ namespace ServerDatabase
                 {
                     Console.WriteLine("Exception: " + arg.Message);
                 }
-            }
+            } // end getMessage
+
+            // each string passed in is assumed to have 3 delimited commands and a delimiter on the end 
+            public string[] parseMessageSizeThree(string data)
+            { // begin parseMessage
+                string[] parsed = new string[4];
+
+                // counting by g
+                for (int g = 0; g < 4; g++)
+                {
+                    parsed[g] = data.Substring(0, data.IndexOf(delimiter));
+                    data = data.Substring(data.IndexOf(delimiter) + 1);
+                }
+
+                return parsed;
+            } // end parseMessage
 
         } // end readThread class
     }

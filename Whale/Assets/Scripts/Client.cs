@@ -199,10 +199,10 @@ public class Client : MonoBehaviour
 		
 		getMessage();
 		
-		/*
+		
 		while(isConnect)
 		{
-			print ("ServerIO: in whileLoop");		
+			// print ("ServerIO: in whileLoop");		
 			if(sendData)
 			{	
     			sendMessage();
@@ -212,7 +212,7 @@ public class Client : MonoBehaviour
 			//reads a message
 			getMessage();
 		}
-		*/
+		
 		print ("end of server IO");
 	}
 	
