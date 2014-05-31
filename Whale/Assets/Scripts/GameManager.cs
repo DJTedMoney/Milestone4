@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
 		//starts command with new direction (U = up, D = down
 		//L = left, and R = right)
 		send = true;
+		//print (start);
 		if(Input.GetKeyDown(KeyCode.UpArrow) )
 		{
 			command = "U$"; 
@@ -87,14 +88,16 @@ public class GameManager : MonoBehaviour
 		{
 			send = false;
 		}
+		//print (command);
 		
 		//finishes the command with player data (Position x and y, speed, and size)
 		if(send == true)
 		{
-			command = command + clientNumber.ToString()+"$"+ 
+			command = "2$"+command + clientNumber.ToString()+"$"+ 
 				      players[clientNumber].transform.position.x.ToString() + "$" + 
 				      players[clientNumber].transform.position.y.ToString() + "$" + 
 				      players[clientNumber].speed.ToString() + "$" + players[clientNumber].size.ToString();
+			//print (command);
 			activeClient.requestMove(command);
 			send = false;
 		}

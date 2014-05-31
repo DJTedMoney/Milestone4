@@ -73,7 +73,9 @@ public class Client : MonoBehaviour
 			//sends the movement change command to server
 		 	// Translate the passed message into ASCII and store it as a Byte array.
 			//print ("sending message to server");
+			//print ("inputMove = " + inputMove);
 			message = inputMove;
+			//print ("message = " + message);
 			sendData = true;
 		}
 	}
@@ -196,16 +198,14 @@ public class Client : MonoBehaviour
 //			sendMessage(message);
 //			print ("ServerIO: message sent");
 		//END THE TEST BLOCK
-		
 		getMessage();
-		
 		
 		while(isConnect)
 		{
-			// print ("ServerIO: in whileLoop");		
+			//print ("ServerIO: in whileLoop");		
 			if(sendData)
 			{	
-    			sendMessage();
+    			sendMessage(message);
 				sendData = false;
 			}
 			
@@ -221,6 +221,7 @@ public class Client : MonoBehaviour
 		print ("in SendMessage " + theMessage);
 		if(theMessage.Length >0)
 		{
+			print("theMessage: "+theMessage);
 			Byte[] data = System.Text.Encoding.ASCII.GetBytes(theMessage);
    			// Send the message to the connected TcpServer. 
 		   	stream.Write(data, 0, data.Length);
