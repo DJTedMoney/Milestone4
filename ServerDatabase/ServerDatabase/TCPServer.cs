@@ -136,11 +136,106 @@ namespace ServerDatabase
                                 {
                                     gmm.executeCommand(parsedCommand);
                                 }
+                            } // end if player has any messages
+
+                         gmm.gamePlayers[s].move();
+
+                         bool collided = false;
+                         int collidingEnemy;
+                         int pelletCollide;
+
+                         if (gmm.detectCollisionsWithWalls(s) )
+                         {
+                             gmm.gamePlayers[s].kill();
+
+                             collided = true;
+                         }
+
+                         pelletCollide = gmm.detectCollisionWithPellets(s);
+                         if(pelletCollide != -1)
+                         {
+                             gmm.relocatePellet(pelletCollide);
+
+                             gmm.gamePlayers[s].grow(20);
+                             gmm.gamePlayers[s].slowDown(1);
+                             gmm.gamePlayers[s].gainPoints(1);
+
+                             collided = true;
+                         }
+
+                         collidingEnemy = gmm.detectCollisionPlayers(s);
+                         if (collidingEnemy != -1)
+                         { // if collided with enemy 
+
+                             collided = true;
+
+                             // if the colliding enemy is larger, kill the client and award the colliding enemy
+                             if (gmm.gamePlayers[collidingEnemy].getSize() > gmm.gamePlayers[s].getSize() )
+                             {
+                                 gmm.gamePlayers[collidingEnemy].grow(80);
+                                 gmm.gamePlayers[collidingEnemy].slowDown(4);
+                                 gmm.gamePlayers[collidingEnemy].gainPoints(10);
+
+                                 gmm.gamePlayers[s].kill();
+                             }
+
+                             // if client is bigger than colliding enemy, kill colliding enemy and award client
+                             else if (gmm.gamePlayers[collidingEnemy].getSize() < gmm.gamePlayers[s].getSize())
+                             {
+                                 gmm.gamePlayers[s].grow(80);
+                                 gmm.gamePlayers[s].slowDown(4);
+                                 gmm.gamePlayers[s].gainPoints(10);
+
+                                 gmm.gamePlayers[collidingEnemy].kill();
+                             }
+
+                             // if both players are the same size, kill them both 
+                             else
+                             {
+                                 gmm.gamePlayers[s].kill();
+                                 gmm.gamePlayers[collidingEnemy].kill();
+                             }
+
+                         } // end if collided with enemy 
+
+                        // win condition check
+                        if(gmm.gamePlayers[s].getSize() > 400)
+                        {
+                            string winMessage = "6$" + s + "$" + gmm.gamePlayers[s].getScoreString() + "$";
+                            notifyAllPlayers(winMessage);
+                        }
 
 
+                        /*
+                         * 
+                         * *************************************************************
+                         * 
+                         *  FIX THE UNIVERSAL GAME STATE MESSAGE TO INCLUDE ALL INFORMATION ABOUT ALL PLAYERS 
+                         * 
+                         if (collided)
+                         {
+                             // counting by t to update every player of board status after a collision
+                             for (int t = 0; t < numberPlayers; t++)
+                             {
+                                 // abbreviating the current active player to p
+                                 Player p = gmm.gamePlayers[s];
 
+                                 // 2 $ locX $ locY $ dirX $ dirY $ speed $ size $  pellet1_x $ pellet1_y $ 
+                                 //      pellet2_x $ pellet2_y $ pellet3_x $ pellet3_y $ pellet4_x $ pellet4_y $
+                                 string moveMessage = "2$" + p.getX_string() + "$" + p.getY_string() + "$" + p.getLeftRightString() +
+                                     "$" + p.getUpDownString() + "$" + p.getSpeed_string() + "$" + p.getSize_string() +
+                                     "$" + p.getScoreString() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() +
+                                     "$" + gmm.gamePellets[1].getPosX() + "$" + gmm.gamePellets[1].getPosY() + "$" + gmm.gamePellets[2].getPosX() +
+                                     "$" + gmm.gamePellets[2].getPosY() + "$" + gmm.gamePellets[3].getPosX() + "$" + gmm.gamePellets[3].getPosY() + "$";
 
-                            } // end if player has any messages 
+                                 notifyAllPlayers(moveMessage);
+                             }
+                         }
+
+                        *****************************************************
+
+                        */
+
                     } // end if connected 
                    
                     
@@ -152,6 +247,7 @@ namespace ServerDatabase
                      //wall collision loop
                      //pellet collision loop
                      //player collision loop
+
                      //win condition loop
                     //send all the messages to the players here
             } // end game loop 
@@ -290,88 +386,21 @@ namespace ServerDatabase
                     { // actual game loop for an individual player
                         Console.WriteLine("in service while loop for player " + client);
 
-                        gmm.gamePlayers[client].move();
+                        
 
-                        bool collided = false;
+                        
 
-                        if( gmm.detectCollisionsWithWalls(client) )
-                        {
-                            gmm.gamePlayers[client].kill();
+                        
 
-                            collided = true;
-                        }
+                        
 
-                        int pelletCollide = gmm.detectCollisionWithPellets(client);
-
-                        if(pelletCollide != -1)
-                        {
-                            gmm.relocatePellet(pelletCollide);
-
-                            gmm.gamePlayers[client].grow(20);
-                            gmm.gamePlayers[client].slowDown(1);
-                            gmm.gamePlayers[client].gainPoints(1);
-
-                            collided = true;
-                        }
-
-                        int collidingEnemy = gmm.detectCollisionPlayers(client);
-
-                        if(collidingEnemy != -1)
-                        {
-                            collided = true;
-
-                            // if the colliding enemy is larger, kill the client and award the colliding enemy
-                            if(gmm.gamePlayers[collidingEnemy].getSize() > gmm.gamePlayers[client].getSize() )
-                            {
-                                gmm.gamePlayers[collidingEnemy].grow(80);
-                                gmm.gamePlayers[collidingEnemy].slowDown(4);
-                                gmm.gamePlayers[collidingEnemy].gainPoints(10);
-
-                                gmm.gamePlayers[client].kill();
-                            }
-
-                            // if client is bigger than colliding enemy, kill colliding enemy and award client
-                            else if (gmm.gamePlayers[collidingEnemy].getSize() < gmm.gamePlayers[client].getSize())
-                            {
-                                gmm.gamePlayers[client].grow(80);
-                                gmm.gamePlayers[client].slowDown(4);
-                                gmm.gamePlayers[client].gainPoints(10);
-
-                                gmm.gamePlayers[collidingEnemy].kill();
-                            }
-
-                            // if both players are the same size, kill them both 
-                            else
-                            {
-                                gmm.gamePlayers[client].kill();
-                                gmm.gamePlayers[collidingEnemy].kill();
-                            }
-
-                        }
+                        
 
                         Console.WriteLine("Preparing to get message");
                         getMessage(activePlayers[client].psnws);
 
 
-                        if (collided)
-                        {
-                            // counting by t to update every player of board status after a collision
-                            for (int t = 0; t < numberPlayers; t++)
-                            {
-                                // abbreviating the current active player to p
-                                Player p = gmm.gamePlayers[client];
-
-                                // 2 $ locX $ locY $ dirX $ dirY $ speed $ size $  pellet1_x $ pellet1_y $ 
-                                //      pellet2_x $ pellet2_y $ pellet3_x $ pellet3_y $ pellet4_x $ pellet4_y $
-                                string moveMessage = "2$" + p.getX_string() + "$" + p.getY_string() + "$" + p.getLeftRightString() +
-                                    "$" + p.getUpDownString() + "$" + p.getSpeed_string() + "$" + p.getSize_string() +
-                                    "$" + p.getScoreString() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() +
-                                    "$" + gmm.gamePellets[1].getPosX() + "$" + gmm.gamePellets[1].getPosY() + "$" + gmm.gamePellets[2].getPosX() +
-                                    "$" + gmm.gamePellets[2].getPosY() + "$" + gmm.gamePellets[3].getPosX() + "$" + gmm.gamePellets[3].getPosY() + "$";
-
-                                sendMessage(activePlayers[t].psnws, moveMessage);
-                            }
-                        }
+                        
 
                         
 
