@@ -83,6 +83,19 @@ namespace ServerDatabase
                 activePlayers[j].psThread.Start();
             }
 
+            while (true)
+            {
+                //put the main game loop logic in here:
+                     //go through received messages here
+                     //disconnect check loop    
+                     //move loop
+                     //wall collision loop
+                     //pellet collision loop
+                     //player collision loop
+                     //win condition loop
+                    //send all the messages to the players here
+            }
+
         } // end gameLoop
 
         class ReadThread
