@@ -27,7 +27,8 @@ namespace ServerDatabase
         public int clientID;
         public Thread psThread = null;
         // protected static bool threadState = false;
-        public Queue<string> updates;
+        public Queue<string> incomingMessages;
+        public Queue<string> outgoingMessages;
         public Socket pSock;
 
         public PlayerSocket(NetworkStream newStream, Socket newSocket, int newID)
@@ -36,7 +37,8 @@ namespace ServerDatabase
             pSock = newSocket;
             clientID = newID;
 
-            updates = new Queue<string>();
+            incomingMessages = new Queue<string>();
+            outgoingMessages = new Queue<string>();
         }
     }
 }
