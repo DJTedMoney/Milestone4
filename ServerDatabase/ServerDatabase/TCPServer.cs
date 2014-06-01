@@ -20,8 +20,6 @@ namespace ServerDatabase
     {
         static TcpListener listener;
         protected static PlayerSocket[] activePlayers;
-        static Queue<string> incomingMessages;
-        static Queue<string> outgoingMessages;
 
         public static LoginDatabase dB;
         public static GameMechanicsManager gmm;
@@ -40,9 +38,6 @@ namespace ServerDatabase
 
             listener = new TcpListener(4300);
             listener.Start();
-
-            incomingMessages = new Queue<string>();
-            outgoingMessages = new Queue<string>();
 
             dB.connectToDatabase();
 
@@ -81,6 +76,18 @@ namespace ServerDatabase
 
                 activePlayers[j].psThread = new Thread(new ThreadStart(thread.Service));
                 activePlayers[j].psThread.Start();
+            }
+
+            while (true)
+            {  //put the main game loop logic in here:
+                     //go through received messages here
+                     //disconnect check loop    
+                     //move loop
+                     //wall collision loop
+                     //pellet collision loop
+                     //player collision loop
+                     //win condition loop
+                    //send all the messages to the players here
             }
 
         } // end gameLoop
