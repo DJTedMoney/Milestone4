@@ -62,7 +62,9 @@ public class LoginBox : MonoBehaviour
 			{
 				//grafxText.text = "Hello";
 				//manager.activeClient.Disconnect();
-				client.Disconnect ();
+				
+				client.message = "0$"+client.manager.clientNumber+"$";
+				client.sendMessage(client.message);
 				showLogin = !showLogin;
 				//manager.start = false;
 			}

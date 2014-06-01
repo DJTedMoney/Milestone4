@@ -93,10 +93,7 @@ public class GameManager : MonoBehaviour
 		//finishes the command with player data (Position x and y, speed, and size)
 		if(send == true)
 		{
-			command = "2$"+command + clientNumber.ToString()+"$"+ 
-				      players[clientNumber].transform.position.x.ToString() + "$" + 
-				      players[clientNumber].transform.position.y.ToString() + "$" + 
-				      players[clientNumber].speed.ToString() + "$" + players[clientNumber].size.ToString();
+			command = "2$"+ command + clientNumber.ToString()+"$";
 			//print (command);
 			activeClient.requestMove(command);
 			send = false;
@@ -192,6 +189,10 @@ public class GameManager : MonoBehaviour
 					int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					players[clientNumber].transform.position = new Vector2(tempX, tempY);
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				}
+				else if(comType.Equals("5"))
+				{
+					activeClient.Disconnect();
 				}
 			}//ends whileLoop
 		}//ends lock

@@ -161,7 +161,6 @@ public class Client : MonoBehaviour
 		print("Running Disconnect");
 		//moved here from LoginBox
 		manager.start = false;
-		
 		//stream.Close();
 		client.Close ();
 		clientThread.Abort();
