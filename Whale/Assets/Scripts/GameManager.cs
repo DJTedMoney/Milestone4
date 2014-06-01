@@ -184,6 +184,9 @@ public class GameManager : MonoBehaviour
 				else if(comType.Equals("4"))
 				{
 					print("comType is 4");
+					int playerNum  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					isActive[playerNum] = true;
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));

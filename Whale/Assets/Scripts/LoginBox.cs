@@ -65,6 +65,7 @@ public class LoginBox : MonoBehaviour
 				
 				client.message = "0$"+client.manager.clientNumber+"$";
 				client.sendMessage(client.message);
+				client.Disconnect();
 				showLogin = !showLogin;
 				//manager.start = false;
 			}
