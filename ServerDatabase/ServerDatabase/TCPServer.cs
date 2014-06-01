@@ -61,18 +61,29 @@ namespace ServerDatabase
 
                 gmm.gamePlayers[t] = new Player(t);
                 gmm.gamePlayers[t].connect();
-
-                // creates a ReadThread, passes in the player value t
-                ReadThread thread = new ReadThread(t);
-
-                activePlayers[t].psThread = new Thread(new ThreadStart(thread.Service) );
-                activePlayers[t].psThread.Start();
+                
                 Console.Write("bottom of for loop in TCPServer constructor\n");
             } // end for loop 
 
         } // end constructor
 
-        public class ReadThread
+        public void gameLoop()
+        { // start multi threading game loop 
+            // moved the multi threading game loop out of TCPServer constructor 
+
+            // counting by j
+            for(int j = 0; j < gmm.getNumberPlayers(); j++ )
+            {
+                // creates a ReadThread, passes in the player value t
+                ReadThread thread = new ReadThread(j);
+
+                activePlayers[j].psThread = new Thread(new ThreadStart(thread.Service));
+                activePlayers[j].psThread.Start();
+            }
+
+        } // end gameLoop
+
+        class ReadThread
         { // start readThread class 
 
             int client = -1;

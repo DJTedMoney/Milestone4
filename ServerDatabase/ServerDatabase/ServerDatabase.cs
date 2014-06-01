@@ -37,6 +37,8 @@ namespace ServerDatabase
             TCPServer.dB.attemptToLogin("Myself", "asdf");
 
             TCPServer.dB.printUsers();
+
+            server.gameLoop();
         }
 
         public ServerDatabase()
