@@ -249,6 +249,8 @@ namespace ServerDatabase
                                  collideMessage += gmm.gamePellets[o].getPosY() + "$";
                              }
 
+                             Console.WriteLine("   RESISTANCE IS FUTILE" + collideMessage);
+
                              notifyAllPlayers(collideMessage);
 
                          } // end if a collision was detected 
@@ -262,6 +264,8 @@ namespace ServerDatabase
 
         void notifyAllPlayers(string command)
         {
+            Console.WriteLine("     ***** Notifying All Players " + command);
+
             // counting by y
             for(int y = 0; y < gmm.getNumberPlayers(); y++)
             {
