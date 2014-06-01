@@ -118,8 +118,13 @@ namespace ServerDatabase
 
                          if(activePlayers[s].incomingMessages.Count > 0)
                             { // if player has any messages 
-                                string newCommand = activePlayers[s].incomingMessages.Dequeue();
 
+                                string newCommand;
+                                lock(activePlayers[s].incomingMessages)
+                                {
+                                    newCommand = activePlayers[s].incomingMessages.Dequeue();
+                                }
+                                
                                 string[] parsedCommand = parseMessage(newCommand);
 
                                 //disconnect check loop to see if this player is disconnecting from the game  
@@ -138,12 +143,14 @@ namespace ServerDatabase
                                 }
                             } // end if player has any messages
 
+                         //move loop
                          gmm.gamePlayers[s].move();
 
                          bool collided = false;
                          int collidingEnemy;
                          int pelletCollide;
 
+                         //wall collision loop
                          if (gmm.detectCollisionsWithWalls(s) )
                          {
                              gmm.gamePlayers[s].kill();
@@ -151,6 +158,7 @@ namespace ServerDatabase
                              collided = true;
                          }
 
+                         //pellet collision loop
                          pelletCollide = gmm.detectCollisionWithPellets(s);
                          if(pelletCollide != -1)
                          {
@@ -163,6 +171,7 @@ namespace ServerDatabase
                              collided = true;
                          }
 
+                         //player collision loop
                          collidingEnemy = gmm.detectCollisionPlayers(s);
                          if (collidingEnemy != -1)
                          { // if collided with enemy 
@@ -199,6 +208,7 @@ namespace ServerDatabase
                          } // end if collided with enemy 
 
                         // win condition check
+                        //win condition loop
                         if(gmm.gamePlayers[s].getSize() > 400)
                         {
                             string winMessage = "6$" + s + "$" + gmm.gamePlayers[s].getScoreString() + "$";
@@ -243,19 +253,9 @@ namespace ServerDatabase
 
                          } // end if a collision was detected 
                     } // end if connected 
-                   
                     
                 } // end for loop 
 
-
-                     
-                     //move loop
-                     //wall collision loop
-                     //pellet collision loop
-                     //player collision loop
-
-                     //win condition loop
-                    //send all the messages to the players here
             } // end game loop 
 
         } // end gameLoop
@@ -388,146 +388,4 @@ namespace ServerDatabase
     }
 }
 
-/*while (activePlayers[client].pSock.Connected )
-                    { // actual game loop for an individual player
-                        Console.WriteLine("in service while loop for player " + client);
 
-                        
-
-                        
-
-                        
-
-                        
-
-                        
-
-                        Console.WriteLine("Preparing to get message");
-                        getMessage(activePlayers[client].psnws);
-
-
-                        
-
-                        
-
-                        // if instruction[0] == "1" -> command to attempt login
-                        // indexes of instruction   [0]     [1]                         [2]                         [3]
-                        // expected sentence:       1   $   userName (pre-encrypted) $  elephant (pre-crypted) $    password (pre-encrypted) $ 
-
-                        ////// attempt to login now has return values 
-                        //          return 1 -> player successfully logged in 
-                        //          return 0 -> incorrect password, login failed
-                        //          return 3 -> new username/pw added to database as new player 
-                        if (instruction[0] == "1")
-                        { // begin instruction 1
-                            int loginStatus;
-
-                            Console.WriteLine("Attempting to log in");
-
-                            loginStatus = dB.attemptToLogin(instruction[1], instruction[3]);
-
-                            string loginMessage;
-
-                            // if loginStatus == 1
-                            // returning user has successfully logged in
-                            // if loginStatus == 3
-                            // new user successfully created
-                            if ( (loginStatus == 1) || (loginStatus == 3) )
-                            {
-                                sendMessage(activePlayers[client].psnws, loginStatus.ToString() + "$" + client.ToString());
-
-                                loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[client].getX_string()
-                                + "$" + gmm.gamePlayers[client].getY_string() + "$";
-
-                                // update all players of the status of the new player's position
-                                // counting by u
-                                for (int u = 0; u < numberPlayers; u++)
-                                {
-                                    if ( (gmm.gamePlayers[u] != null) && (gmm.gamePlayers[u].connected) )
-                                    {
-                                        sendMessage(activePlayers[u].psnws, loginMessage);
-                                    }
-                                }
-
-                                // update the new player of the position of all other players 
-                                // counting by i
-
-                                //problem here.  when only one player is connected, it still tries to run the loop for numberPlayers (who might not all be connected).
-                                //so for anything after the first tile the loop runs is a null object exception
-                                for(int i = 0; i < numberPlayers; i++)
-                                {
-                                    if(gmm.gamePlayers[i] != null && gmm.gamePlayers[i].connected)
-                                    {
-                                       loginMessage = "4$" + client.ToString() + "$" + gmm.gamePlayers[i].getX_string()
-                                         + "$" + gmm.gamePlayers[i].getY_string() + "$";
-
-                                     sendMessage(activePlayers[client].psnws, loginMessage);
-                                    }
-                                }
-
-                                // sendMessage(activePlayers[client].psnws, loginMessage);
-                            }
-
-                            else if (loginStatus == 0)
-                            {
-                                sendMessage(activePlayers[client].psnws, "0$" + "Wrong password, try again" + "$");
-                            }
-                        } // end instruction 1
-
-                        // if instruction[0] == "2" -> command to change directions
-                        // indexes of instruction   [0]     [1]                         [2]                                     [3]
-                        // expected sentence:       2 $     tostada (pre-crypted) $     { U D L R } $ "*****" (pre-crypt) $     { number of player who made the move } $ 
-                        if (instruction[0] == "2")
-                        { // begin instruction 2
-                            // update direction that the indicated player is traveling 
-                            string directionToMove = instruction[2];
-
-                            // mP = moving player.  This is stored to make the variable name shorter 
-                            int mP = Convert.ToInt32( instruction[3] );
-
-                            if (directionToMove == "U")
-                            {
-                                gmm.gamePlayers[mP].goUp();
-                            }
-
-                            else if (directionToMove == "D")
-                            {
-                                gmm.gamePlayers[mP].goDown();
-                            }
-
-                            else if (directionToMove == "L")
-                            {
-                                gmm.gamePlayers[mP].goLeft();
-                            }
-
-                            else if (directionToMove == "R")
-                            {
-                                gmm.gamePlayers[mP].goRight();
-                            }
-
-                            // send a message to every other player with the new direction of the player who turned 
-                            // counting by w
-                            for (int w = 0; w < numberPlayers; w++)
-                            {
-                                // abbreviating the current active player to p
-                                Player p = gmm.gamePlayers[client];
-
-                            // 2 $ locX $ locY $ dirX $ dirY $ speed $ size $  pellet1_x $ pellet1_y $ 
-                            //      pellet2_x $ pellet2_y $ pellet3_x $ pellet3_y $ pellet4_x $ pellet4_y $
-                                string moveMessage = "2$" + p.getX_string() + "$" + p.getY_string() + "$" + p.getLeftRightString() +
-                                    "$" + p.getUpDownString() + "$" + p.getSpeed_string() + "$" +p.getSize_string() + 
-                                    "$" + p.getScoreString() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() + 
-                                    "$" + gmm.gamePellets[1].getPosX() + "$" + gmm.gamePellets[1].getPosY() + "$" + gmm.gamePellets[2].getPosX() + 
-                                    "$" + gmm.gamePellets[2].getPosY() + "$" + gmm.gamePellets[3].getPosX() + "$" + gmm.gamePellets[3].getPosY() + "$";
-
-                                sendMessage(activePlayers[client].psnws, moveMessage);
-                            }
-                        } // end instruction 2
-
-                        // instruction [0] == "0" -> client wants to disconnect
-                        if (instruction[0] == "0")
-                        {
-
-                        }
-
-                    } // end game loop for a player */
