@@ -211,31 +211,37 @@ namespace ServerDatabase
                          * *************************************************************
                          * 
                          *  FIX THE UNIVERSAL GAME STATE MESSAGE TO INCLUDE ALL INFORMATION ABOUT ALL PLAYERS 
-                         * 
+                         * */
                          if (collided)
-                         {
-                             // counting by t to update every player of board status after a collision
-                             for (int t = 0; t < numberPlayers; t++)
+                         { // begin game state update if a collision was detected 
+
+                             string collideMessage = "2$";
+
+                             // using a for loop to append each player's game state to the collidedMessage
+                             // counting by u
+                             for (int u = 0; u < gmm.getNumberPlayers(); u++)
                              {
-                                 // abbreviating the current active player to p
-                                 Player p = gmm.gamePlayers[s];
+                                 collideMessage += gmm.gamePlayers[u].getX_string() + "$";
+                                 collideMessage += gmm.gamePlayers[u].getY_string() + "$";
 
-                                 // 2 $ locX $ locY $ dirX $ dirY $ speed $ size $  pellet1_x $ pellet1_y $ 
-                                 //      pellet2_x $ pellet2_y $ pellet3_x $ pellet3_y $ pellet4_x $ pellet4_y $
-                                 string moveMessage = "2$" + p.getX_string() + "$" + p.getY_string() + "$" + p.getLeftRightString() +
-                                     "$" + p.getUpDownString() + "$" + p.getSpeed_string() + "$" + p.getSize_string() +
-                                     "$" + p.getScoreString() + "$" + gmm.gamePellets[0].getPosX() + "$" + gmm.gamePellets[0].getPosY() +
-                                     "$" + gmm.gamePellets[1].getPosX() + "$" + gmm.gamePellets[1].getPosY() + "$" + gmm.gamePellets[2].getPosX() +
-                                     "$" + gmm.gamePellets[2].getPosY() + "$" + gmm.gamePellets[3].getPosX() + "$" + gmm.gamePellets[3].getPosY() + "$";
+                                 collideMessage += gmm.gamePlayers[u].getLeftRightString() + "$";
+                                 collideMessage += gmm.gamePlayers[u].getUpDownString() + "$";
 
-                                 notifyAllPlayers(moveMessage);
+                                 collideMessage += gmm.gamePlayers[u].getSpeed_string() + "$";
+                                 collideMessage += gmm.gamePlayers[u].getSize_string() + "$";
                              }
-                         }
 
-                        *****************************************************
+                             // use a for loop to append all pellet information to collidedMessage
+                             // counting by o
+                             for (int o = 0; o < 4; o++)
+                             {
+                                 collideMessage += gmm.gamePellets[o].getPosX() + "$";
+                                 collideMessage += gmm.gamePellets[o].getPosY() + "$";
+                             }
 
-                        */
+                             notifyAllPlayers(collideMessage);
 
+                         } // end if a collision was detected 
                     } // end if connected 
                    
                     
