@@ -112,23 +112,42 @@ namespace ServerDatabase
                 //go through received messages here
                 for(int s = 0; s < gmm.getNumberPlayers(); s++)
                 { // start for loop 
+
                     if(activePlayers[s].pSock.Connected)
                     { // if connected 
+
                          if(activePlayers[s].incomingMessages.Count > 0)
                             { // if player has any messages 
                                 string newCommand = activePlayers[s].incomingMessages.Dequeue();
 
                                 string[] parsedCommand = parseMessage(newCommand);
 
+                                //disconnect check loop to see if this player is disconnecting from the game  
+                                if(parsedCommand[0] == "0")
+                                {
+                                    // disconnect the player, leave the socket open for a new player
+                                    activePlayers[s].pSock.Disconnect(true);
+
+                                    string disconnectMessage = "5$" + s.ToString() + "$";
+                                    notifyAllPlayers(disconnectMessage);
+                                }
                                 
+                                if(parsedCommand[0] == "2")
+                                {
+                                    gmm.executeCommand(parsedCommand);
+                                }
+
+
+
+
                             } // end if player has any messages 
                     } // end if connected 
                    
-
+                    
                 } // end for loop 
 
 
-                     //disconnect check loop    
+                     
                      //move loop
                      //wall collision loop
                      //pellet collision loop
@@ -138,6 +157,19 @@ namespace ServerDatabase
             } // end game loop 
 
         } // end gameLoop
+
+        void notifyAllPlayers(string command)
+        {
+            // counting by y
+            for(int y = 0; y < gmm.getNumberPlayers(); y++)
+            {
+                if(activePlayers[y].pSock.Connected)
+                {
+                    Byte[] commandToAll = System.Text.Encoding.ASCII.GetBytes(command);
+                    activePlayers[y].psnws.Write(commandToAll, 0, commandToAll.Length);
+                }
+            }
+        }
 
         class ReadThread
         { // start readThread class 

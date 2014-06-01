@@ -148,31 +148,28 @@ namespace ServerDatabase
 
         public void executeCommand(string[] command)
         { // start execute command 
-            if(command[0] == "2")
-            { // command to move 
-                int movingPlayer = Convert.ToInt32(command[2] );
-                string direction = command[1];
+            int movingPlayer = Convert.ToInt32(command[2] );
+            string direction = command[1];
 
-                if(direction == "U")
-                {
-                    gamePlayers[movingPlayer].goUp();
-                }
+            if(direction == "U")
+            {
+                gamePlayers[movingPlayer].goUp();
+            }
 
-                else if(direction == "D")
-                {
-                    gamePlayers[movingPlayer].goDown();
-                }
+            else if(direction == "D")
+            {
+                gamePlayers[movingPlayer].goDown();
+            }
 
-                else if(direction == "L")
-                {
-                    gamePlayers[movingPlayer].goLeft();
-                }
+            else if(direction == "L")
+            {
+                gamePlayers[movingPlayer].goLeft();
+            }
 
-                else if(direction == "R")
-                {
-                    gamePlayers[movingPlayer].goRight();
-                }
-            } // end command to move 
+            else if(direction == "R")
+            {
+                gamePlayers[movingPlayer].goRight();
+            }
         } // end execute command 
     } // end of class gmm 
 }
