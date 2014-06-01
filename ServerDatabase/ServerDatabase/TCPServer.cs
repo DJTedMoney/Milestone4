@@ -64,6 +64,34 @@ namespace ServerDatabase
 
         } // end constructor
 
+        public string[] parseMessage(string input)
+        {
+            string[] parsedInput = new string[7];
+            int numberParses = 0;
+
+            parsedInput[0] = input.Substring(0, input.IndexOf('$') );
+            input = input.Substring(input.IndexOf('$') + 1);
+
+            if(parsedInput[0] == "0")
+            {
+                numberParses = 1;
+            }
+
+            else if(parsedInput[0] == "2")
+            {
+                numberParses = 2;
+            }
+
+            // counting by e
+            for(int e = 1; e < numberParses; e++)
+            {
+                parsedInput[0] = input.Substring(0, input.IndexOf('$'));
+                input = input.Substring(input.IndexOf('$') + 1);
+            }
+
+            return parsedInput;
+        }
+
         public void gameLoop()
         { // start multi threading game loop 
             // moved the multi threading game loop out of TCPServer constructor 
@@ -80,7 +108,26 @@ namespace ServerDatabase
 
             while (true)
             {  //put the main game loop logic in here:
-                     //go through received messages here
+                
+                //go through received messages here
+                for(int s = 0; s < gmm.getNumberPlayers(); s++)
+                { // start for loop 
+                    if(activePlayers[s].pSock.Connected)
+                    { // if connected 
+                         if(activePlayers[s].incomingMessages.Count > 0)
+                            { // if player has any messages 
+                                string newCommand = activePlayers[s].incomingMessages.Dequeue();
+
+                                string[] parsedCommand = parseMessage(newCommand);
+
+                                
+                            } // end if player has any messages 
+                    } // end if connected 
+                   
+
+                } // end for loop 
+
+
                      //disconnect check loop    
                      //move loop
                      //wall collision loop
@@ -88,7 +135,7 @@ namespace ServerDatabase
                      //player collision loop
                      //win condition loop
                     //send all the messages to the players here
-            }
+            } // end game loop 
 
         } // end gameLoop
 
