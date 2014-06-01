@@ -82,7 +82,6 @@ public class Client : MonoBehaviour
 		{
 			manager.move = true;
 			manager.serverCommand.Enqueue(newMove);
-			sendData = true;
 		}
 	}
 	
