@@ -56,13 +56,6 @@ public class Client : MonoBehaviour
 		return serverIP;
 	}
 	
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
-	}
-	
 	//sends move request to "server" from gameManager
 	public void requestMove(string inputMove)
 	{
@@ -75,8 +68,8 @@ public class Client : MonoBehaviour
 			//print ("sending message to server");
 			//print ("inputMove = " + inputMove);
 			message = inputMove;
-			//print ("message = " + message);
-			sendData = true;
+			//print ("message = " + message);	
+    		sendMessage(message);
 		}
 	}
 	
@@ -203,12 +196,6 @@ public class Client : MonoBehaviour
 		while(isConnect)
 		{
 			//print ("ServerIO: in whileLoop");		
-			if(sendData)
-			{	
-    			sendMessage(message);
-				sendData = false;
-			}
-			
 			//reads a message
 			getMessage();
 		}
@@ -232,14 +219,17 @@ public class Client : MonoBehaviour
 	
 	public void getMessage()
 	{
-		print("in GetMessage");
-		Byte[] data = new Byte[256];
-    	// String to store the response ASCII representation.
-   		String responseData = String.Empty;
-		// Read the first batch of the TcpServer response bytes.
-    	Int32 bytes = stream.Read(data, 0, data.Length);
-    	responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-    	print("Received: " + responseData);
-		manager.serverCommand.Enqueue(responseData);
+		//locks serverCommand queue for thread safety
+		lock(manager.serverCommand){
+			print("in GetMessage");
+			Byte[] data = new Byte[256];
+    		// String to store the response ASCII representation.
+   			String responseData = String.Empty;
+			// Read the first batch of the TcpServer response bytes.
+    		Int32 bytes = stream.Read(data, 0, data.Length);
+    		responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+    		print("Received: " + responseData);
+			manager.serverCommand.Enqueue(responseData);
+		}//end lock
 	}
 }
