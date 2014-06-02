@@ -13,12 +13,11 @@ namespace ServerDatabase
     {
         // static LoginDatabase dB;
 
-        static TCPServer server;
-
-        static ServerDatabase p = new ServerDatabase();
         
         static void Main(string[] args)
         {
+            TCPServer server = new TCPServer();
+
             Console.WriteLine("1");
             //TCPServer.dB.createNewDatabase();
             Console.WriteLine("2");
@@ -39,13 +38,6 @@ namespace ServerDatabase
             TCPServer.dB.printUsers();
 
             server.gameLoop();
-        }
-
-        public ServerDatabase()
-        {
-            //TCPServer.dB = new LoginDatabase();
-
-            server = new TCPServer();
         }
         
     }
