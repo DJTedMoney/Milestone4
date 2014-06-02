@@ -249,7 +249,7 @@ namespace ServerDatabase
                                  collideMessage += gmm.gamePellets[o].getPosY() + "$";
                              }
 
-                             Console.WriteLine("   RESISTANCE IS FUTILE" + collideMessage);
+                             Console.WriteLine("   RESISTANCE IS FUTILE  " + collideMessage);
 
                              notifyAllPlayers(collideMessage);
 
