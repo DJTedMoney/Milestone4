@@ -195,7 +195,9 @@ public class GameManager : MonoBehaviour
 				}
 				else if(comType.Equals("5"))
 				{
-					activeClient.Disconnect();
+					int temp = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					isActive[temp] = false;
 				}
 			}//ends whileLoop
 		}//ends lock

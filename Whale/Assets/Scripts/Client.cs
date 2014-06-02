@@ -81,7 +81,10 @@ public class Client : MonoBehaviour
 		if(manager.start)
 		{
 			manager.move = true;
-			manager.serverCommand.Enqueue(newMove);
+			lock(manager.serverCommand)
+			{
+				manager.serverCommand.Enqueue(newMove);
+			}
 		}
 	}
 	
