@@ -312,7 +312,7 @@ namespace ServerDatabase
 
                         //spliting the serverdata into instruction
                         string[] instruction = new string[11];
-                        instruction = parseMessageSizeThree(responseData);
+                        instruction = parseMessageSizeFour(responseData);
 
                         Console.Write("Instruction [0] " + instruction[0] + " ; ");
                         Console.Write("Instruction [1] " + instruction[1] + " ; ");
@@ -405,6 +405,21 @@ namespace ServerDatabase
 
             // each string passed in is assumed to have 3 delimited commands and a delimiter on the end 
             public string[] parseMessageSizeThree(string data)
+            { // begin parseMessage
+                string[] parsed = new string[3];
+
+                // counting by g
+                for (int g = 0; g < 3; g++)
+                {
+                    parsed[g] = data.Substring(0, data.IndexOf(delimiter));
+                    data = data.Substring(data.IndexOf(delimiter) + 1);
+                }
+
+                return parsed;
+            } // end parseMessage
+
+            // each string passed in is assumed to have 4 delimited commands and a delimiter on the end 
+            public string[] parseMessageSizeFour(string data)
             { // begin parseMessage
                 string[] parsed = new string[4];
 
