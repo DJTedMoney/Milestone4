@@ -336,7 +336,7 @@ namespace ServerDatabase
                             // starting size and starting velocity are hard coded into Client
                             else if (loginVal == 1)
                             {
-                                string newPlayer = "1$";
+                                string newPlayer = "1$" + client.ToString();
                                 newPlayer += (gmm.gamePlayers[client].getX_string() + "$");
                                 newPlayer += (gmm.gamePlayers[client].getY_string() + "$");
                                 

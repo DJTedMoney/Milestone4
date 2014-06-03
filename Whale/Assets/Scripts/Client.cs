@@ -186,27 +186,6 @@ public class Client : MonoBehaviour
 		//should get 0$, 1$, or 3$
 		getMessage();
 		
-		lock(manager.serverCommand)
-		{
-			message = manager.serverCommand.Dequeue();
-		}
-		
-		// got a 0, attempt to login failed 
-		if(message[0].Equals("0") )
-		{
-			Disconnect();	
-		}
-		
-		// got a 1, attempt to login in is returning user
-		// get playerID, locX locY from Server 
-		// speed and size always start at default values
-		// size is 40 
-		// speed is 40 
-		if(message[0].Equals("1") )
-		{
-			
-		}
-		
 		//if the message was 1$ or 3$, a series of 4$ messages will follow
 		
 		
