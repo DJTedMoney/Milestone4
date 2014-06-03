@@ -36,6 +36,13 @@ public class Client : MonoBehaviour
 	bool sendData;
 	bool getData;
 	
+	~Client()
+	{
+		clientThread.Abort();
+		client.Close();
+		isConnect = false;
+	}
+	
 	// Use this for initialization
 	void Start () 
 	{
