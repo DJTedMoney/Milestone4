@@ -296,12 +296,12 @@ namespace ServerDatabase
                 try
                 { // start try
 
-                    getMessage(activePlayers[client].psnws);
-                    Console.WriteLine(responseData);
+                    // getMessage(activePlayers[client].psnws);
+                    // Console.WriteLine(responseData);
                     sendMessage(activePlayers[client].psnws, "hello$");
-                    getMessage(activePlayers[client].psnws);
-                    Console.WriteLine(responseData);
-                    sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
+                    // getMessage(activePlayers[client].psnws);
+                    // Console.WriteLine(responseData);
+                    // sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
 
                     //Game Loop goes here!
 
