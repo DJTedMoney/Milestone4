@@ -47,7 +47,7 @@ namespace ServerDatabase
             for (int o = 0; o < 4; o++)
             {
                 // if o != clientID, check their distance as > or < (pID.size + o.size)
-                if ( (o != pID) && (gamePlayers[o] != null) && (gamePlayers[o].connected) )
+                if ((o != pID) && (gamePlayers[o] != null) && (gamePlayers[o].connected))
                 {
                     int checkDist = distanceBetweenTwoPlayers(pID, o);
 
@@ -91,10 +91,10 @@ namespace ServerDatabase
         // if the player is outside of that, the player dies 
         public bool detectCollisionsWithWalls(int p)
         {
-            if( ( (gamePlayers[p].getLocX() + (gamePlayers[p].getSize() /2) ) > 500) 
-                || ( (gamePlayers[p].getLocX() - gamePlayers[p].getSize() /2 ) < -500) 
-                || ( (gamePlayers[p].getLocY() + gamePlayers[p].getSize() /2 ) > 500) 
-                || ( (gamePlayers[p].getLocY() - gamePlayers[p].getSize() /2) < -500) )
+            if (((gamePlayers[p].getLocX() + (gamePlayers[p].getSize() / 2)) > 500)
+                || ((gamePlayers[p].getLocX() - gamePlayers[p].getSize() / 2) < -500)
+                || ((gamePlayers[p].getLocY() + gamePlayers[p].getSize() / 2) > 500)
+                || ((gamePlayers[p].getLocY() - gamePlayers[p].getSize() / 2) < -500))
             {
                 return true;
             }
@@ -112,15 +112,15 @@ namespace ServerDatabase
             int distance = 0;
             double distDouble = 0;
 
-            double distDiff_X = (gamePlayers[p1].getLocX() - gamePlayers[p2].getLocX() );
+            double distDiff_X = (gamePlayers[p1].getLocX() - gamePlayers[p2].getLocX());
             double disX_squared = Math.Pow(distDiff_X, 2);
 
-            double distDiff_Y = (gamePlayers[p1].getLocY() - gamePlayers[p2].getLocY() );
+            double distDiff_Y = (gamePlayers[p1].getLocY() - gamePlayers[p2].getLocY());
             double distY_squared = Math.Pow(distDiff_Y, 2);
 
             distDouble = Math.Sqrt(disX_squared + distY_squared);
 
-            distance = (int) distDouble;
+            distance = (int)distDouble;
 
             return distance;
         }
@@ -130,15 +130,15 @@ namespace ServerDatabase
             int dist = 0;
             double distDoub = 0;
 
-            double distX = (gamePlayers[player].getLocX() - gamePellets[pellet].getLocX() );
+            double distX = (gamePlayers[player].getLocX() - gamePellets[pellet].getLocX());
             double distX_sq = Math.Pow(distX, 2);
 
-            double distY = (gamePlayers[player].getLocY() - gamePellets[pellet].getLocY() );
+            double distY = (gamePlayers[player].getLocY() - gamePellets[pellet].getLocY());
             double distY_sq = Math.Pow(distY, 2);
 
             distDoub = Math.Sqrt(distX_sq + distY_sq);
 
-            dist = (int) distDoub;
+            dist = (int)distDoub;
 
             return dist;
         }
@@ -153,25 +153,25 @@ namespace ServerDatabase
 
         public void executeCommand(string[] command)
         { // start execute command 
-            int movingPlayer = Convert.ToInt32(command[2] );
+            int movingPlayer = Convert.ToInt32(command[2]);
             string direction = command[1];
 
-            if(direction == "U")
+            if (direction == "U")
             {
                 gamePlayers[movingPlayer].goUp();
             }
 
-            else if(direction == "D")
+            else if (direction == "D")
             {
                 gamePlayers[movingPlayer].goDown();
             }
 
-            else if(direction == "L")
+            else if (direction == "L")
             {
                 gamePlayers[movingPlayer].goLeft();
             }
 
-            else if(direction == "R")
+            else if (direction == "R")
             {
                 gamePlayers[movingPlayer].goRight();
             }

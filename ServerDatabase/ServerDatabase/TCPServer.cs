@@ -34,7 +34,7 @@ namespace ServerDatabase
 
             numberPlayers = gmm.getNumberPlayers();
 
-            activePlayers = new PlayerSocket[ numberPlayers ];
+            activePlayers = new PlayerSocket[numberPlayers];
 
             listener = new TcpListener(4300);
             listener.Start();
@@ -58,7 +58,7 @@ namespace ServerDatabase
 
                 gmm.gamePlayers[t] = new Player(t);
                 gmm.gamePlayers[t].connect();
-                
+
                 Console.Write("bottom of for loop in TCPServer constructor\n");
             } // end for loop 
 
@@ -69,21 +69,21 @@ namespace ServerDatabase
             string[] parsedInput = new string[7];
             int numberParses = 0;
 
-            parsedInput[0] = input.Substring(0, input.IndexOf('$') );
+            parsedInput[0] = input.Substring(0, input.IndexOf('$'));
             input = input.Substring(input.IndexOf('$') + 1);
 
-            if(parsedInput[0] == "0")
+            if (parsedInput[0] == "0")
             {
                 numberParses = 1;
             }
 
-            else if(parsedInput[0] == "2")
+            else if (parsedInput[0] == "2")
             {
                 numberParses = 2;
             }
 
             // counting by e
-            for(int e = 1; e < numberParses; e++)
+            for (int e = 1; e < numberParses; e++)
             {
                 parsedInput[0] = input.Substring(0, input.IndexOf('$'));
                 input = input.Substring(input.IndexOf('$') + 1);
@@ -97,7 +97,7 @@ namespace ServerDatabase
             // moved the multi threading game loop out of TCPServer constructor 
 
             // counting by j
-            for(int j = 0; j < gmm.getNumberPlayers(); j++ )
+            for (int j = 0; j < gmm.getNumberPlayers(); j++)
             {
                 // creates a ReadThread, passes in the player value t
                 ReadThread thread = new ReadThread(j);
@@ -108,154 +108,152 @@ namespace ServerDatabase
 
             while (true)
             {  //put the main game loop logic in here:
-                
+
                 //go through received messages here
-                for(int s = 0; s < gmm.getNumberPlayers(); s++)
+                for (int s = 0; s < gmm.getNumberPlayers(); s++)
                 { // start for loop 
 
-                    if(activePlayers[s].pSock.Connected)
+                    if (activePlayers[s].pSock.Connected)
                     { // if connected 
 
-                         if(activePlayers[s].incomingMessages.Count > 0)
-                            { // if player has any messages 
+                        if (activePlayers[s].incomingMessages.Count > 0)
+                        { // if player has any messages 
 
-                                string newCommand;
-                                lock(activePlayers[s].incomingMessages)
-                                {
-                                    newCommand = activePlayers[s].incomingMessages.Dequeue();
-                                }
-                                
-                                string[] parsedCommand = parseMessage(newCommand);
+                            string newCommand;
+                            lock (activePlayers[s].incomingMessages)
+                            {
+                                newCommand = activePlayers[s].incomingMessages.Dequeue();
+                            }
 
-                                //disconnect check loop to see if this player is disconnecting from the game  
-                                if(parsedCommand[0] == "0")
-                                {
-                                    // disconnect the player, leave the socket open for a new player
-                                    activePlayers[s].pSock.Disconnect(true);
+                            string[] parsedCommand = parseMessage(newCommand);
 
-                                    string disconnectMessage = "5$" + s.ToString() + "$";
-                                    notifyAllPlayers(disconnectMessage);
-                                }
-                                
-                                if(parsedCommand[0] == "2")
-                                {
-                                    gmm.executeCommand(parsedCommand);
-                                }
-                            } // end if player has any messages
+                            //disconnect check loop to see if this player is disconnecting from the game  
+                            if (parsedCommand[0] == "0")
+                            {
+                                // disconnect the player, leave the socket open for a new player
+                                activePlayers[s].pSock.Disconnect(true);
 
-                         //move loop
-                         gmm.gamePlayers[s].move();
+                                string disconnectMessage = "5$" + s.ToString() + "$";
+                                notifyAllPlayers(disconnectMessage);
+                            }
 
-                         bool collided = false;
-                         int collidingEnemy;
-                         int pelletCollide;
+                            if (parsedCommand[0] == "2")
+                            {
+                                gmm.executeCommand(parsedCommand);
+                            }
+                        } // end if player has any messages
 
-                         //wall collision loop
-                         if (gmm.detectCollisionsWithWalls(s) )
-                         {
-                             gmm.gamePlayers[s].kill();
+                        //move loop
+                        gmm.gamePlayers[s].move();
 
-                             collided = true;
-                         }
+                        /*
 
-                         //pellet collision loop
-                         pelletCollide = gmm.detectCollisionWithPellets(s);
-                         if(pelletCollide != -1)
-                         {
-                             gmm.relocatePellet(pelletCollide);
+                        bool collided = false;
+                        int collidingEnemy;
+                        int pelletCollide;
 
-                             gmm.gamePlayers[s].grow(20);
-                             gmm.gamePlayers[s].slowDown(1);
-                             gmm.gamePlayers[s].gainPoints(1);
+                        //wall collision loop
+                        if (gmm.detectCollisionsWithWalls(s))
+                        {
+                            gmm.gamePlayers[s].kill();
 
-                             collided = true;
-                         }
+                            collided = true;
+                        }
 
-                         //player collision loop
-                         collidingEnemy = gmm.detectCollisionPlayers(s);
-                         if (collidingEnemy != -1)
-                         { // if collided with enemy 
+                        //pellet collision loop
+                        pelletCollide = gmm.detectCollisionWithPellets(s);
+                        if (pelletCollide != -1)
+                        {
+                            gmm.relocatePellet(pelletCollide);
 
-                             collided = true;
+                            gmm.gamePlayers[s].grow(20);
+                            gmm.gamePlayers[s].slowDown(1);
+                            gmm.gamePlayers[s].gainPoints(1);
 
-                             // if the colliding enemy is larger, kill the client and award the colliding enemy
-                             if (gmm.gamePlayers[collidingEnemy].getSize() > gmm.gamePlayers[s].getSize() )
-                             {
-                                 gmm.gamePlayers[collidingEnemy].grow(80);
-                                 gmm.gamePlayers[collidingEnemy].slowDown(4);
-                                 gmm.gamePlayers[collidingEnemy].gainPoints(10);
+                            collided = true;
+                        }
 
-                                 gmm.gamePlayers[s].kill();
-                             }
+                        //player collision loop
+                        collidingEnemy = gmm.detectCollisionPlayers(s);
+                        if (collidingEnemy != -1)
+                        { // if collided with enemy 
 
-                             // if client is bigger than colliding enemy, kill colliding enemy and award client
-                             else if (gmm.gamePlayers[collidingEnemy].getSize() < gmm.gamePlayers[s].getSize())
-                             {
-                                 gmm.gamePlayers[s].grow(80);
-                                 gmm.gamePlayers[s].slowDown(4);
-                                 gmm.gamePlayers[s].gainPoints(10);
+                            collided = true;
 
-                                 gmm.gamePlayers[collidingEnemy].kill();
-                             }
+                            // if the colliding enemy is larger, kill the client and award the colliding enemy
+                            if (gmm.gamePlayers[collidingEnemy].getSize() > gmm.gamePlayers[s].getSize())
+                            {
+                                gmm.gamePlayers[collidingEnemy].grow(80);
+                                gmm.gamePlayers[collidingEnemy].slowDown(4);
+                                gmm.gamePlayers[collidingEnemy].gainPoints(10);
 
-                             // if both players are the same size, kill them both 
-                             else
-                             {
-                                 gmm.gamePlayers[s].kill();
-                                 gmm.gamePlayers[collidingEnemy].kill();
-                             }
+                                gmm.gamePlayers[s].kill();
+                            }
 
-                         } // end if collided with enemy 
+                            // if client is bigger than colliding enemy, kill colliding enemy and award client
+                            else if (gmm.gamePlayers[collidingEnemy].getSize() < gmm.gamePlayers[s].getSize())
+                            {
+                                gmm.gamePlayers[s].grow(80);
+                                gmm.gamePlayers[s].slowDown(4);
+                                gmm.gamePlayers[s].gainPoints(10);
+
+                                gmm.gamePlayers[collidingEnemy].kill();
+                            }
+
+                            // if both players are the same size, kill them both 
+                            else
+                            {
+                                gmm.gamePlayers[s].kill();
+                                gmm.gamePlayers[collidingEnemy].kill();
+                            }
+
+                        } // end if collided with enemy 
 
                         // win condition check
                         //win condition loop
-                        if(gmm.gamePlayers[s].getSize() > 400)
+                        if (gmm.gamePlayers[s].getSize() > 400)
                         {
                             string winMessage = "6$" + s + "$" + gmm.gamePlayers[s].getScoreString() + "$";
                             notifyAllPlayers(winMessage);
                         }
 
 
-                        /*
-                         * 
-                         * *************************************************************
-                         * 
-                         *  FIX THE UNIVERSAL GAME STATE MESSAGE TO INCLUDE ALL INFORMATION ABOUT ALL PLAYERS 
-                         * */
-                         if (collided)
-                         { // begin game state update if a collision was detected 
+                        if (collided)
+                        { // begin game state update if a collision was detected 
 
-                             string collideMessage = "2$";
+                            string collideMessage = "2$";
 
-                             // using a for loop to append each player's game state to the collidedMessage
-                             // counting by u
-                             for (int u = 0; u < gmm.getNumberPlayers(); u++)
-                             {
-                                 collideMessage += gmm.gamePlayers[u].getX_string() + "$";
-                                 collideMessage += gmm.gamePlayers[u].getY_string() + "$";
+                            // using a for loop to append each player's game state to the collidedMessage
+                            // counting by u
+                            for (int u = 0; u < gmm.getNumberPlayers(); u++)
+                            {
+                                collideMessage += gmm.gamePlayers[u].getX_string() + "$";
+                                collideMessage += gmm.gamePlayers[u].getY_string() + "$";
 
-                                 collideMessage += gmm.gamePlayers[u].getLeftRightString() + "$";
-                                 collideMessage += gmm.gamePlayers[u].getUpDownString() + "$";
+                                collideMessage += gmm.gamePlayers[u].getLeftRightString() + "$";
+                                collideMessage += gmm.gamePlayers[u].getUpDownString() + "$";
 
-                                 collideMessage += gmm.gamePlayers[u].getSpeed_string() + "$";
-                                 collideMessage += gmm.gamePlayers[u].getSize_string() + "$";
-                             }
+                                collideMessage += gmm.gamePlayers[u].getSpeed_string() + "$";
+                                collideMessage += gmm.gamePlayers[u].getSize_string() + "$";
+                            }
 
-                             // use a for loop to append all pellet information to collidedMessage
-                             // counting by o
-                             for (int o = 0; o < 4; o++)
-                             {
-                                 collideMessage += gmm.gamePellets[o].getPosX() + "$";
-                                 collideMessage += gmm.gamePellets[o].getPosY() + "$";
-                             }
+                            // use a for loop to append all pellet information to collidedMessage
+                            // counting by o
+                            for (int o = 0; o < 4; o++)
+                            {
+                                collideMessage += gmm.gamePellets[o].getPosX() + "$";
+                                collideMessage += gmm.gamePellets[o].getPosY() + "$";
+                            }
 
-                             Console.WriteLine("   RESISTANCE IS FUTILE  " + collideMessage);
+                            Console.WriteLine("   RESISTANCE IS FUTILE  " + collideMessage);
 
-                             notifyAllPlayers(collideMessage);
+                            notifyAllPlayers(collideMessage);
 
-                         } // end if a collision was detected 
+                        } // end if a collision was detected 
+
+                        */
                     } // end if connected 
-                    
+
                 } // end for loop 
 
             } // end game loop 
@@ -267,9 +265,9 @@ namespace ServerDatabase
             Console.WriteLine("     ***** Notifying All Players " + command);
 
             // counting by y
-            for(int y = 0; y < gmm.getNumberPlayers(); y++)
+            for (int y = 0; y < gmm.getNumberPlayers(); y++)
             {
-                if(activePlayers[y].pSock.Connected)
+                if (activePlayers[y].pSock.Connected)
                 {
                     Byte[] commandToAll = System.Text.Encoding.ASCII.GetBytes(command);
                     activePlayers[y].psnws.Write(commandToAll, 0, commandToAll.Length);
@@ -291,7 +289,7 @@ namespace ServerDatabase
                 clientString = newNumber.ToString();
                 responseData = "";
             } // end constructor
-            
+
 
             public void Service() // for an individual operating thread
             { // begin service
@@ -301,13 +299,13 @@ namespace ServerDatabase
                     getMessage(activePlayers[client].psnws);
                     Console.WriteLine(responseData);
                     sendMessage(activePlayers[client].psnws, "hello$");
-                    //getMessage(activePlayers[client].psnws);
-                    //Console.WriteLine(responseData);
+                    getMessage(activePlayers[client].psnws);
+                    Console.WriteLine(responseData);
                     sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
 
                     //Game Loop goes here!
 
-                    while(activePlayers[client].pSock.Connected)
+                    while (activePlayers[client].pSock.Connected)
                     {
                         // waits on a message from this player
                         getMessage(activePlayers[client].psnws);
@@ -315,7 +313,7 @@ namespace ServerDatabase
                         //spliting the serverdata into instruction
                         string[] instruction = new string[11];
                         instruction = parseMessageSizeThree(responseData);
-                         
+
                         Console.Write("Instruction [0] " + instruction[0] + " ; ");
                         Console.Write("Instruction [1] " + instruction[1] + " ; ");
                         Console.Write("Instruction [2] " + instruction[2] + " ; ");
@@ -332,7 +330,7 @@ namespace ServerDatabase
                 {
                     Console.WriteLine("Exception " + beiber.Message);
                 }
-                
+
             } // end service
             public void sendMessage(NetworkStream theStream, String message)
             {

@@ -13,7 +13,7 @@ namespace ServerDatabase
     {
         // static LoginDatabase dB;
 
-        
+
         static void Main(string[] args)
         {
             TCPServer server = new TCPServer();
@@ -39,6 +39,6 @@ namespace ServerDatabase
 
             server.gameLoop();
         }
-        
+
     }
 }

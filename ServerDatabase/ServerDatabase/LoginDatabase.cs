@@ -76,7 +76,7 @@ namespace ServerDatabase
             attemptToLogin("Me", "3000");
             attemptToLogin("Myself", "6000");
             attemptToLogin("And I", "9001");
-             
+
         }
 
         void addElement(string userName, string newPW)
@@ -103,7 +103,7 @@ namespace ServerDatabase
             */
 
             // the password is a match
-            if (reader["pw"].Equals(loginPW) )
+            if (reader["pw"].Equals(loginPW))
             {
                 Console.WriteLine("    Password is a match    " + loginName);
                 // return true;
@@ -134,7 +134,7 @@ namespace ServerDatabase
             // command.Connection.Open();
             bool userExists = reader.Read();
 
-            if (userExists )
+            if (userExists)
             {
                 // Console.WriteLine("  found it! " + userName);
                 return true;
@@ -175,7 +175,7 @@ namespace ServerDatabase
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
 
-            while (reader.Read() )
+            while (reader.Read())
             {
                 Console.WriteLine("Name: " + reader["name"] + "\tPassword: " + reader["pw"]);
             }
