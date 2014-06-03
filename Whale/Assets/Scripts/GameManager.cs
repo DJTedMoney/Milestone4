@@ -63,37 +63,36 @@ public class GameManager : MonoBehaviour
 		
 		//starts command with new direction (U = up, D = down
 		//L = left, and R = right)
-		send = true;
+		send = false;
 		//print (start);
 		if(Input.GetKeyDown(KeyCode.UpArrow) )
 		{
 			command = "U$"; 
+			send = true;
 			print ("Pressed UP");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.DownArrow) )
 		{
 			command = "D$";
+			send = true;
 			print ("Pressed DOWN");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.LeftArrow) )
 		{
 			command = "L$";
+			send = true;
 			print ("Pressed LEFT");
 		}
 		
 		else if(Input.GetKeyDown(KeyCode.RightArrow) )
 		{
 			command = "R$";
+			send = true;
 	     	print ("Pressed RIGHT");
 		}
-		//default command, means no change
-		else
-		{
-			send = false;
-		}
-		//print (command);
+
 		
 		//finishes the command with player data (Position x and y, speed, and size)
 		if(send == true)

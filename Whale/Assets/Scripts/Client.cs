@@ -181,7 +181,7 @@ public class Client : MonoBehaviour
 		message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
 		print ("message " + message);
 		// sendMessage(message);
-		print ("ServerIO: message sent");
+
 		
 		//should get 0$, 1$, or 3$
 		// getMessage();
@@ -201,15 +201,15 @@ public class Client : MonoBehaviour
 	
 	public void sendMessage(string theMessage)
 	{
-		print ("in SendMessage " + theMessage);
+
 		if(theMessage.Length >0)
 		{
-			print("theMessage: "+theMessage);
+
 			Byte[] data = System.Text.Encoding.ASCII.GetBytes(theMessage);
    			// Send the message to the connected TcpServer. 
 		   	stream.Write(data, 0, data.Length);
 			stream.Flush();
-   			print("Sent: " + theMessage);
+			print ("in SendMessage, sent " + theMessage);
 		}
 	}
 	
@@ -218,15 +218,17 @@ public class Client : MonoBehaviour
 		//locks serverCommand queue for thread safety
 		lock(manager.serverCommand)
 		{
-			print("in GetMessage");
+			//print("in GetMessage");
 			Byte[] data = new Byte[256];
     		// String to store the response ASCII representation.
    			String responseData = String.Empty;
 			// Read the first batch of the TcpServer response bytes.
     		Int32 bytes = stream.Read(data, 0, data.Length);
     		responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-    		print("Received: " + responseData);
-			manager.serverCommand.Enqueue(responseData);
+			if(responseData != String.Empty){
+    			print("Received: " + responseData);
+				manager.serverCommand.Enqueue(responseData);
+			}
 		}//end lock
 	}
 }
