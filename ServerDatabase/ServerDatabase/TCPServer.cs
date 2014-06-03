@@ -308,7 +308,7 @@ namespace ServerDatabase
                     while (activePlayers[client].pSock.Connected)
                     {
                         // waits on a message from this player
-                        getMessage(activePlayers[client].psnws);
+                        // getMessage(activePlayers[client].psnws);
 
                         //spliting the serverdata into instruction
                         string[] instruction = new string[11];
@@ -327,7 +327,7 @@ namespace ServerDatabase
                             // loginVal == 0, wrong U/P combination, player fails to log in 
                             if (loginVal == 0)
                             {
-                                sendMessage(activePlayers[client].psnws, "0$");
+                                // sendMessage(activePlayers[client].psnws, "0$");
                                 activePlayers[client].pSock.Disconnect(true);
                             }
 
@@ -345,7 +345,7 @@ namespace ServerDatabase
 
 
                                 Console.WriteLine("  Send Message " + newPlayer);
-                                sendMessage(activePlayers[client].psnws, newPlayer);
+                                // sendMessage(activePlayers[client].psnws, newPlayer);
                             }
 
                             // sendMessage();
