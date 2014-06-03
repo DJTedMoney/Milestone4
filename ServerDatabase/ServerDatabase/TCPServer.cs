@@ -85,7 +85,7 @@ namespace ServerDatabase
             // counting by e
             for (int e = 1; e < numberParses; e++)
             {
-                parsedInput[0] = input.Substring(0, input.IndexOf('$'));
+                parsedInput[e] = input.Substring(0, input.IndexOf('$'));
                 input = input.Substring(input.IndexOf('$') + 1);
             }
 

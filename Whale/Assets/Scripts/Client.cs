@@ -186,7 +186,7 @@ public class Client : MonoBehaviour
 		
 		//sends login info
 		message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
-		print ("message " + message);
+		//print ("message " + message);
 		// sendMessage(message);
 
 		
