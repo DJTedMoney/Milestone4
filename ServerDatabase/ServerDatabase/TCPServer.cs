@@ -336,10 +336,16 @@ namespace ServerDatabase
                             // starting size and starting velocity are hard coded into Client
                             else if (loginVal == 1)
                             {
-                                string newPlayer = "1$" + client.ToString();
-                                newPlayer += (gmm.gamePlayers[client].getX_string() + "$");
-                                newPlayer += (gmm.gamePlayers[client].getY_string() + "$");
-                                
+                                string newPlayer = "1$" + client.ToString() + "$";
+                                // newPlayer += (gmm.gamePlayers[client].getX_string() + "$");
+                                // newPlayer += (gmm.gamePlayers[client].getY_string() + "$");
+
+                                newPlayer += ("300$");
+                                newPlayer += ("300$");
+
+
+                                Console.WriteLine("  Send Message " + newPlayer);
+                                sendMessage(activePlayers[client].psnws, newPlayer);
                             }
 
                             // sendMessage();

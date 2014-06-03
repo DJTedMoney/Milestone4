@@ -126,10 +126,18 @@ public class GameManager : MonoBehaviour
 				{
 					print ("comtype is 1");
 					guiBox.grafxText.text = "Connected\nWelcome back " + guiBox.userName;
+					
+					// second element of command is the client number
 					clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					print ("ClientNumber: " + clientNumber);
 					isActive[clientNumber] = true;
+					
+					// third element of command is starting x pos
+					int startX = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					
+					// fourth element of command is starting y 
+					int startY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 				}
 				//Server sent Move commands to client
 				if(comType.Equals("2") && move == true)
