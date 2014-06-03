@@ -45,10 +45,15 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	
+	IEnumerator Wait(float x) {
+    yield return new WaitForSeconds(x);
+    }
+	
 	// Update is called once per frame
 	void Update () 
 	{
 			sendMove();
+			//Wait (0.5f);
 			applyMove();
 	}
 	
