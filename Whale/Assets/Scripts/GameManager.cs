@@ -110,81 +110,84 @@ public class GameManager : MonoBehaviour
 		//loads the next server command and reads the first command
 		//The first command is the command type (0 = disconect, 1 = connect, 2 = move)
 		lock(serverCommand){
-			while(serverCommand.Count != 0)
-			{
+			int serverSize = serverCommand.Count;
+		}
+		while(serverSize != 0)
+		{
 				//print ("serverCommand is not = 0");
+			lock(serverCommand){
 				string tempCommand = serverCommand.Dequeue().ToString();
-				string comType = tempCommand.Substring(0,tempCommand.IndexOf(delim));
-				tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+			}
+			string comType = tempCommand.Substring(0,tempCommand.IndexOf(delim));
+			tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 				
-				//Server Disconectd Client
-				if(comType.Equals("0"))
-				{
-					print ("comtype is 0");
-					guiBox.grafxText.text = "error, wrong pasword\ndisconected from server";
-					activeClient.Disconnect();
-					start = false;
-					guiBox.showLogin = !guiBox.showLogin;
-				}
-				//Server connected client
-				else if(comType.Equals("1"))
-				{
-					print ("comtype is 1");
-					guiBox.grafxText.text = "Connected\nWelcome back " + guiBox.userName;
+			//Server Disconectd Client
+			if(comType.Equals("0"))
+			{
+				print ("comtype is 0");
+				guiBox.grafxText.text = "error, wrong pasword\ndisconected from server";
+				activeClient.Disconnect();
+				start = false;
+				guiBox.showLogin = !guiBox.showLogin;
+			}
+			//Server connected client
+			else if(comType.Equals("1"))
+			{
+				print ("comtype is 1");
+				guiBox.grafxText.text = "Connected\nWelcome back " + guiBox.userName;
 					
-					// second element of command is the client number
-					clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				// second element of command is the client number
+				clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				print ("ClientNumber: " + clientNumber);
+				isActive[clientNumber] = true;
+				
+				// third element of command is starting x pos
+				int startX = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					
+				// fourth element of command is starting y 
+				int startY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+			}
+			//Server sent Move commands to client
+			if(comType.Equals("2") && move == true)
+			{
+				for(int i = 0; i <4; i++)
+				{
+					if(isActive[i])
+					{
+						//print ("comtype is 2");
+						//sets player position to match server
+						int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+						int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+						players[i].transform.position = new Vector2(tempX, tempY);
+						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					
+						//sets player direction to match server
+						tempX = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+						tempY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+						tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+						players[i].setDirection(tempX, tempY);
+						//sets player speed
+						//players[i].setSpeed(int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim))));
+						//tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);					
+						//sets player size
+						//players[i].size = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+						//tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					}
+				}
+				//sets pellet position
+				for(int j = 0; j < 4; j++)
+				{
+					int tempX = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-					print ("ClientNumber: " + clientNumber);
-					isActive[clientNumber] = true;
-					
-					// third element of command is starting x pos
-					int startX = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-					
-					// fourth element of command is starting y 
-					int startY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					int tempY = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					pellets[j].setPos(tempX, tempY);
 				}
-				//Server sent Move commands to client
-				if(comType.Equals("2") && move == true)
-				{
-					for(int i = 0; i <4; i++)
-					{
-						if(isActive[i])
-						{
-							//print ("comtype is 2");
-							//sets player position to match server
-							int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-							tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-							int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-							players[i].transform.position = new Vector2(tempX, tempY);
-							tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-					
-							//sets player direction to match server
-							tempX = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-							tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-							tempY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-							tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-							players[i].setDirection(tempX, tempY);
-							//sets player speed
-							players[i].setSpeed(int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim))));
-							tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-					
-							//sets player size
-							players[i].size = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-							tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-						}
-					}
-					//sets pellet position
-					for(int j = 0; j < 4; j++)
-					{
-						int tempX = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-						tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-						int tempY = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-						tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-						pellets[j].setPos(tempX, tempY);
-					}
-					move = false;
-				}
+				move = false;
+			}
 				//writes the server command to the gui
 				else if(comType.Equals("3"))
 				{
