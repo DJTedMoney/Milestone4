@@ -319,10 +319,36 @@ namespace ServerDatabase
                         Console.Write("Instruction [2] " + instruction[2] + " ; ");
                         Console.Write("Instruction [3] " + instruction[3] + " ; ");
 
-                        int loginVal = dB.attemptToLogin(instruction[1], instruction[3]);
+                        if (instruction[0] == "1")
+                        {
+                            int loginVal = dB.attemptToLogin(instruction[1], instruction[3]);
+                            Console.WriteLine(loginVal);
 
-                        Console.WriteLine(loginVal);
+                            // loginVal == 0, wrong U/P combination, player fails to log in 
+                            if (loginVal == 0)
+                            {
+                                sendMessage(activePlayers[client].psnws, "0$");
+                                activePlayers[client].pSock.Disconnect(true);
+                            }
+
+                            // loginVal == 1, successful login as returning user 
+                            // give the player their starting position 
+                            // starting size and starting velocity are hard coded into Client
+                            else if (loginVal == 1)
+                            {
+                                string newPlayer = "1$";
+                                newPlayer += (gmm.gamePlayers[client].getX_string() + "$");
+                                newPlayer += (gmm.gamePlayers[client].getY_string() + "$");
+                                
+                            }
+
+                            // sendMessage();
+                        }
                     }
+
+
+
+
 
                 } // end try
 

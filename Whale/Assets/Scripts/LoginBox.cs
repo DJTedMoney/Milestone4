@@ -22,7 +22,7 @@ public class LoginBox : MonoBehaviour
 		
 		userName = "";
 		passWord = "";
-		grafxText.text = "Enter Username and password";
+		
 		
 	}
 	
@@ -32,6 +32,8 @@ public class LoginBox : MonoBehaviour
 	{	
 		if(!showLogin)
 		{
+			grafxText.text = "Enter Username and password";
+			
 			GUI.Label(new Rect(130, 200, 100, 20), "UserName : ");
 			
 			userName = GUI.TextField(new Rect(200, 200, 200, 20), userName );
@@ -51,6 +53,8 @@ public class LoginBox : MonoBehaviour
 				//manager.activeClient.Connect( manager.activeClient.GetIP(), Encryptor.encryptString(userName), 
 											// Encryptor.encryptString(passWord));
 				client.Connect(client.GetIP(),Encryptor.encryptString(userName), Encryptor.encryptString(passWord));
+				
+				grafxText.text = "";
 			}
 		}
 		
