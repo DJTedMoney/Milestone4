@@ -173,27 +173,16 @@ public class Client : MonoBehaviour
 	public void serverIO()
 	{
 		print ("in ServerIO");
-		print ("ServerIO: in first If");
-		// stream = client.GetStream();
-		print ("1");
+		//should get hello$ from server
+		getMessage ();
+		//sends login info
 		message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
 		print ("message " + message);
 		sendMessage(message);
 		print ("ServerIO: message sent");
-		
+		//should get 0$, 1$, or 3$
 		getMessage();
-		
-		//THIS IS A TEST BLOCK
-//			print ("ServerIO: in first If");
-//			// stream = client.GetStream();
-//			print ("1");
-//			message = "2$" + "TestMessage$";
-//			print ("message " + message);
-//			sendMessage(message);
-//			print ("ServerIO: message sent");
-		//END THE TEST BLOCK
-		getMessage();
-		
+		//if the message was 1$ or 3$, a series of 4$ messages will follow
 		while(isConnect)
 		{
 			//print ("ServerIO: in whileLoop");		

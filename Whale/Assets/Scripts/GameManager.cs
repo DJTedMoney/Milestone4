@@ -199,6 +199,10 @@ public class GameManager : MonoBehaviour
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					isActive[temp] = false;
 				}
+				else if(comType.Equals("hello"))
+				{
+					print("Client got the Hello!");
+				}
 			}//ends whileLoop
 		}//ends lock
 	}
