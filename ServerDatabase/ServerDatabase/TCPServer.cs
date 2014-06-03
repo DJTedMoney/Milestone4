@@ -74,12 +74,12 @@ namespace ServerDatabase
 
             if (parsedInput[0] == "0")
             {
-                numberParses = 1;
+                numberParses = 2;
             }
 
             else if (parsedInput[0] == "2")
             {
-                numberParses = 2;
+                numberParses = 3;
             }
 
             // counting by e
@@ -137,9 +137,19 @@ namespace ServerDatabase
                                 notifyAllPlayers(disconnectMessage);
                             }
 
+                            // parsed command 0 = 2
+                            // parsed command 1 = direction to move U D L R 
+                            // parsed command 2 = player ID 
                             if (parsedCommand[0] == "2")
                             {
                                 gmm.executeCommand(parsedCommand);
+
+                                int playID = Convert.ToInt32(parsedCommand[2]);
+
+                                string moveMessage = "2$" + parsedCommand[2];
+                                moveMessage += gmm.gamePlayers[playID].getLeftRightString() + "$";
+                                moveMessage += gmm.gamePlayers[playID].getUpDownString() + "$";
+
                             }
                         } // end if player has any messages
 
@@ -260,6 +270,14 @@ namespace ServerDatabase
 
         } // end gameLoop
 
+        public void sendMessage(NetworkStream theStream, int ID, String message)
+        {
+            Byte[] sendData = System.Text.Encoding.ASCII.GetBytes(message);
+            // Send the message to the connected TcpServer. 
+            activePlayers[ID].psnws.Write(sendData, 0, sendData.Length);
+            Console.WriteLine("Sent: " + message);
+        }
+
         void notifyAllPlayers(string command)
         {
             Console.WriteLine("     ***** Notifying All Players " + command);
@@ -269,8 +287,10 @@ namespace ServerDatabase
             {
                 if (activePlayers[y].pSock.Connected)
                 {
-                    Byte[] commandToAll = System.Text.Encoding.ASCII.GetBytes(command);
-                    activePlayers[y].psnws.Write(commandToAll, 0, commandToAll.Length);
+                    // Byte[] commandToAll = System.Text.Encoding.ASCII.GetBytes(command);
+                    // activePlayers[y].psnws.Write(commandToAll, 0, commandToAll.Length);
+
+                    sendMessage(activePlayers[y].psnws, y, command);
                 }
             }
         }
@@ -298,10 +318,16 @@ namespace ServerDatabase
 
                     // getMessage(activePlayers[client].psnws);
                     // Console.WriteLine(responseData);
-                    sendMessage(activePlayers[client].psnws, "hello$");
+                    
                     // getMessage(activePlayers[client].psnws);
                     // Console.WriteLine(responseData);
                     // sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
+
+                    lock (activePlayers[client].incomingMessages)
+                    {
+                        activePlayers[client].incomingMessages.Enqueue("hello$");
+                    }
+                    
 
                     //Game Loop goes here!
 
@@ -310,6 +336,12 @@ namespace ServerDatabase
                         // waits on a message from this player
                         getMessage(activePlayers[client].psnws);
 
+                        lock(activePlayers[client].incomingMessages)
+                        {
+                            activePlayers[client].incomingMessages.Enqueue(responseData);
+                        }
+                        
+                        /*
                         //spliting the serverdata into instruction
                         string[] instruction = new string[11];
 
@@ -360,9 +392,9 @@ namespace ServerDatabase
 
                             // sendMessage();
                         } // end if instruction login
+                        */
 
-
-                    }
+                    } // end of thread while loop that reads the stream 
 
 
 
@@ -376,13 +408,7 @@ namespace ServerDatabase
                 }
 
             } // end service
-            public void sendMessage(NetworkStream theStream, String message)
-            {
-                Byte[] sendData = System.Text.Encoding.ASCII.GetBytes(message);
-                // Send the message to the connected TcpServer. 
-                activePlayers[client].psnws.Write(sendData, 0, sendData.Length);
-                Console.WriteLine("Sent: " + message);
-            }
+            
 
             public void getMessage(NetworkStream theStream)
             { // begin getMessage 
