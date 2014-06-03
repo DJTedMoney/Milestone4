@@ -36,7 +36,7 @@ public class Client : MonoBehaviour
 	bool sendData;
 	bool getData;
 	
-	~Client()
+	void OnApplicationQuit()
 	{
 		clientThread.Abort();
 		client.Close();
