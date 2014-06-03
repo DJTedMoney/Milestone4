@@ -424,7 +424,7 @@ namespace ServerDatabase
                 Int32 buffer;
                 try
                 {
-                    Console.WriteLine("  In the Try");
+                    Console.WriteLine("In the getMessage Try");
 
                     buffer = theStream.Read(data, 0, 4096);
                     Console.WriteLine("buffer" + buffer);
@@ -432,8 +432,6 @@ namespace ServerDatabase
                     responseData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
 
                     Console.WriteLine("responseData " + responseData);
-
-                    Console.WriteLine("Received: " + responseData);
                 }
                 catch (Exception arg)
                 {
