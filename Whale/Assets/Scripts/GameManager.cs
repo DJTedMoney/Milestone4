@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 	{
 			sendMove();
 			//Wait (0.5f);
-			// applyMove();
+			//applyMove();
 	}
 	
 	public void sendMove()
@@ -66,45 +66,46 @@ public class GameManager : MonoBehaviour
 		//L = left, and R = right)
 		send = false;
 		//print (start);
-		if(Input.GetKeyDown(KeyCode.UpArrow) )
-		{
-			command = "U$"; 
-			send = true;
-			print ("Pressed UP");
-		}
-		
-		else if(Input.GetKeyDown(KeyCode.DownArrow) )
-		{
-			command = "D$";
-			send = true;
-			print ("Pressed DOWN");
-		}
-		
-		else if(Input.GetKeyDown(KeyCode.LeftArrow) )
-		{
-			command = "L$";
-			send = true;
-			print ("Pressed LEFT");
-		}
-		
-		else if(Input.GetKeyDown(KeyCode.RightArrow) )
-		{
-			command = "R$";
-			send = true;
-	     	print ("Pressed RIGHT");
-		}
-
-		
-		//finishes the command with player data (Position x and y, speed, and size)
-		if(send == true)
-		{
-			command = "2$"+ command + clientNumber.ToString()+"$";
-			//print (command);
-			activeClient.requestMove(command);
-			send = false;
-		}
-	}
+		if(start && isActive[clientNumber]){
+			if(Input.GetKeyDown(KeyCode.UpArrow) )
+			{
+				command = "U$"; 
+				send = true;
+				print ("Pressed UP");
+			}
+			
+			else if(Input.GetKeyDown(KeyCode.DownArrow) )
+			{
+				command = "D$";
+				send = true;
+				print ("Pressed DOWN");
+			}
+			
+			else if(Input.GetKeyDown(KeyCode.LeftArrow) )
+			{
+				command = "L$";
+				send = true;
+				print ("Pressed LEFT");
+			}
+			
+			else if(Input.GetKeyDown(KeyCode.RightArrow) )
+			{
+				command = "R$";
+				send = true;
+	     		print ("Pressed RIGHT");
+			}
 	
+			
+			//finishes the command with player data (Position x and y, speed, and size)
+			if(send == true)
+			{
+				command = "2$"+ command + clientNumber.ToString()+"$";
+				//print (command);
+				activeClient.requestMove(command);
+				send = false;
+			}
+		}
+	}		
 	void applyMove()
 	{	//print ("in applyMove");
 		//loads the next server command and reads the first command
