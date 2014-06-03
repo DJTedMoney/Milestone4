@@ -312,7 +312,17 @@ namespace ServerDatabase
 
                         //spliting the serverdata into instruction
                         string[] instruction = new string[11];
-                        instruction = parseMessageSizeFour(responseData);
+
+                        if(responseData[0].Equals("1") )
+                        {
+                            instruction = parseMessageSizeFour(responseData);
+                        }
+
+                        else if(responseData[0].Equals("2") )
+                        {
+                            instruction = parseMessageSizeThree(responseData);
+                        }
+                        
 
                         Console.Write("Instruction [0] " + instruction[0] + " ; ");
                         Console.Write("Instruction [1] " + instruction[1] + " ; ");
@@ -320,7 +330,7 @@ namespace ServerDatabase
                         Console.Write("Instruction [3] " + instruction[3] + " ; ");
 
                         if (instruction[0] == "1")
-                        {
+                        { // if instruction login 
                             int loginVal = dB.attemptToLogin(instruction[1], instruction[3]);
                             Console.WriteLine(loginVal);
 
@@ -349,7 +359,9 @@ namespace ServerDatabase
                             }
 
                             // sendMessage();
-                        }
+                        } // end if instruction login
+
+
                     }
 
 
