@@ -109,14 +109,16 @@ public class GameManager : MonoBehaviour
 	{	//print ("in applyMove");
 		//loads the next server command and reads the first command
 		//The first command is the command type (0 = disconect, 1 = connect, 2 = move)
+		int serverSize;
 		lock(serverCommand){
-			int serverSize = serverCommand.Count;
+			serverSize = serverCommand.Count;
 		}
 		while(serverSize != 0)
 		{
 				//print ("serverCommand is not = 0");
+			string tempCommand;
 			lock(serverCommand){
-				string tempCommand = serverCommand.Dequeue().ToString();
+				tempCommand = serverCommand.Dequeue().ToString();
 			}
 			string comType = tempCommand.Substring(0,tempCommand.IndexOf(delim));
 			tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
@@ -219,7 +221,6 @@ public class GameManager : MonoBehaviour
 				{
 					print("Client got the Hello!");
 				}
-			}//ends whileLoop
-		}//ends lock
+		}//ends whileLoop
 	}
 }
