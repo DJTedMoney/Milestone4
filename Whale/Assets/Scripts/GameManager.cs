@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 	{
 			sendMove();
 			//Wait (0.5f);
-			applyMove();
+			// applyMove();
 	}
 	
 	public void sendMove()

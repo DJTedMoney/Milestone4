@@ -308,7 +308,7 @@ namespace ServerDatabase
                     while (activePlayers[client].pSock.Connected)
                     {
                         // waits on a message from this player
-                        // getMessage(activePlayers[client].psnws);
+                        getMessage(activePlayers[client].psnws);
 
                         //spliting the serverdata into instruction
                         string[] instruction = new string[11];
