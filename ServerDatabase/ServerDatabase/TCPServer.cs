@@ -146,10 +146,11 @@ namespace ServerDatabase
 
                                 int playID = Convert.ToInt32(parsedCommand[2]);
 
-                                string moveMessage = "2$" + parsedCommand[2];
+                                string moveMessage = "2$" + parsedCommand[2] + "$";
                                 moveMessage += gmm.gamePlayers[playID].getLeftRightString() + "$";
                                 moveMessage += gmm.gamePlayers[playID].getUpDownString() + "$";
 
+                                notifyAllPlayers(moveMessage);
                             }
                         } // end if player has any messages
 
@@ -262,6 +263,14 @@ namespace ServerDatabase
                         } // end if a collision was detected 
 
                         */
+
+                        if(activePlayers[s].outgoingMessages.Count > 0)
+                        {
+                            lock(activePlayers[s].outgoingMessages)
+                            {
+                                sendMessage(activePlayers[s].psnws, s, activePlayers[s].outgoingMessages.Dequeue() );
+                            }
+                        }
                     } // end if connected 
 
                 } // end for loop 
@@ -290,7 +299,9 @@ namespace ServerDatabase
                     // Byte[] commandToAll = System.Text.Encoding.ASCII.GetBytes(command);
                     // activePlayers[y].psnws.Write(commandToAll, 0, commandToAll.Length);
 
-                    sendMessage(activePlayers[y].psnws, y, command);
+                    // sendMessage(activePlayers[y].psnws, y, command);
+
+                    activePlayers[y].outgoingMessages.Enqueue(command);
                 }
             }
         }
