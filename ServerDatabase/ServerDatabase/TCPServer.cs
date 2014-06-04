@@ -280,6 +280,7 @@ namespace ServerDatabase
 
                             bool collided = false;
                             int pelletCollide;
+                            int collidingEnemy;
 
                             //wall collision loop
                             if (gmm.detectCollisionsWithWalls(s))
@@ -343,14 +344,6 @@ namespace ServerDatabase
                                 notifyAllPlayers(newPellet);
                             }
 
-                            /*
-                        
-                            int collidingEnemy;
-                        
-
-                        
-
-                        
 
                             //player collision loop
                             collidingEnemy = gmm.detectCollisionPlayers(s);
@@ -386,17 +379,51 @@ namespace ServerDatabase
                                     gmm.gamePlayers[collidingEnemy].kill();
                                 }
 
+                                // update the world on the status of player s
+                                string colliderUpdate = "6$" + s.ToString() + "$";
+                                colliderUpdate += gmm.gamePlayers[s].getX_string() + "$";
+                                colliderUpdate += gmm.gamePlayers[s].getY_string() + "$";
+
+                                // x direction $ y direction $
+                                colliderUpdate += gmm.gamePlayers[s].getLeftRightString() + "$";
+                                colliderUpdate += gmm.gamePlayers[s].getUpDownString() + "$";
+
+                                // size $ score $ speed $
+                                colliderUpdate += gmm.gamePlayers[s].getSize_string() + "$";
+                                colliderUpdate += gmm.gamePlayers[s].getScoreString() + "$";
+                                colliderUpdate += gmm.gamePlayers[s].getSpeed_string() + "$";
+
+                                notifyAllPlayers(colliderUpdate);
+
+
+                                // update the world on the status of colliding enemy 
+                                colliderUpdate = "6$" + collidingEnemy.ToString() + "$";
+                                colliderUpdate += gmm.gamePlayers[collidingEnemy].getX_string() + "$";
+                                colliderUpdate += gmm.gamePlayers[collidingEnemy].getY_string() + "$";
+
+                                // x direction $ y direction $
+                                colliderUpdate += gmm.gamePlayers[collidingEnemy].getLeftRightString() + "$";
+                                colliderUpdate += gmm.gamePlayers[collidingEnemy].getUpDownString() + "$";
+
+                                // size $ score $ speed $
+                                colliderUpdate += gmm.gamePlayers[collidingEnemy].getSize_string() + "$";
+                                colliderUpdate += gmm.gamePlayers[collidingEnemy].getScoreString() + "$";
+                                colliderUpdate += gmm.gamePlayers[collidingEnemy].getSpeed_string() + "$";
+
+                                notifyAllPlayers(colliderUpdate);
+
                             } // end if collided with enemy 
 
                             // win condition check
                             //win condition loop
                             if (gmm.gamePlayers[s].getSize() > 400)
                             {
-                                string winMessage = "6$" + s + "$" + gmm.gamePlayers[s].getScoreString() + "$";
+                                string winMessage = "9$" + s + "$" + gmm.gamePlayers[s].getScoreString() + "$";
                                 notifyAllPlayers(winMessage);
                             }
 
 
+                            /*
                             if (collided)
                             { // begin game state update if a collision was detected 
 
