@@ -35,6 +35,9 @@ namespace ServerDatabase
                 int startY = roller.Next(-450, 450);
 
                 gamePellets[p].setPosition(startX, startY);
+
+
+
             }
         }
 
