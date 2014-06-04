@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 	public int score;
 	int number;
 	string myName;
+	bool active;
 	
 	public Client commsClient;
 	
@@ -26,13 +27,28 @@ public class Player : MonoBehaviour
 		speed = 0;
 		score = 0;
 		direction = new Vector2(0,1);
+		active = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		transform.position = new Vector2(transform.position.x + direction.x*speed, transform.position.y + direction.y*speed);
-		transform.localScale = new Vector3(size, size, 1);
+		if(active)
+		{
+			transform.position = new Vector2(transform.position.x + direction.x*speed, transform.position.y + direction.y*speed);
+			transform.localScale = new Vector3(size, size, 1);
+			if(!transform.renderer.enabled)
+			{
+				transform.renderer.enabled = true;
+			}
+		}
+		else
+		{
+			if( transform.renderer.enabled)
+			{
+				transform.renderer.enabled = false;
+			}
+		}
 	}
 	
 	public void setPosition(int newX, int newY)
@@ -71,13 +87,21 @@ public class Player : MonoBehaviour
 		size = newSize;
 	}
 	
+	public void setActive(bool newActive)
+	{
+		active = newActive;
+	}
+	
 	void OnGUI()
 	{
-		GUI.Label(new Rect(10, 40+number*75, 40, 20), myName + " : ");
-		GUI.Label(new Rect(55, 40+number*75, 40, 20), size.ToString() );
-		GUI.Label(new Rect(10, 65+number*75, 40, 20), "Size : ");
-		GUI.Label(new Rect(55, 65+number*75, 40, 20), size.ToString() );
-		GUI.Label(new Rect(10, 90+number*75, 40, 20), "Speed : ");
-		GUI.Label(new Rect(55, 90+number*75, 40, 20), speed.ToString() );
+		if(active)
+		{
+			GUI.Label(new Rect(10, 40+number*75, 40, 20), myName + " : ");
+			GUI.Label(new Rect(55, 40+number*75, 40, 20), size.ToString() );
+			GUI.Label(new Rect(10, 65+number*75, 40, 20), "Size : ");
+			GUI.Label(new Rect(55, 65+number*75, 40, 20), size.ToString() );
+			GUI.Label(new Rect(10, 90+number*75, 40, 20), "Speed : ");
+			GUI.Label(new Rect(55, 90+number*75, 40, 20), speed.ToString() );
+		}
 	}
 }

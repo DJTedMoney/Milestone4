@@ -7,6 +7,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour 
 {
+	int MAX_PLAYERS = 2;
 	public Client activeClient;
 	public string command;
 	public Queue serverCommand;
@@ -25,9 +26,9 @@ public class GameManager : MonoBehaviour
 	void Start () 
 	{
 		activeClient = GameObject.Find("GameClient").GetComponent<Client>();
-		players = new Player[4];
-		isActive = new bool[4];
-		for(int i = 0; i<4; i++)
+		players = new Player[MAX_PLAYERS];
+		isActive = new bool[MAX_PLAYERS];
+		for(int i = 0; i<MAX_PLAYERS; i++)
 		{
 			//print ("test " + i);
 			players[i] = GameObject.Find ("Player" + i.ToString()).GetComponent<Player>();
@@ -53,6 +54,10 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		for(int i = 0; i<MAX_PLAYERS; i++)
+		{
+			players[i].setActive(isActive[i]);
+		}
 			sendMove();
 			applyMove();
 	}
@@ -265,6 +270,20 @@ public class GameManager : MonoBehaviour
 					int tempSpeed = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					players[tempNum].setSpeed(tempSpeed);
+				
+					if(tempNum != clientNumber)
+					{
+						if(players[tempNum].size > players[clientNumber].size)
+						{
+							players[tempNum].renderer.material.color = Color.red;
+						}
+						else
+						{
+							players[tempNum].renderer.material.color = Color.green;
+						}
+					{
+					}
+					}
 				}
 			
 			else if(comType.Equals("7"))
