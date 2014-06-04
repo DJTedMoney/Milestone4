@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	public int speed;
 	public int size;
 	public int score;
+	string myName;
 	
 	public Client commsClient;
 	
@@ -53,6 +54,11 @@ public class Player : MonoBehaviour
 	public void setScore(int newScore)
 	{
 		score = newScore;
+	}
+	
+	public void setName(string newName)
+	{
+		myName = newName;
 	}
 	
 	void OnGUI()

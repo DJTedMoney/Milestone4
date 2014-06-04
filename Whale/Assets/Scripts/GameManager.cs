@@ -212,6 +212,10 @@ public class GameManager : MonoBehaviour
 					int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					players[clientNumber].transform.position = new Vector2(tempX, tempY);
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				
+					string tempName = tempX.SubString(0,tempCommand.IndexOf (delim));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setName(tempName);
 				}
 				//player[temp] disconnected
 				else if(comType.Equals("5"))
@@ -221,7 +225,7 @@ public class GameManager : MonoBehaviour
 					isActive[temp] = false;
 				}
 				//wall collision or new player info
-				else if(comType.Equals("6") || comType.Equals("7"))
+				else if(comType.Equals("6"))
 				{
 					int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
@@ -248,6 +252,39 @@ public class GameManager : MonoBehaviour
 					int tempSpeed = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					players[tempNum].setSpeed(tempSpeed);
+				}
+			
+			else if(comType.Equals("6"))
+				{
+					int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					
+					int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					players[tempNum].transform.position = new Vector3(tempX, tempY, 0);
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				
+					tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setDirection(tempX, tempY);
+				
+					int tempSize  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				
+					int tempScore  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setScore(tempScore);
+				
+					int tempSpeed = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setSpeed(tempSpeed);
+				
+					string tempName = tempX.SubString(0,tempCommand.IndexOf (delim));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setName(tempName);
 				}
 				//pellets set to new position
 				else if(comType.Equals("8"))
