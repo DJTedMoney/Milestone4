@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
 			string comType = tempCommand.Substring(0,tempCommand.IndexOf(delim));
 			tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 				
-			//Server Disconectd Client
+			//Server Disconectd Client due to wrong username/Passowrd
 			if(comType.Equals("0"))
 			{
 				print ("comtype is 0");
@@ -150,24 +150,18 @@ public class GameManager : MonoBehaviour
 					
 				// fourth element of command is starting y 
 				int startY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-				players[clientNumber].setSpeed(40);
+				players[clientNumber].setSpeed(10);
 			}
 			//Server sent Move commands to client
 			if(comType.Equals("2")) //&& move == true)
 			{
-				//for(int i = 0; i <4; i++)
-				//{
-					//if(isActive[i])
-					//{
-						//print ("comtype is 2");
-						//sets player directon to match server
-						int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-						int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-						int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-						players[tempNum].setDirection(tempX,tempY);
-						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				players[tempNum].setDirection(tempX,tempY);
+				tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					
 						//sets player speed
 						//players[i].setSpeed(int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim))));
@@ -189,6 +183,7 @@ public class GameManager : MonoBehaviour
 				//move = false;
 			}
 				//writes the server command to the gui
+				//new player connetion success
 				else if(comType.Equals("3"))
 				{
 					print ("comtype is 3");
@@ -196,9 +191,10 @@ public class GameManager : MonoBehaviour
 					clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					isActive[clientNumber] = true;
-					players[clientNumber].setSpeed(40);
+					players[clientNumber].setSpeed(10);
 					print ("got to end of comtype 3");
 				}
+				//player[temp] connected
 				else if(comType.Equals("4"))
 				{
 					print("comType is 4");
@@ -211,11 +207,51 @@ public class GameManager : MonoBehaviour
 					players[clientNumber].transform.position = new Vector2(tempX, tempY);
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 				}
+				//player[temp] disconnected
 				else if(comType.Equals("5"))
 				{
 					int temp = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					isActive[temp] = false;
+				}
+				//wall collision
+				else if(comType.Equals("6"))
+				{
+					int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					players[tempNum].transform.position = new Vector3(tempX, tempY, 0);
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				}
+				else if(comType.Equals("7"))
+				{
+					int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					
+					int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					players[tempNum].transform.position = new Vector3(tempX, tempY, 0);
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				
+					tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setDirection(tempX, tempY);
+				
+					int tempSize  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				
+					tempScore  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setScore(tempScore);
+				
+					int tempSpeed = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setSpeed(tempSpeed);
 				}
 				else if(comType.Equals("hello"))
 				{

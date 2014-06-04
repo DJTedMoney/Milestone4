@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 	public Vector2 direction;
 	public int speed;
 	public int size;
+	public int score;
 	
 	public Client commsClient;
 	
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
 		commsClient = GameObject.Find("GameClient").GetComponent<Client>();
 		size = 40;
 		speed = 0;
+		score = 0;
 		direction = new Vector2(0,1);
 	}
 	
@@ -46,6 +48,11 @@ public class Player : MonoBehaviour
 	{
 		speed = newSpeed;
 		//rigidbody.velocity = direction*speed;
+	}
+	
+	public void setScore(int newScore)
+	{
+		score = newScore;
 	}
 	
 	void OnGUI()

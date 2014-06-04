@@ -28,7 +28,7 @@ public class LoginBox : MonoBehaviour
 	
 	// Update is called once per frame
 	
-	 void OnGUI()
+	void OnGUI()
 	{	
 		if(!showLogin)
 		{
@@ -44,7 +44,6 @@ public class LoginBox : MonoBehaviour
 			
 			if(GUI.Button (new Rect (250, 170, 100, 20), "Connect") )
 			{
-
 				showLogin = !showLogin;
 				print ("<From LoginBox>UserName: " +Encryptor.encryptString(userName));
 				print ("<From LoginBox>Password: " +Encryptor.encryptString(passWord));
