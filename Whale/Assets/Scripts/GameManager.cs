@@ -213,9 +213,9 @@ public class GameManager : MonoBehaviour
 					players[clientNumber].transform.position = new Vector2(tempX, tempY);
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 				
-					string tempName = tempX.SubString(0,tempCommand.IndexOf (delim));
+					string tempName = tempCommand.Substring(0,tempCommand.IndexOf (delim));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-					players[tempNum].setName(tempName);
+					players[playerNum].setName(tempName);
 				}
 				//player[temp] disconnected
 				else if(comType.Equals("5"))
@@ -282,7 +282,7 @@ public class GameManager : MonoBehaviour
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					players[tempNum].setSpeed(tempSpeed);
 				
-					string tempName = tempX.SubString(0,tempCommand.IndexOf (delim));
+					string tempName = tempCommand.Substring(0,tempCommand.IndexOf (delim));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					players[tempNum].setName(tempName);
 				}
