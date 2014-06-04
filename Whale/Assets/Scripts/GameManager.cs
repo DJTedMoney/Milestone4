@@ -156,8 +156,8 @@ public class GameManager : MonoBehaviour
 			//Server sent Move commands to client
 			if(comType.Equals("2") && move == true)
 			{
-				for(int i = 0; i <4; i++)
-				{
+				//for(int i = 0; i <4; i++)
+				//{
 					if(isActive[i])
 					{
 						//print ("comtype is 2");
@@ -181,16 +181,16 @@ public class GameManager : MonoBehaviour
 						//players[i].size = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 						//tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					}
-				}
+				//}
 				//sets pellet position
-				for(int j = 0; j < 4; j++)
+				/*for(int j = 0; j < 4; j++)
 				{
 					int tempX = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					int tempY = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					pellets[j].setPos(tempX, tempY);
-				}
+				}*/
 				move = false;
 			}
 				//writes the server command to the gui

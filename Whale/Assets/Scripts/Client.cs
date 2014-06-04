@@ -22,6 +22,7 @@ public class Client : MonoBehaviour
 	public string message;
 	string use;
 	string pass;
+	//Queue sendQueue;
 	
 	static TcpClient client;
 	NetworkStream stream;
@@ -55,6 +56,7 @@ public class Client : MonoBehaviour
 		use = "";
 		pass = "";
 		numPlayers = 0;
+		//sendQueue = new Queue();
 	}
 	
 	//if anything needs the IP address
@@ -75,6 +77,7 @@ public class Client : MonoBehaviour
 			//print ("sending message to server");
 			//print ("inputMove = " + inputMove);
 			message = inputMove;
+			qu
 			//print ("message = " + message);	
     		sendMessage(message);
 		}
