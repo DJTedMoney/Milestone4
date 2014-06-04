@@ -233,10 +233,10 @@ public class Client : MonoBehaviour
 			// Read the first batch of the TcpServer response bytes.
     		Int32 bytes = stream.Read(data, 0, data.Length);
     		responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-			if(responseData != String.Empty){
+			//if(responseData != String.Empty){
     			print("Received: " + responseData);
 				manager.serverCommand.Enqueue(responseData);
-			}
+			//}
 		}//end lock
 	}
 }
