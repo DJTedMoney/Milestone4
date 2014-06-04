@@ -26,8 +26,8 @@ public class Client : MonoBehaviour
 	
 	static TcpClient client;
 	NetworkStream stream;
-	const String serverIP = "127.0.0.1";
-	//const String serverIP = "128.195.11.143";
+	//const String serverIP = "127.0.0.1";
+	const String serverIP = "128.195.11.143";
 	
 	
 	

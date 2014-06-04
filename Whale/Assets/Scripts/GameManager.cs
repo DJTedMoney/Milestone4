@@ -275,18 +275,14 @@ public class GameManager : MonoBehaviour
 					{
 						if(players[tempNum].size > players[clientNumber].size)
 						{
-							Material newMat = Resources.Load("LargerEnemySkin", typeof(Material)) as Material;
-							players[tempNum].renderer.material = newMat;
-						}
+							players[tempNum].renderer.material.color = Color.red;
+						}//end if
 						else
 						{
-							Material newMat = Resources.Load("SmallerEnemySkin", typeof(Material)) as Material;
-							players[tempNum].renderer.material = newMat;
-						}
-					{
-					}
-					}
-				}
+							players[tempNum].renderer.material.color = Color.blue;
+						}//end else
+					}//end if
+				}//end if
 			
 			else if(comType.Equals("7"))
 				{
