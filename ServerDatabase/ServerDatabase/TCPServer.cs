@@ -113,18 +113,6 @@ namespace ServerDatabase
             }
 
 
-            for (int j = 0; j < 4; j++)
-            {
-
-
-                string newPellet = "8$" + j + "$";
-                newPellet += gmm.gamePellets[j].getPosX() + "$";
-                newPellet += gmm.gamePellets[j].getPosY() + "$";
-
-                notifyAllPlayers(newPellet);
-            }
-
-
                 while (true)
                 {
                     System.Threading.Thread.Sleep(15);
@@ -257,9 +245,18 @@ namespace ServerDatabase
                                                 sendMessage(activePlayers[s].psnws, s, opponentStatus);
                                             }
                                         }
+
+                                        // update where all the pellets are for each player
+                                        for (int j = 0; j < 4; j++)
+                                        {
+                                            string newPellet = "8$" + j + "$";
+                                            newPellet += gmm.gamePellets[j].getPosX() + "$";
+                                            newPellet += gmm.gamePellets[j].getPosY() + "$";
+
+                                            notifyAllPlayers(newPellet);
+                                        }
                                     }
 
-                                    // sendMessage();
                                 } // end if instruction login
 
                                 // parsed command 0 = 2
