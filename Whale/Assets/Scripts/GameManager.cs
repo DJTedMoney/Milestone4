@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 		isActive = new bool[4];
 		for(int i = 0; i<4; i++)
 		{
-			print ("test " + i);
+			//print ("test " + i);
 			players[i] = GameObject.Find ("Player" + i.ToString()).GetComponent<Player>();
 			isActive[i]=false;
 		}
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 	{
 			sendMove();
 			//Wait (0.5f);
-			//applyMove();
+			applyMove();
 	}
 	
 	public void sendMove()
