@@ -214,18 +214,8 @@ public class GameManager : MonoBehaviour
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					isActive[temp] = false;
 				}
-				//wall collision
-				else if(comType.Equals("6"))
-				{
-					int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-					int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-					int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-					players[tempNum].transform.position = new Vector3(tempX, tempY, 0);
-					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-				}
-				else if(comType.Equals("7"))
+				//wall collision or new player info
+				else if(comType.Equals("6") || comType.Equals("7"))
 				{
 					int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
