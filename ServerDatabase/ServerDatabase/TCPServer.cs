@@ -205,6 +205,29 @@ namespace ServerDatabase
                                             sendMessage(activePlayers[n].psnws, n, addNewPlayer);
                                         }
                                     }
+
+                                    // counting by m
+                                    for(int m = 0; m < gmm.getNumberPlayers(); m++)
+                                    {
+                                        if(activePlayers[m].pSock.Connected)
+                                        {
+                                            // user id 
+                                            string opponentStatus = "7$" + m.ToString() + "$";
+
+                                            // x and y position
+                                            opponentStatus += gmm.gamePlayers[m].getX_string() + "$";
+                                            opponentStatus += gmm.gamePlayers[m].getY_string() + "$";
+
+                                            // x and y direction 
+                                            opponentStatus += gmm.gamePlayers[m].getLeftRightString() + "$";
+                                            opponentStatus += gmm.gamePlayers[m].getUpDownString() + "$";
+
+                                            // size, score, speed
+                                            opponentStatus += gmm.gamePlayers[m].getSize_string() + "$";
+                                            opponentStatus += gmm.gamePlayers[m].getScoreString() + "$";
+                                            opponentStatus += gmm.gamePlayers[m].getSpeed_string() + "$";
+                                        }
+                                    }
                                 }
 
                                 // sendMessage();
