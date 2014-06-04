@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	public int speed;
 	public int size;
 	public int score;
+	int number;
 	string myName;
 	
 	public Client commsClient;
@@ -61,11 +62,18 @@ public class Player : MonoBehaviour
 		myName = newName;
 	}
 	
+	public void setNumber(int newNum)
+	{
+		number = newNum;
+	}
+	
 	void OnGUI()
 	{
-		GUI.Label(new Rect(10, 65, 40, 20), "Size : ");
-		GUI.Label(new Rect(55, 65, 40, 20), size.ToString() );
-		GUI.Label(new Rect(10, 90, 40, 20), "Speed : ");
-		GUI.Label(new Rect(55, 90, 40, 20), speed.ToString() );
+		GUI.Label(new Rect(10, 40+number*15, 40, 20), myName + " : ");
+		GUI.Label(new Rect(55, 40+number*15, 40, 20), size.ToString() );
+		GUI.Label(new Rect(10, 65+number*15, 40, 20), "Size : ");
+		GUI.Label(new Rect(55, 65+number*15, 40, 20), size.ToString() );
+		GUI.Label(new Rect(10, 90+number*15, 40, 20), "Speed : ");
+		GUI.Label(new Rect(55, 90+number*15, 40, 20), speed.ToString() );
 	}
 }

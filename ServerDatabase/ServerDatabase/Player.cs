@@ -81,14 +81,16 @@ namespace ServerDatabase
 
         public void slowDown(int slowFactor)
         {
-            if (slowFactor >= moveSpeed)
+            int newSpeed = moveSpeed - slowFactor;
+
+            if (newSpeed < 1)
             {
                 moveSpeed = 1;
             }
 
             else
             {
-                moveSpeed -= slowFactor;
+                moveSpeed = newSpeed;
             }
         }
 
