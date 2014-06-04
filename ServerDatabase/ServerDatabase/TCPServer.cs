@@ -212,11 +212,8 @@ namespace ServerDatabase
                         //move loop
                         gmm.gamePlayers[s].move();
 
-                        /*
-
                         bool collided = false;
-                        int collidingEnemy;
-                        int pelletCollide;
+
 
                         //wall collision loop
                         if (gmm.detectCollisionsWithWalls(s))
@@ -225,6 +222,13 @@ namespace ServerDatabase
 
                             collided = true;
                         }
+
+                        /*
+                        
+                        int collidingEnemy;
+                        int pelletCollide;
+
+                        
 
                         //pellet collision loop
                         pelletCollide = gmm.detectCollisionWithPellets(s);
