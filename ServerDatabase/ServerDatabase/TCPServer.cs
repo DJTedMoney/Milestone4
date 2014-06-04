@@ -138,7 +138,14 @@ namespace ServerDatabase
                         if (activePlayers[s].pSock.Connected)
                         { // if connected 
 
-                            if (activePlayers[s].incomingMessages.Count > 0)
+                            int incomingMessageCount = 0;
+
+                            lock (activePlayers[s].incomingMessages)
+                            {
+                                incomingMessageCount = activePlayers[s].incomingMessages.Count();
+                            }
+
+                            if (incomingMessageCount> 0)
                             { // if player has any messages 
 
                                 string newCommand;
