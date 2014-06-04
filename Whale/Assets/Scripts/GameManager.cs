@@ -249,6 +249,17 @@ public class GameManager : MonoBehaviour
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					players[tempNum].setSpeed(tempSpeed);
 				}
+				//pellets set to new position
+				else if(comType.Equals("8"))
+				{
+					int tempPellet = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					int tempX = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					int tempY = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					pellets[tempPellet].transform.position = new Vector3(tempX, tempY, 0);
+				}
 				else if(comType.Equals("hello"))
 				{
 					print("Client got the Hello!");
