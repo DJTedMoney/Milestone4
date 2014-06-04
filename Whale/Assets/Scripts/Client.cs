@@ -187,11 +187,11 @@ public class Client : MonoBehaviour
 		//sends login info
 		message = "1$" + use + "$" + Encryptor.encryptString("elephant") + "$" + pass + "$";
 		//print ("message " + message);
-		// sendMessage(message);
+		sendMessage(message);
 
 		
 		//should get 0$, 1$, or 3$
-		// getMessage();
+		getMessage();
 		
 		//if the message was 1$ or 3$, a series of 4$ messages will follow
 		
