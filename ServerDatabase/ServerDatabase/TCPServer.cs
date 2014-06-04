@@ -343,7 +343,7 @@ namespace ServerDatabase
 
                                 notifyAllPlayers(pelletEater);
 
-                                gmm.relocatePellet(pelletCollide);
+                                // gmm.relocatePellet(pelletCollide);
                                 string newPellet = "8$" + pelletCollide.ToString() + "$";
                                 newPellet += gmm.gamePellets[pelletCollide].getPosX() + "$";
                                 newPellet += gmm.gamePellets[pelletCollide].getPosY() + "$";
@@ -429,43 +429,6 @@ namespace ServerDatabase
                                 notifyAllPlayers(winMessage);
                             }
 
-
-                            /*
-                            if (collided)
-                            { // begin game state update if a collision was detected 
-
-                                string collideMessage = "2$";
-
-                                // using a for loop to append each player's game state to the collidedMessage
-                                // counting by u
-                                for (int u = 0; u < gmm.getNumberPlayers(); u++)
-                                {
-                                    collideMessage += gmm.gamePlayers[u].getX_string() + "$";
-                                    collideMessage += gmm.gamePlayers[u].getY_string() + "$";
-
-                                    collideMessage += gmm.gamePlayers[u].getLeftRightString() + "$";
-                                    collideMessage += gmm.gamePlayers[u].getUpDownString() + "$";
-
-                                    collideMessage += gmm.gamePlayers[u].getSpeed_string() + "$";
-                                    collideMessage += gmm.gamePlayers[u].getSize_string() + "$";
-                                }
-
-                                // use a for loop to append all pellet information to collidedMessage
-                                // counting by o
-                                for (int o = 0; o < 4; o++)
-                                {
-                                    collideMessage += gmm.gamePellets[o].getPosX() + "$";
-                                    collideMessage += gmm.gamePellets[o].getPosY() + "$";
-                                }
-
-                                Console.WriteLine("   RESISTANCE IS FUTILE  " + collideMessage);
-
-                                notifyAllPlayers(collideMessage);
-
-                            } // end if a collision was detected 
-
-                            */
-
                             if (activePlayers[s].outgoingMessages.Count > 0)
                             {
                                 lock (activePlayers[s].outgoingMessages)
@@ -503,7 +466,10 @@ namespace ServerDatabase
 
                     // sendMessage(activePlayers[y].psnws, y, command);
 
-                    activePlayers[y].outgoingMessages.Enqueue(command);
+                    lock(activePlayers[y].outgoingMessages)
+                    {
+                        activePlayers[y].outgoingMessages.Enqueue(command);
+                    }
                 }
             }
         }
