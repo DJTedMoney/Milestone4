@@ -209,6 +209,8 @@ namespace ServerDatabase
                                         addNewPlayer += (gmm.gamePlayers[s].getX_string() + "$");
                                         addNewPlayer += (gmm.gamePlayers[s].getY_string() + "$");
 
+                                        addNewPlayer += parsedCommand[1] + "$";
+
                                         Console.WriteLine("  new player message " + newPlayer);
 
                                         sendMessage(activePlayers[s].psnws, s, newPlayer);
@@ -238,10 +240,11 @@ namespace ServerDatabase
                                                 opponentStatus += gmm.gamePlayers[m].getLeftRightString() + "$";
                                                 opponentStatus += gmm.gamePlayers[m].getUpDownString() + "$";
 
-                                                // size, score, speed
+                                                // size, score, speed, username
                                                 opponentStatus += gmm.gamePlayers[m].getSize_string() + "$";
                                                 opponentStatus += gmm.gamePlayers[m].getScoreString() + "$";
                                                 opponentStatus += gmm.gamePlayers[m].getSpeed_string() + "$";
+                                                opponentStatus += parsedCommand[1] + "$";
                                             }
                                         }
                                     }
