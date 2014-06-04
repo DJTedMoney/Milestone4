@@ -46,7 +46,7 @@ namespace ServerDatabase
 
             leftRight = 0;
             upDown = -1;
-            moveSpeed = 10;
+            moveSpeed = 1;
 
             size = 40;
             score = 0;
