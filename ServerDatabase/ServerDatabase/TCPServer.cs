@@ -429,7 +429,12 @@ namespace ServerDatabase
                                 notifyAllPlayers(winMessage);
                             }
 
-                            if (activePlayers[s].outgoingMessages.Count > 0)
+                            int newCount = 0;
+                            lock (activePlayers[s].outgoingMessages)
+                            {
+                                newCount = activePlayers[s].outgoingMessages.Count;
+                            }
+                            if (newCount > 0)
                             {
                                 lock (activePlayers[s].outgoingMessages)
                                 {
