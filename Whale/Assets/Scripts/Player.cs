@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 	void Update () 
 	{
 		transform.position = new Vector2(transform.position.x + direction.x*speed, transform.position.y + direction.y*speed);
-		transform.lossyScale.Set(size, size, 1);
+		transform.localScale = new Vector3(size, size, 1);
 	}
 	
 	public void setPosition(int newX, int newY)
@@ -65,6 +65,10 @@ public class Player : MonoBehaviour
 	public void setNumber(int newNum)
 	{
 		number = newNum;
+	}
+	public void setSize(int newSize)
+	{
+		size = newSize;
 	}
 	
 	void OnGUI()

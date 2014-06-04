@@ -256,6 +256,7 @@ public class GameManager : MonoBehaviour
 				
 					int tempSize  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setSize(tempSize);
 				
 					int tempScore  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
@@ -266,7 +267,7 @@ public class GameManager : MonoBehaviour
 					players[tempNum].setSpeed(tempSpeed);
 				}
 			
-			else if(comType.Equals("6"))
+			else if(comType.Equals("7"))
 				{
 					int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
@@ -283,8 +284,9 @@ public class GameManager : MonoBehaviour
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					players[tempNum].setDirection(tempX, tempY);
 				
-					int tempSize  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					int tempSize  = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					players[tempNum].setSize(tempSize);
 				
 					int tempScore  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
