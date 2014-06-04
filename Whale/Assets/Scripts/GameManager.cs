@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
 				players[clientNumber].setSpeed(40);
 			}
 			//Server sent Move commands to client
-			if(comType.Equals("2") && move == true)
+			if(comType.Equals("2")) //&& move == true)
 			{
 				//for(int i = 0; i <4; i++)
 				//{
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					pellets[j].setPos(tempX, tempY);
 				}*/
-				move = false;
+				//move = false;
 			}
 				//writes the server command to the gui
 				else if(comType.Equals("3"))
