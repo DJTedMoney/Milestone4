@@ -129,7 +129,7 @@ namespace ServerDatabase
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
 
-            Console.WriteLine("test");
+           // Console.WriteLine("test");
 
             // command.Connection.Open();
             bool userExists = reader.Read();

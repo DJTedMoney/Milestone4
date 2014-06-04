@@ -151,7 +151,7 @@ namespace ServerDatabase
                             if (parsedCommand[0] == "1")
                             { // if instruction login 
                                 int loginVal = dB.attemptToLogin(parsedCommand[1], parsedCommand[3]);
-                                Console.WriteLine(loginVal);
+                                Console.WriteLine("Returned value of DB: " + loginVal);
 
                                 // loginVal == 0, wrong U/P combination, player fails to log in 
                                 if (loginVal == 0)
@@ -465,7 +465,7 @@ namespace ServerDatabase
                     Console.WriteLine("In the getMessage Try");
 
                     buffer = theStream.Read(data, 0, 4096);
-                    Console.WriteLine("Size of buffer in getMessage" + buffer);
+                    Console.WriteLine("Size of buffer in getMessage: " + buffer);
 
                     responseData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
 
