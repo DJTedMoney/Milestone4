@@ -216,6 +216,7 @@ namespace ServerDatabase
                                         addNewPlayer += (gmm.gamePlayers[s].getX_string() + "$");
                                         addNewPlayer += (gmm.gamePlayers[s].getY_string() + "$");
 
+                                        // send all players the username of the new player 
                                         addNewPlayer += parsedCommand[1] + "$";
 
                                         Console.WriteLine("  new player message " + newPlayer);
@@ -225,7 +226,7 @@ namespace ServerDatabase
                                         // counting by n
                                         for (int n = 0; n < gmm.getNumberPlayers(); n++)
                                         {
-                                            if (n != s)
+                                            if ( (n != s) && activePlayers[n].pSock.Connected)
                                             {
                                                 sendMessage(activePlayers[n].psnws, n, addNewPlayer);
                                             }
@@ -252,6 +253,8 @@ namespace ServerDatabase
                                                 opponentStatus += gmm.gamePlayers[m].getScoreString() + "$";
                                                 opponentStatus += gmm.gamePlayers[m].getSpeed_string() + "$";
                                                 opponentStatus += parsedCommand[1] + "$";
+
+                                                sendMessage(activePlayers[s].psnws, s, opponentStatus);
                                             }
                                         }
                                     }
