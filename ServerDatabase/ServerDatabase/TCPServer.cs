@@ -256,7 +256,7 @@ namespace ServerDatabase
                         gmm.gamePlayers[s].move();
 
                         bool collided = false;
-
+                        int pelletCollide;
 
                         //wall collision loop
                         if (gmm.detectCollisionsWithWalls(s))
@@ -265,17 +265,23 @@ namespace ServerDatabase
 
                             collided = true;
 
-                            string wallCollide = "6$" + s.ToString() + "$" + gmm.gamePlayers[s].getX_string() + "$" + gmm.gamePlayers[s].getY_string() + "$";
+                            // 6$ is the universal player status message after a collision
+                            // 6$ id $ x position $ y position $
+                            string wallCollide = "6$" + s.ToString() + "$"; 
+                            wallCollide += gmm.gamePlayers[s].getX_string() + "$";
+                            wallCollide += gmm.gamePlayers[s].getY_string() + "$";
+
+                            // x direction $ y direction $
+                            wallCollide += gmm.gamePlayers[s].getLeftRightString() + "$";
+                            wallCollide += gmm.gamePlayers[s].getUpDownString() + "$";
+
+                            // size $ score $ speed $
+                            wallCollide += gmm.gamePlayers[s].getSize_string() + "$";
+                            wallCollide += gmm.gamePlayers[s].getScoreString() + "$";
+                            wallCollide += gmm.gamePlayers[s].getSpeed_string() + "$";
 
                             notifyAllPlayers(wallCollide);
                         }
-
-                        /*
-                        
-                        int collidingEnemy;
-                        int pelletCollide;
-
-                        
 
                         //pellet collision loop
                         pelletCollide = gmm.detectCollisionWithPellets(s);
@@ -288,7 +294,33 @@ namespace ServerDatabase
                             gmm.gamePlayers[s].gainPoints(1);
 
                             collided = true;
+
+                            // 6$ is the universal player status message after a collision
+                            // 6$ id $ x position $ y position $
+                            string pelletEater = "6$" + s.ToString() + "$";
+                            pelletEater += gmm.gamePlayers[s].getX_string() + "$";
+                            pelletEater += gmm.gamePlayers[s].getY_string() + "$";
+
+                            // x direction $ y direction $
+                            pelletEater += gmm.gamePlayers[s].getLeftRightString() + "$";
+                            pelletEater += gmm.gamePlayers[s].getUpDownString() + "$";
+
+                            // size $ score $ speed $
+                            pelletEater += gmm.gamePlayers[s].getSize_string() + "$";
+                            pelletEater += gmm.gamePlayers[s].getScoreString() + "$";
+                            pelletEater += gmm.gamePlayers[s].getSpeed_string() + "$";
+
+                            notifyAllPlayers(pelletEater);
                         }
+
+                        /*
+                        
+                        int collidingEnemy;
+                        
+
+                        
+
+                        
 
                         //player collision loop
                         collidingEnemy = gmm.detectCollisionPlayers(s);
