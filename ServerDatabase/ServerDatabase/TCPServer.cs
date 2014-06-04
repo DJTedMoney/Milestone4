@@ -77,6 +77,11 @@ namespace ServerDatabase
                 numberParses = 2;
             }
 
+            else if (parsedInput[0] == "1")
+            {
+                numberParses = 3;
+            }
+
             else if (parsedInput[0] == "2")
             {
                 numberParses = 3;
@@ -460,11 +465,11 @@ namespace ServerDatabase
                     Console.WriteLine("In the getMessage Try");
 
                     buffer = theStream.Read(data, 0, 4096);
-                    Console.WriteLine("buffer" + buffer);
+                    Console.WriteLine("Size of buffer in getMessage" + buffer);
 
                     responseData = System.Text.Encoding.ASCII.GetString(data, 0, buffer);
 
-                    Console.WriteLine("responseData " + responseData);
+                    Console.WriteLine("Received data: " + responseData);
                 }
                 catch (Exception arg)
                 {
