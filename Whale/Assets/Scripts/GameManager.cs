@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
 					
 				// fourth element of command is starting y 
 				int startY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-				players[clientNumber].setSpeed(10);
+				players[clientNumber].setSpeed(1);
 			}
 			//Server sent Move commands to client
 			if(comType.Equals("2")) //&& move == true)
@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
 					clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					isActive[clientNumber] = true;
-					players[clientNumber].setSpeed(10);
+					players[clientNumber].setSpeed(1);
 					print ("got to end of comtype 3");
 				}
 				//player[temp] connected
