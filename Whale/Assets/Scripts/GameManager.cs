@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 		lock(serverCommand){
 			serverSize = serverCommand.Count;
 		}
-		while(serverSize != 0)
+		if(serverSize != 0)
 		{
 				//print ("serverCommand is not = 0");
 			string tempCommand;
@@ -198,6 +198,7 @@ public class GameManager : MonoBehaviour
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					isActive[clientNumber] = true;
 					players[clientNumber].setSpeed(40);
+					print ("got to end of comtype 3");
 				}
 				else if(comType.Equals("4"))
 				{
