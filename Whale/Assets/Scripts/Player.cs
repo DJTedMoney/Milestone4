@@ -99,21 +99,23 @@ public class Player : MonoBehaviour
 			int x = 0;
 			int y = 0;
 			if(number == 0)
-			{
+			{	
 				x = 10;
 				y = 40;
 			}
-			else if( number== 1)
-			{	x = 10;
+			else if(number == 1)
+			{	
+				x = 10;
 				y = 115;
 			}
 			else if(number == 2)
-			{
-				x = 500;
+			{	
+				x = 400;
 				y = 40;
 			}
-			else if( number== 3)
-			{	x = 500;
+			else if(number == 3)
+			{	
+				x = 400;
 				y = 115;
 			}
 			GUI.Label(new Rect(x, y, 40, 20), myName + " : ");

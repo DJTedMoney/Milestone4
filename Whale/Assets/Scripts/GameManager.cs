@@ -332,6 +332,16 @@ public class GameManager : MonoBehaviour
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					pellets[tempPellet].transform.position = new Vector3(tempX, tempY, 0);
 				}
+				else if(comType.Equals("9"))
+				{
+					int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					guiBox.grafxText.text = players[tempNum] + " has won/nwith a Score of: " + players[tempNum].score.ToString();
+					for(int i = 0; i < MAX_PLAYERS; i++)
+					{
+						isActive[i] = false;
+					}
+				}
 				else if(comType.Equals("hello"))
 				{
 					print("Client got the Hello!");
