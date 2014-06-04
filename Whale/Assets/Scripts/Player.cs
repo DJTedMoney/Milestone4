@@ -13,9 +13,9 @@ public class Player : MonoBehaviour
 	public int speed;
 	public int size;
 	public int score;
-	int number;
-	string myName;
-	bool active;
+	public int number;
+	public string myName;
+	public bool active;
 	
 	public Client commsClient;
 	
