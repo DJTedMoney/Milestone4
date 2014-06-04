@@ -75,7 +75,7 @@ namespace ServerDatabase
             {
                 int foodDist = distanceBetweenPlayerAndPellet(pID, p);
 
-                int combSize = gamePlayers[pID].getSize() + 20;
+                int combSize = gamePlayers[pID].getSize() /2 + 10;
 
                 if (foodDist < combSize)
                 {
