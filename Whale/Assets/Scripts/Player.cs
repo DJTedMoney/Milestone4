@@ -96,12 +96,32 @@ public class Player : MonoBehaviour
 	{
 		if(active)
 		{
-			GUI.Label(new Rect(10, 40+number*75, 40, 20), myName + " : ");
-			GUI.Label(new Rect(55, 40+number*75, 40, 20), size.ToString() );
-			GUI.Label(new Rect(10, 65+number*75, 40, 20), "Size : ");
-			GUI.Label(new Rect(55, 65+number*75, 40, 20), size.ToString() );
-			GUI.Label(new Rect(10, 90+number*75, 40, 20), "Speed : ");
-			GUI.Label(new Rect(55, 90+number*75, 40, 20), speed.ToString() );
+			int x = 0;
+			int y = 0;
+			if(number == 0)
+			{
+				x = 10;
+				y = 40;
+			}
+			else if( number== 1)
+			{	x = 10;
+				y = 115;
+			}
+			else if(number == 2)
+			{
+				x = 500;
+				y = 40;
+			}
+			else if( number== 3)
+			{	x = 500;
+				y = 115;
+			}
+			GUI.Label(new Rect(x, y, 40, 20), myName + " : ");
+			GUI.Label(new Rect(x+45, y, 40, 20), score.ToString() );
+			GUI.Label(new Rect(x, y+25, 40, 20), "Size : ");
+			GUI.Label(new Rect(x+45, y+25, 40, 20), size.ToString() );
+			GUI.Label(new Rect(x, y+50, 40, 20), "Speed : ");
+			GUI.Label(new Rect(x+45, y+50, 40, 20), speed.ToString() );
 		}
 	}
 }
