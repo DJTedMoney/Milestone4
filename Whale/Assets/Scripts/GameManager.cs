@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour
 					int tempSize  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 				
-					tempScore  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					int tempScore  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					players[tempNum].setScore(tempScore);
 				
