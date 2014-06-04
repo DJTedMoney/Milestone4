@@ -245,8 +245,14 @@ namespace ServerDatabase
                                 int playID = Convert.ToInt32(parsedCommand[2]);
 
                                 string moveMessage = "2$" + parsedCommand[2] + "$";
+
+                                // x and y direction of travel 
                                 moveMessage += gmm.gamePlayers[playID].getLeftRightString() + "$";
                                 moveMessage += gmm.gamePlayers[playID].getUpDownString() + "$";
+
+                                // x and y position
+                                moveMessage += gmm.gamePlayers[playID].getX_string() + "$";
+                                moveMessage += gmm.gamePlayers[playID].getY_string() + "$";
 
                                 notifyAllPlayers(moveMessage);
                             }
