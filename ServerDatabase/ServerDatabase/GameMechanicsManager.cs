@@ -91,10 +91,10 @@ namespace ServerDatabase
         // if the player is outside of that, the player dies 
         public bool detectCollisionsWithWalls(int p)
         {
-            if (((gamePlayers[p].getLocX() + (gamePlayers[p].getSize() / 2)) > 500)
-                || ((gamePlayers[p].getLocX() - gamePlayers[p].getSize() / 2) < -500)
-                || ((gamePlayers[p].getLocY() + gamePlayers[p].getSize() / 2) > 500)
-                || ((gamePlayers[p].getLocY() - gamePlayers[p].getSize() / 2) < -500))
+            if (((gamePlayers[p].getLocX() + (gamePlayers[p].getSize() / 2)) > 490)
+                || ((gamePlayers[p].getLocX() - gamePlayers[p].getSize() / 2) < -490)
+                || ((gamePlayers[p].getLocY() + gamePlayers[p].getSize() / 2) > 490)
+                || ((gamePlayers[p].getLocY() - gamePlayers[p].getSize() / 2) < -490))
             {
                 return true;
             }
