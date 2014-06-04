@@ -158,29 +158,25 @@ public class GameManager : MonoBehaviour
 			{
 				//for(int i = 0; i <4; i++)
 				//{
-					if(isActive[i])
-					{
+					//if(isActive[i])
+					//{
 						//print ("comtype is 2");
-						//sets player position to match server
+						//sets player directon to match server
+						int tempNum = (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 						int tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 						int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-						players[i].transform.position = new Vector2(tempX, tempY);
+						players[tempNum].setDirection(tempX,tempY);
 						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					
-						//sets player direction to match server
-						tempX = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-						tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-						tempY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-						tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-						players[i].setDirection(tempX, tempY);
 						//sets player speed
 						//players[i].setSpeed(int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim))));
 						//tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);					
 						//sets player size
 						//players[i].size = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 						//tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
-					}
+					//}
 				//}
 				//sets pellet position
 				/*for(int j = 0; j < 4; j++)

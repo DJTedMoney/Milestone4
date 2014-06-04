@@ -77,7 +77,6 @@ public class Client : MonoBehaviour
 			//print ("sending message to server");
 			//print ("inputMove = " + inputMove);
 			message = inputMove;
-			qu
 			//print ("message = " + message);	
     		sendMessage(message);
 		}
