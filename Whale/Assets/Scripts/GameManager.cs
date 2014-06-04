@@ -162,6 +162,12 @@ public class GameManager : MonoBehaviour
 				int tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 				players[tempNum].setDirection(tempX,tempY);
 				tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				
+				tempX  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				tempY  =  (int)float.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				players[tempNum].transform.position = new Vector3(tempX, tempY, 0);
+				tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 					
 						//sets player speed
 						//players[i].setSpeed(int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim))));
