@@ -384,9 +384,11 @@ namespace ServerDatabase
                     // Console.WriteLine(responseData);
                     // sendMessage(activePlayers[client].psnws, "Test plus info$" + client + "$");
 
-                    lock (activePlayers[client].incomingMessages)
+                    //lock (activePlayers[client].incomingMessages)
+                    lock (activePlayers[client].outgoingMessages)
                     {
-                        activePlayers[client].incomingMessages.Enqueue("hello$");
+                        //activePlayers[client].incomingMessages.Enqueue("hello$");
+                        activePlayers[client].outgoingMessages.Enqueue("hello$");
                     }
                     
 
