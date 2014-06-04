@@ -182,6 +182,7 @@ public class Client : MonoBehaviour
 		print ("in ServerIO");
 		
 		//should get hello$ from server
+		//
 		getMessage ();
 		
 		//sends login info
