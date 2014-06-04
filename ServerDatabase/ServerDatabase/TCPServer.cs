@@ -112,7 +112,9 @@ namespace ServerDatabase
             }
 
             while (true)
-            {  //put the main game loop logic in here:
+            {
+                System.Threading.Thread.Sleep(17);
+                //put the main game loop logic in here:
 
                 // go through received messages here
                 // counting players by s
