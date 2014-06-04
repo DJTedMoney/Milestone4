@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
 			string tempCommand;
 			lock(serverCommand){
 				tempCommand = serverCommand.Dequeue().ToString();
+				serverSize--;
 			}
 			string comType = tempCommand.Substring(0,tempCommand.IndexOf(delim));
 			tempCommand= tempCommand.Substring(tempCommand.IndexOf(delim)+1);
