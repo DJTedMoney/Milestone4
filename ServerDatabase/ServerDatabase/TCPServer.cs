@@ -113,7 +113,7 @@ namespace ServerDatabase
 
             while (true)
             {
-                System.Threading.Thread.Sleep(17);
+                System.Threading.Thread.Sleep(15);
                 //put the main game loop logic in here:
 
                 // go through received messages here
@@ -317,6 +317,13 @@ namespace ServerDatabase
                             pelletEater += gmm.gamePlayers[s].getSpeed_string() + "$";
 
                             notifyAllPlayers(pelletEater);
+
+                            gmm.relocatePellet(pelletCollide);
+                            string newPellet = "8$" + pelletCollide.ToString() + "$";
+                            newPellet += gmm.gamePellets[pelletCollide].getPosX() + "$";
+                            newPellet += gmm.gamePellets[pelletCollide].getPosY() + "$";
+
+                            notifyAllPlayers(newPellet);
                         }
 
                         /*
