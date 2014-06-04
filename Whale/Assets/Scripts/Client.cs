@@ -225,20 +225,20 @@ public class Client : MonoBehaviour
 	
 	public void getMessage()
 	{
-		//locks serverCommand queue for thread safety
-		lock(manager.serverCommand)
-		{
-			//print("in GetMessage");
-			Byte[] data = new Byte[256];
-    		// String to store the response ASCII representation.
-   			String responseData = String.Empty;
-			// Read the first batch of the TcpServer response bytes.
-    		Int32 bytes = stream.Read(data, 0, data.Length);
-    		responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-			if(responseData != String.Empty){
-    			print("Received: " + responseData);
-				manager.serverCommand.Enqueue(responseData);
-			}
-		}//end lock
+		//locks serverCommand queue for thread safety		
+		//print("in GetMessage");
+		Byte[] data = new Byte[256];
+    	// String to store the response ASCII representation.
+   		String responseData = String.Empty;
+		// Read the first batch of the TcpServer response bytes.
+    	Int32 bytes = stream.Read(data, 0, data.Length);
+    	responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+		if(responseData != String.Empty){
+    			print("Received: " + responseData);	
+				lock(manager.serverCommand)
+				{
+					manager.serverCommand.Enqueue(responseData);
+				}
+		}
 	}
 }
