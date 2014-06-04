@@ -147,9 +147,13 @@ public class GameManager : MonoBehaviour
 				
 				// third element of command is starting x pos
 				int startX = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
-					
+				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
 				// fourth element of command is starting y 
 				int startY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+				tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				
+				players[clientNumber].transform.position = new Vector3(startX, startY, 0);
+				players[clientNumber].setNumber(clientNumber);
 				players[clientNumber].setSpeed(1);
 			}
 			//Server sent Move commands to client
@@ -195,9 +199,17 @@ public class GameManager : MonoBehaviour
 					print ("comtype is 3");
 					guiBox.grafxText.text = "Connected\nWelcome " + guiBox.userName;
 					clientNumber = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);// third element of command is starting x pos
+					int startX = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
 					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+					// fourth element of command is starting y 
+					int startY = int.Parse(tempCommand.Substring(0,tempCommand.IndexOf(delim)));
+					tempCommand = tempCommand.Substring(tempCommand.IndexOf(delim)+1);
+				
+					players[clientNumber].transform.position = new Vector3(startX, startY, 0);
 					isActive[clientNumber] = true;
 					players[clientNumber].setSpeed(1);
+					players[clientNumber].setNumber(clientNumber);
 					print ("got to end of comtype 3");
 				}
 				//player[temp] connected
