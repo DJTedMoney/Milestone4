@@ -214,7 +214,7 @@ namespace ServerDatabase
                                         // counting by n
                                         for (int n = 0; n < gmm.getNumberPlayers(); n++)
                                         {
-                                            if ( (n != s) && activePlayers[n].pSock.Connected)
+                                            if ( activePlayers[n].pSock.Connected)
                                             {
                                                 sendMessage(activePlayers[n].psnws, n, addNewPlayer);
                                             }
