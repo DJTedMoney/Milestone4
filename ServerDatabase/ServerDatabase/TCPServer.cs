@@ -79,7 +79,7 @@ namespace ServerDatabase
 
             else if (parsedInput[0] == "1")
             {
-                numberParses = 3;
+                numberParses = 4;
             }
 
             else if (parsedInput[0] == "2")
